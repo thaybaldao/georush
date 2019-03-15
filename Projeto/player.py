@@ -4,15 +4,30 @@ import os
 
 class Player:
     run = pygame.image.load(os.path.join('Imagens','Personagem_Principal.png'))
+    jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4,
+                4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1,
+                -1, -1, -1, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3,
+                -3, -3, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4]
     def __init__(self, x, y, width, height):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
         self.runCount = 0
+        self.jumping = False
+        self.jumpCount = 0
 
     def draw(self, win):
-        if self.runCount > 42:
-            self.runCount = 0
-        win.blit(self.run, (self.x, self.y))
-        self.runCount += 1
+        if self.jumping:
+            self.y -= self.jumpList[self.jumpCount] * 1.3
+            win.blit(self.run, (self.x, self.y))
+            self.jumpCount += 1
+            if self.jumpCount > 99:
+                self.jumpCount = 0
+                self.jumping = False
+                self.runCount = 0
+        else:
+            if self.runCount > 42:
+                self.runCount = 0
+            win.blit(self.run, (self.x, self.y))
+            self.runCount += 1

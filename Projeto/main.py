@@ -1,6 +1,10 @@
 from player import *
 from obstacle_1 import *
+from obstacle_1_2 import *
 from obstacle_2 import *
+from obstacle_3 import *
+from obstacle_4 import *
+from platform import *
 import pygame
 from pygame.locals import *
 import os
@@ -27,16 +31,16 @@ def redrawWindow():
     pygame.display.update()
 
 pygame.time.set_timer(USEREVENT+1, 500)
-pygame.time.set_timer(USEREVENT+2, 3000)
+pygame.time.set_timer(USEREVENT+2, 6000)
 speed = 50
 run = True
-runner = Player(30,378,75,75)
+runner = Player(30,393,49,47)
 obstacles = []
 
 while run:
 
     for obstacle in obstacles:
-        if obstacle.x < -350:
+        if obstacle.x < -850:
             obstacles.pop(obstacles.index(obstacle))
         else:
             obstacle.x -= 1.4
@@ -55,13 +59,25 @@ while run:
             run = False
         if event.type == USEREVENT+1:
             speed += 1
-        if event.type == USEREVENT + 2:
-            r = random.randrange(0, 2)
+        if event.type == USEREVENT+2:
+            r = random.randrange(0, 6)
             if r == 0: ##Está com bug, aparecendo muito próximo e estão colidindo
-                obstacles.append(Obstacle_1(810, 395, 50,50))
+                obstacles.append(Obstacle_1(810, 395, 50, 48))
             elif r == 1:
-                obstacles.append(Obstacle_2(810, 235, 338, 219))
+                obstacles.append(Obstacle_1_2(810, 245, 118, 48))
+            elif r == 2:
+                obstacles.append(Obstacle_2(810, 240, 835, 60))
+            elif r == 3:
+                obstacles.append(Obstacle_3(810, 380, 303, 200))
+            elif r == 4:
+                obstacles.append(Obstacle_4(810, 250, 303, 200))
+            elif r == 5:
+                obstacles.append(Platform(810, 300, 303, 200))
 
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            if not(runner.jumping):
+                runner.jumping = True
     if run != False:
         redrawWindow()
 
