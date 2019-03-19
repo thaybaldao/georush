@@ -15,19 +15,24 @@ class Player:
         self.height = height
         self.runCount = 0
         self.jumping = False
+        self.running = False
+        self.vel = 15
         self.jumpCount = 0
 
     def draw(self, win):
         if self.jumping:
             self.y -= self.jumpList[self.jumpCount] * 1.3
+            self.x += self.vel/25
             win.blit(self.run, (self.x, self.y))
             self.jumpCount += 1
             if self.jumpCount > 99:
                 self.jumpCount = 0
                 self.jumping = False
                 self.runCount = 0
-        else:
-            if self.runCount > 42:
-                self.runCount = 0
+        elif self.running:
+            self.x += self.vel;
             win.blit(self.run, (self.x, self.y))
-            self.runCount += 1
+            self.running = False
+        else:
+            win.blit(self.run, (self.x, self.y))
+

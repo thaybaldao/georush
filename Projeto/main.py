@@ -54,11 +54,14 @@ while run:
         bgX2 = bg.get_width()
 
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_ESCAPE]:
             pygame.quit()
             run = False
+            break
+
         if event.type == USEREVENT+1:
             speed += 1
+
         if event.type == USEREVENT+2:
             r = random.randrange(0, 6)
             if r == 0: ##Está com bug, aparecendo muito próximo e estão colidindo
@@ -75,9 +78,16 @@ while run:
                 obstacles.append(Platform(810, 300, 303, 200))
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_SPACE]:
-            if not(runner.jumping):
-                runner.jumping = True
+
+        if runner.x < W - runner.width - runner.vel:
+            if keys[pygame.K_RIGHT]:
+                runner.running = True
+            elif keys[pygame.K_SPACE]:
+                if not (runner.jumping):
+                    runner.jumping = True
+
+
+
     if run != False:
         redrawWindow()
 
