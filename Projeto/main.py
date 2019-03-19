@@ -1,10 +1,10 @@
-from player import *
-from obstacle_1 import *
-from obstacle_1_2 import *
-from obstacle_2 import *
-from obstacle_3 import *
-from obstacle_4 import *
-from platform import *
+from Player import *
+from Obstacle1 import *
+from Obstacle1_2 import *
+from Obstacle2 import *
+from Obstacle3 import *
+from Obstacle4 import *
+from Platform import *
 import pygame
 from pygame.locals import *
 import os
@@ -30,11 +30,11 @@ def redrawWindow():
         obstacle.draw(win)
     pygame.display.update()
 
-pygame.time.set_timer(USEREVENT+1, 500)
-pygame.time.set_timer(USEREVENT+2, 6000)
+pygame.time.set_timer(USEREVENT + 1, 500)
+pygame.time.set_timer(USEREVENT + 2, 6000)
 speed = 50
 run = True
-runner = Player(30,393,49,47)
+runner = Player()
 obstacles = []
 
 while run:
@@ -65,28 +65,24 @@ while run:
         if event.type == USEREVENT+2:
             r = random.randrange(0, 6)
             if r == 0: ##Está com bug, aparecendo muito próximo e estão colidindo
-                obstacles.append(Obstacle_1(810, 395, 50, 48))
+                obstacles.append(Obstacle1())
             elif r == 1:
-                obstacles.append(Obstacle_1_2(810, 245, 118, 48))
+                obstacles.append(Obstacle1_2())
             elif r == 2:
-                obstacles.append(Obstacle_2(810, 240, 835, 60))
+                obstacles.append(Obstacle2())
             elif r == 3:
-                obstacles.append(Obstacle_3(810, 380, 303, 200))
+                obstacles.append(Obstacle3())
             elif r == 4:
-                obstacles.append(Obstacle_4(810, 250, 303, 200))
+                obstacles.append(Obstacle4())
             elif r == 5:
-                obstacles.append(Platform(810, 300, 303, 200))
+               obstacles.append(Platform())
 
         keys = pygame.key.get_pressed()
 
         if runner.x < W - runner.width - runner.vel:
-            if keys[pygame.K_RIGHT]:
-                runner.running = True
-            elif keys[pygame.K_SPACE]:
+            if keys[pygame.K_SPACE]:
                 if not (runner.jumping):
                     runner.jumping = True
-
-
 
     if run != False:
         redrawWindow()

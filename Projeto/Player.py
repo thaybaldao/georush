@@ -8,14 +8,13 @@ class Player:
                 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1,
                 -1, -1, -1, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3,
                 -3, -3, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4]
-    def __init__(self, x, y, width, height):
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
+    def __init__(self):
+        self.x = 30
+        self.y = 393
+        self.width = 49
+        self.height = 47
         self.runCount = 0
         self.jumping = False
-        self.running = False
         self.vel = 15
         self.jumpCount = 0
 
@@ -29,10 +28,5 @@ class Player:
                 self.jumpCount = 0
                 self.jumping = False
                 self.runCount = 0
-        elif self.running:
-            self.x += self.vel;
-            win.blit(self.run, (self.x, self.y))
-            self.running = False
         else:
             win.blit(self.run, (self.x, self.y))
-

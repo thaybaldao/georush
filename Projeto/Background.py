@@ -2,13 +2,13 @@ import pygame
 from pygame.locals import *
 import os
 
-class Obstacle_1:
-    img = pygame.image.load(os.path.join('Imagens','Triangulo.png'))
-    def __init__(self, x, y, width, height):
-        self.x = x
-        self.y = y
+class Background:
+    def __init__(self, x, y, width, height, img):
         self.width = width
         self.height = height
+        self.x = x
+        self.y = y
+        self.img = img
 
     def draw(self, win):
         win.blit(self.img, (self.x, self.y))
