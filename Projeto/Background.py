@@ -9,6 +9,9 @@ class Background:
         self.x = x
         self.y = y
         self.img = img
+        # hitbox(x_right, x_left, y_top, y_bottom)
+        self.hitbox = (self.x + width/2, self.x - width/2, self.y + height/2, self.y - height/2)
 
     def draw(self, win):
         win.blit(self.img, (self.x, self.y))
+

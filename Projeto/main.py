@@ -10,33 +10,46 @@ from pygame.locals import *
 import os
 import random
 
+# initializing pygame
 pygame.init()
 
+# creating game window
 W, H = 800, 500
 win = pygame.display.set_mode((W,H))
 pygame.display.set_caption('Geo Rush')
 
+# creating background
 bg = pygame.image.load(os.path.join('Imagens','Background.png')).convert()
 bgX = 0
 bgX2 = bg.get_width()
+speed = 50
 
+# creating obstacles vector
+obstacles = []
+
+# setting up clock
 clock = pygame.time.Clock()
+pygame.time.set_timer(USEREVENT + 1, 500)
+pygame.time.set_timer(USEREVENT + 2, 6000)
+
+# creating runner
+runner = Player()
 
 def redrawWindow():
     win.blit(bg, (bgX, 0))
     win.blit(bg, (bgX2,0))
+
     runner.draw(win)
+
     for obstacle in obstacles:
         obstacle.draw(win)
+
     pygame.display.update()
 
-pygame.time.set_timer(USEREVENT + 1, 500)
-pygame.time.set_timer(USEREVENT + 2, 6000)
-speed = 50
+# starting game
 run = True
-runner = Player()
-obstacles = []
 
+# main loop
 while run:
 
     for obstacle in obstacles:
@@ -54,15 +67,16 @@ while run:
         bgX2 = bg.get_width()
 
     for event in pygame.event.get():
+
         if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_ESCAPE]:
             pygame.quit()
             run = False
             break
 
-        if event.type == USEREVENT+1:
+        if event.type == USEREVENT + 1:
             speed += 1
 
-        if event.type == USEREVENT+2:
+        if event.type == USEREVENT + 2:
             r = random.randrange(0, 6)
             if r == 0: ##Está com bug, aparecendo muito próximo e estão colidindo
                 obstacles.append(Obstacle1())

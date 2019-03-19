@@ -17,16 +17,22 @@ class Player:
         self.jumping = False
         self.vel = 15
         self.jumpCount = 0
+        self.updateHitbox()
 
-    def draw(self, win):
+    def updateHitbox(self):
+        # hitbox(x_right, x_left, y_top, y_bottom)
+        self.hitbox = (self.x + self.width/2, self.x - self.width/2, self.y + self.height/2, self.y - self.height/2)
+                 
+    def updatePlayer(self):
         if self.jumping:
             self.y -= self.jumpList[self.jumpCount] * 1.3
             self.x += self.vel/25
-            win.blit(self.run, (self.x, self.y))
             self.jumpCount += 1
             if self.jumpCount > 99:
                 self.jumpCount = 0
                 self.jumping = False
                 self.runCount = 0
-        else:
-            win.blit(self.run, (self.x, self.y))
+
+    def draw(self, win):
+        self.updatePlayer()
+        win.blit(self.run, (self.x, self.y))
