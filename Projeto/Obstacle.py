@@ -1,4 +1,8 @@
-class Background:
+import pygame
+from pygame.locals import *
+import os
+
+class Obstacle:
     def __init__(self, x, y, width, height, img, type):
         self.width = width
         self.height = height

@@ -5,6 +5,7 @@ from Obstacle2 import *
 from Obstacle3 import *
 from Obstacle4 import *
 from Platform import *
+from Obstacle import *
 import pygame
 from pygame.locals import *
 import os
