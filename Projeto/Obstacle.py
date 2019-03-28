@@ -19,3 +19,10 @@ class Obstacle:
 
     def updateHitbox(self):
         self.hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
+
+    def identifyObstacleType(self):
+        return self.type;
+
+#    def collide(self, rect):
+#        if(self.hitbox.colliderect(rect))
+#            if(
