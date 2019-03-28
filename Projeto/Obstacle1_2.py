@@ -7,3 +7,6 @@ class Obstacle1_2(Obstacle):
     def __init__(self):
         super().__init__(810, 245, 118, 48, pygame.image.load(os.path.join('Imagens', 'Triangulos_inverso.png')), 'triangle')
 
+    def collisionStatus(self, rect):
+        if self.hitbox.colliderect(rect):
+            return 'death'
