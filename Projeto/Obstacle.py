@@ -1,4 +1,5 @@
 import pygame
+from math import *
 from pygame.locals import *
 import os
 
@@ -23,6 +24,17 @@ class Obstacle:
     def identifyObstacleType(self):
         return self.type;
 
-#    def collide(self, rect):
-#        if(self.hitbox.colliderect(rect))
-#            if(
+    def collisionStatus(self, rect):
+        if self.hitbox.colliderect(rect):
+            if self.type == 'triangle':
+                return 'death'
+            else:
+                x = self.hitbox.centerx - rect.centerx
+                y = rect.centerx - self.hitbox.centerx
+                collisionAngle = atan2(y, x)
+                maxLateralCollisionAngle = atan2(self.hitbox.height + rect.height, self.hitbox.width + rect.width)
+
+                if collisionAngle > maxLateralCollisionAngle and collisionAngle < pi - maxLateralCollisionAngle:
+                    return 'continue'
+
+                return 'death'

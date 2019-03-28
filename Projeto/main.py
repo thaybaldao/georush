@@ -110,10 +110,17 @@ while run:
 
         keys = pygame.key.get_pressed()
 
-        if runner.x < W - runner.width - runner.vel:
-            if keys[pygame.K_SPACE]:
-                if not (runner.jumping):
-                    runner.jumping = True
+        for obstacle in obstacles:
+            if obstacle.collisionStatus(runner.hitbox) == 'continue' or obstacle.collisionStatus(runner.hitbox) == 'death':
+                print("colission status: ", obstacle.collisionStatus(runner.hitbox), "\n\n")
+            #if obstacle.collisionStatus(runner.hitbox) == 'death':
+            #    runner.jumping = False
+            #    run = False
+
+
+        if keys[pygame.K_SPACE]:
+            if not (runner.jumping):
+                runner.jumping = True
 
     if run != False:
         redrawWindow()
