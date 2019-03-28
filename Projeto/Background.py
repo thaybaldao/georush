@@ -1,7 +1,3 @@
-import pygame
-from pygame.locals import *
-import os
-
 class Background:
     def __init__(self, x, y, width, height, img):
         self.width = width
