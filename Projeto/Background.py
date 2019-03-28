@@ -3,15 +3,19 @@ from pygame.locals import *
 import os
 
 class Background:
-    def __init__(self, x, y, width, height, img):
+    def __init__(self, x, y, width, height, img, type):
         self.width = width
         self.height = height
         self.x = x
         self.y = y
         self.img = img
-        # hitbox(x_right, x_left, y_top, y_bottom)
-        self.hitbox = (self.x + width/2, self.x - width/2, self.y + height/2, self.y - height/2)
+        self.type = type
+        self.hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
 
     def draw(self, win):
+        self.updateHitbox()
+        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
         win.blit(self.img, (self.x, self.y))
 
+    def updateHitbox(self):
+        self.hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
