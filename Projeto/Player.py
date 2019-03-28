@@ -24,7 +24,6 @@ class Player:
         self.hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
                  
     def updatePlayer(self):
-        self.updateHitbox()
         if self.jumping:
             self.y -= self.jumpList[self.jumpCount] * 1.8
             self.jumpCount += 1
@@ -32,6 +31,7 @@ class Player:
                 self.jumpCount = 0
                 self.jumping = False
                 self.runCount = 0
+        self.updateHitbox()
 
     def draw(self, win):
         self.updatePlayer()
