@@ -35,6 +35,8 @@ pygame.time.set_timer(USEREVENT + 2, 6000)
 # creating runner
 runner = Player()
 
+collisions = 'False'
+
 def redrawWindow():
     win.blit(bg, (bgX, 0))
     win.blit(bg, (bgX2,0))
