@@ -5,7 +5,7 @@ from pygame.locals import *
 
 class Obstacle1_2(Obstacle):
     def __init__(self):
-        super().__init__(810, 245, 118, 48, pygame.image.load(os.path.join('Imagens', 'Triangulos_inverso.png')), 'triangle')
+        super().__init__(810, 245, 118, 48, pygame.image.load(os.path.join('Imagens', 'Triangulos_inverso.png')), 'triangle','1_2')
 
     def collisionStatus(self, rect):
         if self.hitbox.colliderect(rect):

@@ -12,6 +12,7 @@ class Obstacle3():
         self.r1 = random.randrange(0,2)
         self.r2 = random.randrange(0,2)
         self.objects = [obj1, obj2, obj3, obj4, obj5]
+        self.num = '3'
 
 
     def draw(self, win):

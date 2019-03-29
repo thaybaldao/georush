@@ -7,6 +7,7 @@ class Platform():
         self.x = obj1.x
         self.width = 306
         self.objects = [obj1, obj2]
+        self.num = '5'
 
     def draw(self, win):
         self.obj1.draw(win)

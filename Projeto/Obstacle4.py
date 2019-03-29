@@ -9,6 +9,7 @@ class Obstacle4():
         self.obj5 = obj5
         self.x = (obj1.x + obj2.x + obj3.x + obj4.x + obj5.x)/5
         self.objects = [obj1, obj2, obj3, obj4, obj5]
+        self.num = '4'
 
 
 

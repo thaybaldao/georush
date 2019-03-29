@@ -97,16 +97,24 @@ while run:
 
         if event.type == USEREVENT + 2:
             r = random.randrange(0, 6)
-            if r == 0: ##Está com bug, aparecendo muito próximo e estão colidindo
+            if r == 0:
                     obstacles.append(Obstacle1())
             elif r == 1:
                     obstacles.append(Obstacle1_2())
             elif r == 2:
+                if len(obstacles) == 0:
                     obstacles.append(Obstacle2(Obstacle2_1(), Obstacle2_2(), Obstacle2_3(), Obstacle2_4(), Obstacle2_5()))
+                elif obstacles[len(obstacles)-1].num != '4':
+                    obstacles.append(
+                        Obstacle2(Obstacle2_1(), Obstacle2_2(), Obstacle2_3(), Obstacle2_4(), Obstacle2_5()))
             elif r == 3:
                     obstacles.append(Obstacle3(Obstacle3_1(), Obstacle3_2(), Obstacle3_3(), Obstacle3_4(), Obstacle3_5()))
             elif r == 4:
+                if len(obstacles) == 0:
                     obstacles.append(Obstacle4(Obstacle4_1(), Obstacle4_2(), Obstacle4_3(), Obstacle4_4(), Obstacle4_5()))
+                elif obstacles[len(obstacles) - 1].num != '2':
+                    obstacles.append(
+                        Obstacle4(Obstacle4_1(), Obstacle4_2(), Obstacle4_3(), Obstacle4_4(), Obstacle4_5()))
             elif r == 5:
                     obstacles.append(Platform(Platform_1(), Platform_2()))
 

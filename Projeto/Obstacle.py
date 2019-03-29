@@ -4,7 +4,7 @@ from pygame.locals import *
 import os
 
 class Obstacle:
-    def __init__(self, x, y, width, height, img, type):
+    def __init__(self, x, y, width, height, img, type, num):
         self.width = width
         self.height = height
         self.x = x
@@ -12,6 +12,7 @@ class Obstacle:
         self.img = img
         self.type = type
         self.hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
+        self.num = num
 
     def draw(self, win):
         self.updateHitbox()
