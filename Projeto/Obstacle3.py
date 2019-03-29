@@ -11,19 +11,7 @@ class Obstacle3():
         self.x = obj2.x
         self.r1 = random.randrange(0,2)
         self.r2 = random.randrange(0,2)
-        self.objects = []
-        self.objects.append(self.obj1)
-        self.objects.append(self.obj1)
-        self.objects.append(self.obj1)
-        self.objects.append(self.obj1)
-        self.objects.append(self.obj1)
-
-        self.objects = []
-        self.objects.append(self.obj1)
-        self.objects.append(self.obj1)
-        self.objects.append(self.obj1)
-        self.objects.append(self.obj1)
-        self.objects.append(self.obj1)
+        self.objects = [obj1, obj2, obj3, obj4, obj5]
 
 
     def draw(self, win):
@@ -60,20 +48,4 @@ class Obstacle3():
 
                     return 'death'
 
-    def collisionStatus(self, rect):
-        for object in self.objects:
-            if object.hitbox.colliderect(rect):
-                if object.type == 'triangle':
-                    return 'death'
-                else:
-                    x = object.hitbox.centerx - rect.centerx
-                    y = rect.centerx - object.hitbox.centerx
-                    collisionAngle = atan2(y, x)
-                    maxLateralCollisionAngle = atan2(object.hitbox.height + rect.height,
-                                                     object.hitbox.width + rect.width)
-
-                    if collisionAngle > maxLateralCollisionAngle and collisionAngle < pi - maxLateralCollisionAngle:
-                        return 'continue'
-
-                    return 'death'
 
