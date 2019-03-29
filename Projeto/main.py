@@ -20,6 +20,8 @@ from Obstacle4_3 import *
 from Obstacle4_4 import *
 from Obstacle4_5 import *
 from Platform import *
+from Platform_1 import *
+from Platform_2 import *
 import pygame
 from pygame.locals import *
 import os
@@ -45,7 +47,7 @@ obstacles = []
 # setting up clock
 clock = pygame.time.Clock()
 pygame.time.set_timer(USEREVENT + 1, 500)
-pygame.time.set_timer(USEREVENT + 2, 8000)
+pygame.time.set_timer(USEREVENT + 2, 6000)
 
 # creating runner
 runner = Player()
@@ -96,17 +98,18 @@ while run:
         if event.type == USEREVENT + 2:
             r = random.randrange(0, 6)
             if r == 0: ##Está com bug, aparecendo muito próximo e estão colidindo
-                obstacles.append(Obstacle1())
+                    obstacles.append(Obstacle1())
             elif r == 1:
-                obstacles.append(Obstacle1_2())
+                    obstacles.append(Obstacle1_2())
             elif r == 2:
-                obstacles.append(Obstacle2(Obstacle2_1(), Obstacle2_2(), Obstacle2_3(), Obstacle2_4(), Obstacle2_5()))
+                    obstacles.append(Obstacle2(Obstacle2_1(), Obstacle2_2(), Obstacle2_3(), Obstacle2_4(), Obstacle2_5()))
             elif r == 3:
-                obstacles.append(Obstacle3(Obstacle3_1(),Obstacle3_2(),Obstacle3_3(), Obstacle3_4(), Obstacle3_5()))
+                    obstacles.append(Obstacle3(Obstacle3_1(), Obstacle3_2(), Obstacle3_3(), Obstacle3_4(), Obstacle3_5()))
             elif r == 4:
-               obstacles.append(Obstacle4(Obstacle4_1(), Obstacle4_2(), Obstacle4_3(), Obstacle4_4(), Obstacle4_5()))
+                    obstacles.append(Obstacle4(Obstacle4_1(), Obstacle4_2(), Obstacle4_3(), Obstacle4_4(), Obstacle4_5()))
             elif r == 5:
-               obstacles.append(Platform())
+                    obstacles.append(Platform(Platform_1(), Platform_2()))
+
 
         keys = pygame.key.get_pressed()
 

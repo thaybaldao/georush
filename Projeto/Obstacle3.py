@@ -7,9 +7,10 @@ class Obstacle3():
         self.obj3 = obj3
         self.obj4 = obj4
         self.obj5 = obj5
-        self.x = (obj1.x + obj2.x + obj3.x)/5
+        self.x = obj2.x
         self.r1 = random.randrange(0,2)
         self.r2 = random.randrange(0,2)
+        self.width = 835
 
     def draw(self, win):
         self.obj1.draw(win)
@@ -26,5 +27,5 @@ class Obstacle3():
         for obj in (self.obj1, self.obj2, self.obj3):
             if obj.x >= -850:
                 obj.x -= 1.4
-        self.x = (self.obj1.x + self.obj2.x + self.obj3.x) / 3
+        self.x = self.obj2.x
 
