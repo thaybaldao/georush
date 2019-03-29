@@ -45,4 +45,3 @@ class Obstacle4():
                         return 'continue'
 
                     return 'death'
-
