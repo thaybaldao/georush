@@ -9,7 +9,7 @@ class Player:
                 -1, -1, -1, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3,
                 -3, -3, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4]
     def __init__(self):
-        self.x = 30
+        self.x = 150
         self.y = 393
         self.width = 49
         self.height = 47
@@ -17,22 +17,23 @@ class Player:
         self.jumping = False
         self.vel = 15
         self.jumpCount = 0
-        self.updateHitbox()
+        self.hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
 
     def updateHitbox(self):
-        # hitbox(x_right, x_left, y_top, y_bottom)
-        self.hitbox = (self.x + self.width/2, self.x - self.width/2, self.y + self.height/2, self.y - self.height/2)
+        # hitbox(left, top, width, height)
+        self.hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
                  
     def updatePlayer(self):
         if self.jumping:
-            self.y -= self.jumpList[self.jumpCount] * 1.3
-            self.x += self.vel/25
+            self.y -= self.jumpList[self.jumpCount] * 1.8
             self.jumpCount += 1
             if self.jumpCount > 99:
                 self.jumpCount = 0
                 self.jumping = False
                 self.runCount = 0
+        self.updateHitbox()
 
     def draw(self, win):
         self.updatePlayer()
+        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
         win.blit(self.run, (self.x, self.y))

@@ -2,8 +2,23 @@ from Player import *
 from Obstacle1 import *
 from Obstacle1_2 import *
 from Obstacle2 import *
+from Obstacle2_1 import *
+from Obstacle2_2 import *
+from Obstacle2_3 import *
+from Obstacle2_4 import *
+from Obstacle2_5 import *
 from Obstacle3 import *
+from Obstacle3_1 import *
+from Obstacle3_2 import *
+from Obstacle3_3 import *
+from Obstacle3_4 import *
+from Obstacle3_5 import *
 from Obstacle4 import *
+from Obstacle4_1 import *
+from Obstacle4_2 import *
+from Obstacle4_3 import *
+from Obstacle4_4 import *
+from Obstacle4_5 import *
 from Platform import *
 import pygame
 from pygame.locals import *
@@ -30,10 +45,12 @@ obstacles = []
 # setting up clock
 clock = pygame.time.Clock()
 pygame.time.set_timer(USEREVENT + 1, 500)
-pygame.time.set_timer(USEREVENT + 2, 6000)
+pygame.time.set_timer(USEREVENT + 2, 8000)
 
 # creating runner
 runner = Player()
+
+collisions = 'False'
 
 def redrawWindow():
     win.blit(bg, (bgX, 0))
@@ -83,11 +100,11 @@ while run:
             elif r == 1:
                 obstacles.append(Obstacle1_2())
             elif r == 2:
-                obstacles.append(Obstacle2())
+                obstacles.append(Obstacle2(Obstacle2_1(), Obstacle2_2(), Obstacle2_3(), Obstacle2_4(), Obstacle2_5()))
             elif r == 3:
-                obstacles.append(Obstacle3())
+                obstacles.append(Obstacle3(Obstacle3_1(),Obstacle3_2(),Obstacle3_3(), Obstacle3_4(), Obstacle3_5()))
             elif r == 4:
-                obstacles.append(Obstacle4())
+               obstacles.append(Obstacle4(Obstacle4_1(), Obstacle4_2(), Obstacle4_3(), Obstacle4_4(), Obstacle4_5()))
             elif r == 5:
                obstacles.append(Platform())
 
