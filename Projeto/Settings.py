@@ -1,7 +1,7 @@
 # game options/settings
 TITLE = "Geo Rush"
-WIDTH = 800
-HEIGHT = 500
+SCREENWIDTH = 800
+SCREENHEIGHT = 500
 FPS = 50
 
 # Player properties

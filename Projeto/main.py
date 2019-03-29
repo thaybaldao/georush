@@ -22,118 +22,152 @@ from Obstacle4_5 import *
 from Platform import *
 from Platform_1 import *
 from Platform_2 import *
-import pygame
+from Settings import *
 from pygame.locals import *
+import pygame
 import os
 import random
 
-# initializing pygame
-pygame.init()
+class Game:
+    def __init__(self):
+        # initializing pygame
+        pygame.init()
+        pygame.mixer.init()
+        # creating game window
+        self.screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
+        pygame.display.set_caption(TITLE)
+        # setting up clock
+        self.clock = pygame.time.Clock()
+        pygame.time.set_timer(USEREVENT + 1, 500)
+        pygame.time.set_timer(USEREVENT + 2, 6000)
+        self.running = True
+        self.collisions = False
 
-# creating game window
-W, H = 800, 500
-win = pygame.display.set_mode((W,H))
-pygame.display.set_caption('Geo Rush')
+        collisions = 'False'
 
-# creating background
-bg = pygame.image.load(os.path.join('Imagens','Background.png')).convert()
-bgX = 0
-bgX2 = bg.get_width()
-speed = 50
+    def new(self):
+        # initializing player and vector for obstacles
+        self.runner = Player()
+        self.obstacles = []
+        # creating background
+        self.bg = pygame.image.load(os.path.join('Imagens', 'Background.png')).convert()
+        self.bgX = 0
+        self.bgX2 = self.bg.get_width()
+        self.speed = 50
 
-# creating obstacles vector
-obstacles = []
+        self.run()
 
-# setting up clock
-clock = pygame.time.Clock()
-pygame.time.set_timer(USEREVENT + 1, 500)
-pygame.time.set_timer(USEREVENT + 2, 6000)
+    def run(self):
+        # Game Loop
+        self.playing = True
+        while self.playing:
+            self.clock.tick(self.speed)
+            self.events()
+            self.update()
+            self.draw()
 
-# creating runner
-runner = Player()
+    def update(self):
+        # making background move
+        self.bgX -= 2
+        self.bgX2 -= 2
+        if self.bgX < self.bg.get_width() * -1:
+            self.bgX = self.bg.get_width()
+        if self.bgX2 < self.bg.get_width() * -1:
+            self.bgX2 = self.bg.get_width()
 
-collisions = 'False'
+        # making obstacles disappear
+        for obstacle in self.obstacles:
+            if obstacle.x < -850:
+                self.obstacles.pop(self.obstacles.index(obstacle))
+            else:
+                obstacle.x -= 1.4
 
-def redrawWindow():
-    win.blit(bg, (bgX, 0))
-    win.blit(bg, (bgX2,0))
+    def events(self):
+        # Game Loop - events
+        for event in pygame.event.get():
+            # check for closing window
+            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_ESCAPE]:
+                if self.playing:
+                    self.playing = False
+                self.running = False
 
-    runner.draw(win)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.runner.jumping = True
 
-    for obstacle in obstacles:
-        obstacle.draw(win)
+            if event.type == USEREVENT + 1:
+                self.speed += 1
 
-    pygame.display.update()
+            if event.type == USEREVENT + 2:
+                r = random.randrange(0, 6)
+                if r == 0:
+                    self.obstacles.append(Obstacle1())
+                elif r == 1:
+                    self.obstacles.append(Obstacle1_2())
+                elif r == 2:
+                   if len(self.obstacles) == 0:
+                       self.obstacles.append(
+                           Obstacle2(Obstacle2_1(), Obstacle2_2(), Obstacle2_3(), Obstacle2_4(), Obstacle2_5()))
+                   elif self.obstacles[len(self.obstacles) - 1].num != '4':
+                        self.obstacles.append(
+                            Obstacle2(Obstacle2_1(), Obstacle2_2(), Obstacle2_3(), Obstacle2_4(), Obstacle2_5()))
+                elif r == 3:
+                    self.obstacles.append(
+                        Obstacle3(Obstacle3_1(), Obstacle3_2(), Obstacle3_3(), Obstacle3_4(), Obstacle3_5()))
+                elif r == 4:
+                    if len(self.obstacles) == 0:
+                        self.obstacles.append(
+                            Obstacle4(Obstacle4_1(), Obstacle4_2(), Obstacle4_3(), Obstacle4_4(), Obstacle4_5()))
+                    elif self.obstacles[len(self.obstacles) - 1].num != '2':
+                        self.obstacles.append(
+                            Obstacle4(Obstacle4_1(), Obstacle4_2(), Obstacle4_3(), Obstacle4_4(), Obstacle4_5()))
+                elif r == 5:
+                    self.obstacles.append(Platform(Platform_1(), Platform_2()))
 
-# starting game
-run = True
-
-# main loop
-while run:
-
-    for obstacle in obstacles:
-        if obstacle.x < -850:
-            obstacles.pop(obstacles.index(obstacle))
-        else:
-            obstacle.x -= 1.4
-
-    bgX -= 2
-    bgX2 -= 2
-
-    if bgX < bg.get_width() * -1:
-        bgX = bg.get_width()
-    if bgX2 < bg.get_width() * -1:
-        bgX2 = bg.get_width()
-
-    for event in pygame.event.get():
-
-        if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_ESCAPE]:
-            pygame.quit()
-            run = False
-            break
-
-        if event.type == USEREVENT + 1:
-            speed += 1
-
-        if event.type == USEREVENT + 2:
-            r = random.randrange(0, 6)
-            if r == 0:
-                    obstacles.append(Obstacle1())
-            elif r == 1:
-                    obstacles.append(Obstacle1_2())
-            elif r == 2:
-                if len(obstacles) == 0:
-                    obstacles.append(Obstacle2(Obstacle2_1(), Obstacle2_2(), Obstacle2_3(), Obstacle2_4(), Obstacle2_5()))
-                elif obstacles[len(obstacles)-1].num != '4':
-                    obstacles.append(
-                        Obstacle2(Obstacle2_1(), Obstacle2_2(), Obstacle2_3(), Obstacle2_4(), Obstacle2_5()))
-            elif r == 3:
-                    obstacles.append(Obstacle3(Obstacle3_1(), Obstacle3_2(), Obstacle3_3(), Obstacle3_4(), Obstacle3_5()))
-            elif r == 4:
-                if len(obstacles) == 0:
-                    obstacles.append(Obstacle4(Obstacle4_1(), Obstacle4_2(), Obstacle4_3(), Obstacle4_4(), Obstacle4_5()))
-                elif obstacles[len(obstacles) - 1].num != '2':
-                    obstacles.append(
-                        Obstacle4(Obstacle4_1(), Obstacle4_2(), Obstacle4_3(), Obstacle4_4(), Obstacle4_5()))
-            elif r == 5:
-                    obstacles.append(Platform(Platform_1(), Platform_2()))
-
-
-        keys = pygame.key.get_pressed()
-
-        for obstacle in obstacles:
-            if obstacle.collisionStatus(runner.hitbox) == 'continue' or obstacle.collisionStatus(runner.hitbox) == 'death':
-                print("colission status: ", obstacle.collisionStatus(runner.hitbox), "\n\n")
-            #if obstacle.collisionStatus(runner.hitbox) == 'death':
-            #    runner.jumping = False
-            #    run = False
+            for obstacle in self.obstacles:
+                if obstacle.collisionStatus(self.runner.hitbox) == 'continue' or obstacle.collisionStatus(
+                        self.runner.hitbox) == 'death':
+                    print("colission status: ", obstacle.collisionStatus(self.runner.hitbox), "\n\n")
+                # if obstacle.collisionStatus(runner.hitbox) == 'death':
+                #    runner.jumping = False
+                #    run = False
 
 
-        if keys[pygame.K_SPACE]:
-            if not (runner.jumping):
-                runner.jumping = True
 
-    if run != False:
-        redrawWindow()
 
-    clock.tick(speed)
+    def draw(self):
+        # Game Loop - draw
+
+        self.screen.blit(self.bg, (self.bgX, 0))
+        self.screen.blit(self.bg, (self.bgX2, 0))
+
+        self.runner.draw(self.screen)
+
+        for obstacle in self.obstacles:
+            obstacle.draw(self.screen)
+
+        # *after* drawing everything, flip the display
+        pygame.display.flip()
+
+    def show_start_screen(self):
+        # game splash/start screen
+        pass
+
+    def show_go_screen(self):
+        # game over/continue
+        pass
+
+game = Game()
+game.show_start_screen()
+game.new()
+
+while game.running:
+    game.show_go_screen()
+
+pygame.quit()
+
+
+
+
+
+
