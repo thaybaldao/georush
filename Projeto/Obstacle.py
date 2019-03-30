@@ -11,16 +11,16 @@ class Obstacle:
         self.y = y
         self.img = img
         self.type = type
-        self.hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
+        self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
         self.num = num
 
-    def draw(self, win):
-        self.updateHitbox()
-        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
-        win.blit(self.img, (self.x, self.y))
+    def update(self):
+        self.rect.x = self.x
+        self.rect.y = self.y
 
-    def updateHitbox(self):
-        self.hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
+    def draw(self, win):
+        pygame.draw.rect(win, (255, 0, 0), self.rect, 2)
+        win.blit(self.img, (self.x, self.y))
 
     def identifyObstacleType(self):
         return self.type;

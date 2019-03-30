@@ -1,39 +1,46 @@
 import pygame
 from pygame.locals import *
+from Settings import *
 import os
+vec = pygame.math.Vector2
 
-class Player:
-    run = pygame.image.load(os.path.join('Imagens','Personagem_Principal.png'))
-    jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4,
-                4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1,
-                -1, -1, -1, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3,
-                -3, -3, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4]
-    def __init__(self):
+class Player():
+    def __init__(self, game):
         self.x = 150
         self.y = 393
         self.width = 49
         self.height = 47
         self.runCount = 0
-        self.jumping = False
-        self.vel = 15
-        self.jumpCount = 0
-        self.hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
+        self.game = game
+        self.image = pygame.image.load(os.path.join('Imagens','Personagem_Principal.png'))
+        self.rect = self.image.get_rect()
+        self.rect.center = (self.x, self.y)
+        self.pos = vec(self.x, self.y)
+        self.vel = vec(0, 0)
+        self.acc = vec(0, 0)
 
-    def updateHitbox(self):
-        # hitbox(left, top, width, height)
-        self.hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
-                 
-    def updatePlayer(self):
-        if self.jumping:
-            self.y -= self.jumpList[self.jumpCount] * 1.8
-            self.jumpCount += 1
-            if self.jumpCount > 99:
-                self.jumpCount = 0
-                self.jumping = False
-                self.runCount = 0
-        self.updateHitbox()
+    def jump(self):
+        # jump only if standing on a platform
+        self.rect.x += 1
+        for obstacle in self.game.obstacles:
+            if self.rect.colliderect(obstacle.rect):
+                hits = True
+            else: hits = False
+            self.rect.x -= 1
+            if hits:
+                self.vel.y = -20
+        if self.pos.y == BOTTOM_Y:
+            self.vel.y = -25
+
+    def update(self):
+        self.acc = vec(0, PLAYER_GRAV)
+        
+        # equations of motion
+        self.vel += self.acc
+        self.pos += self.vel + 0.5 * self.acc
+
+        self.rect.midbottom = self.pos
 
     def draw(self, win):
-        self.updatePlayer()
-        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
-        win.blit(self.run, (self.x, self.y))
+        pygame.draw.rect(win, (255, 0, 0), self.rect, 2)
+        win.blit(self.image, (self.rect.left, self.rect.top))

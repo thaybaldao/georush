@@ -1,27 +1,5 @@
 from Player import *
-from Obstacle1 import *
-from Obstacle1_2 import *
-from Obstacle2 import *
-from Obstacle2_1 import *
-from Obstacle2_2 import *
-from Obstacle2_3 import *
-from Obstacle2_4 import *
-from Obstacle2_5 import *
-from Obstacle3 import *
-from Obstacle3_1 import *
-from Obstacle3_2 import *
-from Obstacle3_3 import *
-from Obstacle3_4 import *
-from Obstacle3_5 import *
-from Obstacle4 import *
-from Obstacle4_1 import *
-from Obstacle4_2 import *
-from Obstacle4_3 import *
-from Obstacle4_4 import *
-from Obstacle4_5 import *
-from Platform import *
-from Platform_1 import *
-from Platform_2 import *
+from Obstacle import *
 from Settings import *
 from pygame.locals import *
 import pygame
@@ -47,7 +25,7 @@ class Game:
 
     def new(self):
         # initializing player and vector for obstacles
-        self.runner = Player()
+        self.runner = Player(self)
         self.obstacles = []
         # creating background
         self.bg = pygame.image.load(os.path.join('Imagens', 'Background.png')).convert()
@@ -67,6 +45,20 @@ class Game:
             self.draw()
 
     def update(self):
+        self.runner.update()
+
+        if self.runner.pos.y > BOTTOM_Y:
+            self.runner.pos.y = BOTTOM_Y
+            self.runner.vel.y = 0
+
+        for obstacle in self.obstacles:
+            obstacle.update()
+            if self.runner.vel.y > 0:
+                if self.runner.rect.colliderect(obstacle):
+                    self.runner.pos.y = obstacle.rect.top
+                    self.runner.vel.y = 0
+
+
         # making background move
         self.bgX -= 2
         self.bgX2 -= 2
@@ -93,7 +85,7 @@ class Game:
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    self.runner.jumping = True
+                    self.runner.jump()
 
             if event.type == USEREVENT + 1:
                 self.speed += 1
@@ -101,36 +93,60 @@ class Game:
             if event.type == USEREVENT + 2:
                 r = random.randrange(0, 6)
                 if r == 0:
-                    self.obstacles.append(Obstacle1())
+                    self.obstacles.append(Obstacle(810, 395, 50, 48, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle', '1'))
                 elif r == 1:
-                    self.obstacles.append(Obstacle1_2())
+                    self.obstacles.append(Obstacle(810, 245, 118, 48, pygame.image.load(os.path.join('Imagens', 'Triangulos_inverso.png')), 'triangle','1_2'))
                 elif r == 2:
                    if len(self.obstacles) == 0:
-                       self.obstacles.append(
-                           Obstacle2(Obstacle2_1(), Obstacle2_2(), Obstacle2_3(), Obstacle2_4(), Obstacle2_5()))
+                       self.obstacles.append(Obstacle(810, 375, 45, 64, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_1.png')), 'rectangle','2'))
+                       self.obstacles.append(Obstacle(940, 314, 45, 126, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_2.png')), 'rectangle', '2'))
+                       self.obstacles.append(Obstacle(1070, 243, 45, 197, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_3.png')), 'rectangle','2'))
+                       self.obstacles.append(Obstacle(858, 409, 82, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_4.png')), 'rectangle','2'))
+                       self.obstacles.append(Obstacle(988, 409, 82, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_4.png')), 'rectangle','2'))
                    elif self.obstacles[len(self.obstacles) - 1].num != '4':
                         self.obstacles.append(
-                            Obstacle2(Obstacle2_1(), Obstacle2_2(), Obstacle2_3(), Obstacle2_4(), Obstacle2_5()))
+                            Obstacle(810, 375, 45, 64, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_1.png')), 'rectangle', '2'))
+                        self.obstacles.append(
+                            Obstacle(940, 314, 45, 126, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_2.png')), 'rectangle', '2'))
+                        self.obstacles.append(
+                            Obstacle(1070, 243, 45, 197, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_3.png')), 'rectangle', '2'))
+                        self.obstacles.append(
+                            Obstacle(858, 409, 82, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_4.png')), 'rectangle', '2'))
+                        self.obstacles.append(
+                            Obstacle(988, 409, 82, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_4.png')), 'rectangle', '2'))
                 elif r == 3:
-                    self.obstacles.append(
-                        Obstacle3(Obstacle3_1(), Obstacle3_2(), Obstacle3_3(), Obstacle3_4(), Obstacle3_5()))
+                    self.obstacles.append(Obstacle(810, 380, 379, 60, pygame.image.load(os.path.join('Imagens', 'Obstaculo3_1.png')), 'rectangle','3'))
+                    self.obstacles.append(Obstacle(1300, 380, 379, 60, pygame.image.load(os.path.join('Imagens', 'Obstaculo3_1.png')), 'rectangle','3'))
+                    self.obstacles.append(Obstacle(1197, 409, 99, 29, pygame.image.load(os.path.join('Imagens', 'Obstaculo3_2.png')), 'rectangle','3'))
+                    self.obstacles.append(Obstacle(990, 334, 50, 48, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle','3'))
+                    self.obstacles.append(Obstacle(1480, 334, 50, 48, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle','3'))
                 elif r == 4:
                     if len(self.obstacles) == 0:
-                        self.obstacles.append(
-                            Obstacle4(Obstacle4_1(), Obstacle4_2(), Obstacle4_3(), Obstacle4_4(), Obstacle4_5()))
+                        self.obstacles.append(Obstacle(810, 408, 306, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_1.png')), 'rectangle','4'))
+                        self.obstacles.append(Obstacle(810, 350, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')), 'rectangle','4'))
+                        self.obstacles.append(Obstacle(900, 280, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')), 'rectangle','4'))
+                        self.obstacles.append(Obstacle(990, 210, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')), 'rectangle','4'))
+                        self.obstacles.append(Obstacle(1080, 130, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')), 'rectangle','4'))
                     elif self.obstacles[len(self.obstacles) - 1].num != '2':
                         self.obstacles.append(
-                            Obstacle4(Obstacle4_1(), Obstacle4_2(), Obstacle4_3(), Obstacle4_4(), Obstacle4_5()))
+                            Obstacle(810, 408, 306, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_1.png')),
+                                     'rectangle', '4'))
+                        self.obstacles.append(
+                            Obstacle(810, 350, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')),
+                                     'rectangle', '4'))
+                        self.obstacles.append(
+                            Obstacle(900, 280, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')),
+                                     'rectangle', '4'))
+                        self.obstacles.append(
+                            Obstacle(990, 210, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')),
+                                     'rectangle', '4'))
+                        self.obstacles.append(
+                            Obstacle(1080, 130, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')),
+                                     'rectangle', '4'))
                 elif r == 5:
-                    self.obstacles.append(Platform(Platform_1(), Platform_2()))
+                    self.obstacles.append(Obstacle(810, 300, 306, 38, pygame.image.load(os.path.join('Imagens', 'Plataforma.png')), 'rectangle', '5'))
+                    self.obstacles.append(Obstacle(810, 408, 306, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_1.png')), 'rectangle', '5'))
 
-            for obstacle in self.obstacles:
-                if obstacle.collisionStatus(self.runner.hitbox) == 'continue' or obstacle.collisionStatus(
-                        self.runner.hitbox) == 'death':
-                    print("colission status: ", obstacle.collisionStatus(self.runner.hitbox), "\n\n")
-                # if obstacle.collisionStatus(runner.hitbox) == 'death':
-                #    runner.jumping = False
-                #    run = False
 
 
 
