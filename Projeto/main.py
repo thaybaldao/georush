@@ -1,5 +1,5 @@
 from Player import *
-from Obstacle import *
+from Obstacles import *
 from Settings import *
 from pygame.locals import *
 import pygame
@@ -114,6 +114,7 @@ class Game:
                 if obstacle.type == 'rectangle' and self.runner.vel.y > 0:
                     self.runner.pos.y = obstacle.rect.top
                     self.runner.vel.y = 0
+                    self.runner.obstacleOnTop = obstacle
                 else:
                     if self.playing:
                         self.playing = False

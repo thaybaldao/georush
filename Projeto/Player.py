@@ -18,17 +18,18 @@ class Player():
         self.pos = vec(self.x, self.y)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
+        self.obstacleOnTop = 0
 
     def jump(self):
         # jump only if standing on a platform
         self.rect.center = (self.rect.centerx, self.rect.centery + 1)
-        for obstacle in self.game.obstacles:
-            if self.rect.colliderect(obstacle.rect):
-                self.rect.center = (self.rect.centerx, self.rect.centery - 1)
-                self.vel.y = PLAYER_INITIAL_VEL
-                break
-            else:
-                self.rect.center = (self.rect.centerx, self.rect.centery - 1)
+
+        if self.pos.y != BOTTOM_Y and self.rect.colliderect(self.obstacleOnTop.rect):
+            self.rect.center = (self.rect.centerx, self.rect.centery - 1)
+            self.vel.y = PLAYER_INITIAL_VEL
+        else:
+            self.rect.center = (self.rect.centerx, self.rect.centery - 1)
+
         if self.pos.y == BOTTOM_Y:
             self.vel.y = PLAYER_INITIAL_VEL
 
