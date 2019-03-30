@@ -21,20 +21,20 @@ class Player():
 
     def jump(self):
         # jump only if standing on a platform
-        self.rect.x += 1
+        self.rect.center = (self.rect.centerx, self.rect.centery + 1)
         for obstacle in self.game.obstacles:
             if self.rect.colliderect(obstacle.rect):
-                hits = True
-            else: hits = False
-            self.rect.x -= 1
-            if hits:
-                self.vel.y = -20
+                self.rect.center = (self.rect.centerx, self.rect.centery - 1)
+                self.vel.y = PLAYER_INITIAL_VEL
+                break
+            else:
+                self.rect.center = (self.rect.centerx, self.rect.centery - 1)
         if self.pos.y == BOTTOM_Y:
-            self.vel.y = -25
+            self.vel.y = PLAYER_INITIAL_VEL
 
     def update(self):
         self.acc = vec(0, PLAYER_GRAV)
-        
+
         # equations of motion
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
