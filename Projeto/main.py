@@ -19,6 +19,7 @@ class Game:
         pygame.time.set_timer(USEREVENT + 1, 500)
         pygame.time.set_timer(USEREVENT + 2, 6000)
         self.running = True
+        self.run_start_screen = False
         self.collisions = False
         # initializing player and vector for obstacles
         self.runner = Player(self)
@@ -28,13 +29,52 @@ class Game:
         self.bgX = 0
         self.bgX2 = self.bg.get_width()
         self.speed = 150
-
-        self.run()
+        self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
+        self.inst = pygame.image.load(os.path.join('Imagens', 'Instrucoes.png'))
+        self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
 
 
     def show_start_screen(self):
         # game splash/start screen
-        pass
+        self.run_start_screen = True
+        while self.run_start_screen:
+            self.clock.tick(self.speed)
+            self.draw_start_screen()
+            self.update_start_screen()
+            for event in pygame.event.get():
+                pos = pygame.mouse.get_pos()
+                if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_ESCAPE]:
+                    self.run_start_screen = False
+                    self.running = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
+                        self.run_start_screen = False
+
+
+    def update_start_screen(self):
+        self.runner.update()
+
+        if self.runner.pos.y >= BOTTOM_Y:
+            self.runner.pos.y = BOTTOM_Y
+            self.runner.vel.y = 0
+
+        # making background move
+        self.bgX -= 2
+        self.bgX2 -= 2
+        if self.bgX < self.bg.get_width() * -1:
+            self.bgX = self.bg.get_width()
+        if self.bgX2 < self.bg.get_width() * -1:
+            self.bgX2 = self.bg.get_width()
+
+    def draw_start_screen(self):
+        self.screen.blit(self.bg, (self.bgX, 0))
+        self.screen.blit(self.bg, (self.bgX2, 0))
+        self.screen.blit(self.play, (340, 140))
+        self.screen.blit(self.inst, (75, 290))
+        self.screen.blit(self.title, (230, 50))
+        self.runner.draw(self.screen)
+        pygame.display.flip()
+
 
     def show_go_screen(self):
         # game over/continue
@@ -62,8 +102,8 @@ class Game:
                 if event.key == pygame.K_SPACE:
                     self.runner.jump()
 
-            #if event.type == USEREVENT + 1:
-            #    self.speed += 1
+            if event.type == USEREVENT + 1:
+                self.speed += 1
 
             if event.type == USEREVENT + 2:
                 r = random.randrange(0, 6)
@@ -165,6 +205,7 @@ class Game:
         for obstacle in self.obstacles:
             obstacle.draw(self.screen)
 
+
         # *after* drawing everything, flip the display
         pygame.display.flip()
 
@@ -172,8 +213,8 @@ class Game:
 game = Game()
 game.show_start_screen()
 
-while game.running:
-    game.show_go_screen()
+while game.running and not game.run_start_screen:
+    game.run()
 
 pygame.quit()
 
