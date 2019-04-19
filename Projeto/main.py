@@ -52,11 +52,7 @@ class Game:
 
 
     def update_start_screen(self):
-        self.runner.update()
-
-        if self.runner.pos.y >= BOTTOM_Y:
-            self.runner.pos.y = BOTTOM_Y
-            self.runner.vel.y = 0
+        self.runner.update(self)
 
         # making background move
         self.bgX -= 2
@@ -157,27 +153,8 @@ class Game:
                     self.obstacles.append(Obstacle(810, 300, 306, 38, pygame.image.load(os.path.join('Imagens', 'Plataforma.png')), 'rectangle', '5'))
                     self.obstacles.append(Obstacle(810, 408, 306, 33, pygame.image.load(os.path.join('Imagens', 'Espinhos_Plat.png')), 'triangle', '5'))
 
-    def checkCollisions(self):
-        for obstacle in self.obstacles:
-            obstacle.update()
-            if self.runner.rect.colliderect(obstacle):
-                if obstacle.type == 'rectangle' and self.runner.vel.y > 0:
-                    self.runner.pos.y = obstacle.rect.top
-                    self.runner.vel.y = 0
-                    self.runner.obstacleOnTop = obstacle
-                else:
-                    if self.playing:
-                        self.playing = False
-                    self.running = False
-
     def update(self):
-        self.runner.update()
-
-        if self.runner.pos.y >= BOTTOM_Y:
-            self.runner.pos.y = BOTTOM_Y
-            self.runner.vel.y = 0
-
-        self.checkCollisions()
+        self.runner.update(self)
 
         # making background move
         self.bgX -= 2

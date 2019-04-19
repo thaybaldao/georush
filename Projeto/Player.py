@@ -7,7 +7,7 @@ vec = pygame.math.Vector2
 class Player():
     def __init__(self, game):
         self.x = 150
-        self.y = 393
+        self.y = BOTTOM_Y
         self.width = 49
         self.height = 47
         self.runCount = 0
@@ -15,32 +15,48 @@ class Player():
         self.image = pygame.image.load(os.path.join('Imagens','Personagem_Principal.png'))
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
-        self.pos = vec(self.x, self.y)
-        self.vel = vec(0, 0)
-        self.acc = vec(0, 0)
         self.obstacleOnTop = 0
+        self.timeJumpStarted = 0
+        self.isJumping = False
+        self.riseTime = 0
 
     def jump(self):
-        # jump only if standing on a platform
-        self.rect.center = (self.rect.centerx, self.rect.centery + 1)
-
-        if self.pos.y != BOTTOM_Y and self.rect.colliderect(self.obstacleOnTop.rect):
+        if self.isJumping == False:
             self.rect.center = (self.rect.centerx, self.rect.centery - 1)
-            self.vel.y = PLAYER_INITIAL_VEL
-        else:
-            self.rect.center = (self.rect.centerx, self.rect.centery - 1)
+            self.timeJumpStarted = pygame.time.get_ticks()/1000
+            self.isJumping = True
+            self.riseTime = PLAYER_INITIAL_VEL/PLAYER_GRAV + self.timeJumpStarted
 
-        if self.pos.y == BOTTOM_Y:
-            self.vel.y = PLAYER_INITIAL_VEL
+    def checkCollisions(self, game):
+        for obstacle in game.obstacles:
+            obstacle.update()
+            if self.rect.colliderect(obstacle):
+                if obstacle.type == 'rectangle' and self.isJumping == True and pygame.time.get_ticks()/1000 - self.riseTime > 0:
+                    self.y = obstacle.rect.top
+                    self.obstacleOnTop = obstacle
+                    self.isJumping = False
+                else:
+                    self.obstacleOnTop = 0
+                    if game.playing:
+                        game.playing = False
+                    game.running = False
 
-    def update(self):
-        self.acc = vec(0, PLAYER_GRAV)
+    def update(self, game):
+        if self.isJumping:
+            if pygame.time.get_ticks()/1000 - self.riseTime < 0 or (pygame.time.get_ticks()/1000 - self.riseTime > 0 and self.y < BOTTOM_Y):
+                dt = (pygame.time.get_ticks()/1000 - self.timeJumpStarted)
+                self.y = self.y - PLAYER_INITIAL_VEL*dt + PLAYER_GRAV*dt*dt/2
+            else:
+                self.y = BOTTOM_Y
+                self.isJumping = False
 
-        # equations of motion
-        self.vel += self.acc
-        self.pos += self.vel + 0.5 * self.acc
+        self.checkCollisions(game)
 
-        self.rect.midbottom = self.pos
+        print('runner y: ')
+        print(self.y)
+        print('\n')
+
+        self.rect.center = (self.x, self.y)
 
     def draw(self, win):
         pygame.draw.rect(win, (255, 0, 0), self.rect, 2)
