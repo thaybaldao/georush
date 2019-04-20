@@ -38,12 +38,12 @@ class Game:
         self.bgX2 = self.bg.get_width()
         self.speed = 150
         self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
-        self.reset = pygame.image.load(os.path.join('Imagens', 'Play.png'))
-        self.stop = pygame.image.load(os.path.join('Imagens', 'Play.png'))
+        self.reset = pygame.image.load(os.path.join('Imagens', 'Replay.png'))
+        self.stop = pygame.image.load(os.path.join('Imagens', 'X_button.png'))
         self.inst = pygame.image.load(os.path.join('Imagens', 'Instrucoes.png'))
-        self.try_again = pygame.image.load(os.path.join('Imagens', 'Instrucoes.png'))
+        self.try_again = pygame.image.load(os.path.join('Imagens', 'Best_Score.png'))
         self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
-        self.game_over = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
+        self.game_over = pygame.image.load(os.path.join('Imagens', 'Game_Over.png'))
 
 
     def show_start_screen(self):
@@ -104,13 +104,13 @@ class Game:
                 pos = pygame.mouse.get_pos()
                 # highlight hovering the button
                 if pos[0] > 205 and pos[0] < 333 and pos[1] > 140 and pos[1] < 259:
-                    self.reset = pygame.image.load(os.path.join('Imagens', 'Play1.png'))
+                    self.reset = pygame.image.load(os.path.join('Imagens', 'Replay1.png'))
                 else:
-                    self.reset = pygame.image.load(os.path.join('Imagens', 'Play.png'))
+                    self.reset = pygame.image.load(os.path.join('Imagens', 'Replay.png'))
                 if pos[0] > 455 and pos[0] < 583 and pos[1] > 140 and pos[1] < 259:
-                    self.stop = pygame.image.load(os.path.join('Imagens', 'Play1.png'))
+                    self.stop = pygame.image.load(os.path.join('Imagens', 'X_button1.png'))
                 else:
-                    self.stop = pygame.image.load(os.path.join('Imagens', 'Play.png'))
+                    self.stop = pygame.image.load(os.path.join('Imagens', 'X_button.png'))
                 if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.key.get_pressed()[
                     pygame.K_ESCAPE]:
                     self.run_reset_screen = False
@@ -128,7 +128,7 @@ class Game:
         self.screen.blit(self.reset, (205, 140))
         self.screen.blit(self.stop, (455, 140))
         self.screen.blit(self.try_again, (75, 290))
-        self.screen.blit(self.game_over, (225, 50))
+        self.screen.blit(self.game_over, (190, 50))
         self.runner.draw(self.screen)
         pygame.display.flip()
 
@@ -227,6 +227,9 @@ class Game:
                     self.runner.obstacleOnTop = obstacle
                 else:
                     if self.n_lifes == 0:
+                        self.lifes.clear()
+                        self.obstacles.clear()
+                        self.lifebar.clear()
                         game.show_reset_screen()
                         if self.playing:
                             self.playing = False
