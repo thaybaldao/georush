@@ -18,20 +18,19 @@ class Player():
         self.obstacleOnTop = 0
         self.timeJumpStarted = 0
         self.isJumping = False
-        self.riseTime = 0
+        self.lastY = BOTTOM_Y
 
     def jump(self):
         if self.isJumping == False:
             self.rect.center = (self.rect.centerx, self.rect.centery - 1)
             self.timeJumpStarted = pygame.time.get_ticks()/1000
             self.isJumping = True
-            self.riseTime = PLAYER_INITIAL_VEL/PLAYER_GRAV + self.timeJumpStarted
 
     def checkCollisions(self, game):
         for obstacle in game.obstacles:
             obstacle.update()
             if self.rect.colliderect(obstacle):
-                if obstacle.type == 'rectangle' and self.isJumping == True and pygame.time.get_ticks()/1000 - self.riseTime > 0:
+                if obstacle.type == 'rectangle' and self.isJumping == True and self.lastY < self.y:
                     self.y = obstacle.rect.top
                     self.obstacleOnTop = obstacle
                     self.isJumping = False
@@ -43,7 +42,7 @@ class Player():
 
     def update(self, game):
         if self.isJumping:
-            if pygame.time.get_ticks()/1000 - self.riseTime < 0 or (pygame.time.get_ticks()/1000 - self.riseTime > 0 and self.y < BOTTOM_Y):
+            if self.y <= BOTTOM_Y:
                 dt = (pygame.time.get_ticks()/1000 - self.timeJumpStarted)
                 self.y = self.y - PLAYER_INITIAL_VEL*dt + PLAYER_GRAV*dt*dt/2
             else:
@@ -52,11 +51,9 @@ class Player():
 
         self.checkCollisions(game)
 
-        print('runner y: ')
-        print(self.y)
-        print('\n')
-
         self.rect.center = (self.x, self.y)
+
+        self.lastY = self.y
 
     def draw(self, win):
         pygame.draw.rect(win, (255, 0, 0), self.rect, 2)

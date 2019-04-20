@@ -7,7 +7,7 @@ FPS = 50
 # Player properties
 PLAYER_ACC = 0.5
 PLAYER_FRICTION = -0.12
-PLAYER_GRAV = 10
+PLAYER_GRAV = 13
 PLAYER_INITIAL_VEL = 6
 
 # define colors
