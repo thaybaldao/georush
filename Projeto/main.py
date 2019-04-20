@@ -20,10 +20,13 @@ class Game:
         pygame.time.set_timer(USEREVENT + 2, 6000)
         self.running = True
         self.run_start_screen = False
+        self.n_lifes = 0
         self.collisions = False
         # initializing player and vector for obstacles
         self.runner = Player(self)
         self.obstacles = []
+        self.lifes = []
+        self.lifebar = []
         # creating background
         self.bg = pygame.image.load(os.path.join('Imagens', 'Background.png')).convert()
         self.bgX = 0
@@ -107,10 +110,15 @@ class Game:
 
             if event.type == USEREVENT + 2:
                 r = random.randrange(0, 6)
+                l = random.randrange(0, 5)
                 if r == 0:
                     self.obstacles.append(Obstacle(810, 395, 50, 48, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle', '1'))
+                    if l == 0:
+                        self.lifes.append(Obstacle(950, 400, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')),'life', 'x'))
                 elif r == 1:
                     self.obstacles.append(Obstacle(810, 245, 118, 48, pygame.image.load(os.path.join('Imagens', 'Triangulos_inverso.png')), 'triangle','1_2'))
+                    if l == 0:
+                        self.lifes.append(Obstacle(810, 400, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')),'life', 'x'))
                 elif r == 2:
                    if len(self.obstacles) == 0:
                        self.obstacles.append(Obstacle(810, 375, 45, 64, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_1.png')), 'rectangle','2'))
@@ -118,18 +126,24 @@ class Game:
                        self.obstacles.append(Obstacle(1070, 243, 45, 197, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_3.png')), 'rectangle','2'))
                        self.obstacles.append(Obstacle(858, 409, 82, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_4.png')), 'triangle','2'))
                        self.obstacles.append(Obstacle(988, 409, 82, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_4.png')), 'triangle','2'))
+                       if l == 0:
+                           self.lifes.append(Obstacle(940, 275, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')),'life', 'x'))
                    elif self.obstacles[len(self.obstacles) - 1].num != '4':
                         self.obstacles.append(Obstacle(810, 375, 45, 64, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_1.png')), 'rectangle', '2'))
                         self.obstacles.append(Obstacle(940, 314, 45, 126, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_2.png')), 'rectangle', '2'))
                         self.obstacles.append(Obstacle(1070, 243, 45, 197, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_3.png')), 'rectangle', '2'))
                         self.obstacles.append(Obstacle(858, 409, 82, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_4.png')), 'triangle', '2'))
                         self.obstacles.append(Obstacle(988, 409, 82, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_4.png')), 'triangle', '2'))
+                        if l == 0:
+                            self.lifes.append(Obstacle(940, 275, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')),'life', 'x'))
                 elif r == 3:
                     self.obstacles.append(Obstacle(810, 380, 379, 60, pygame.image.load(os.path.join('Imagens', 'Obstaculo3_1.png')), 'rectangle','3'))
                     self.obstacles.append(Obstacle(1300, 380, 379, 60, pygame.image.load(os.path.join('Imagens', 'Obstaculo3_1.png')), 'rectangle','3'))
                     self.obstacles.append(Obstacle(1197, 409, 99, 29, pygame.image.load(os.path.join('Imagens', 'Obstaculo3_2.png')), 'triangle','3'))
                     self.obstacles.append(Obstacle(990, 334, 50, 48, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle','3'))
                     self.obstacles.append(Obstacle(1480, 334, 50, 48, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle','3'))
+                    if l == 0:
+                        self.lifes.append(Obstacle(900, 340, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life', 'x'))
                 elif r == 4:
                     if len(self.obstacles) == 0:
                         self.obstacles.append(Obstacle(810, 408, 400, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_1.png')), 'triangle','4'))
@@ -137,25 +151,21 @@ class Game:
                         self.obstacles.append(Obstacle(935, 325, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')), 'rectangle','4'))
                         self.obstacles.append(Obstacle(1060, 280, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')), 'rectangle','4'))
                         self.obstacles.append(Obstacle(1185, 235, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')), 'rectangle','4'))
+                        if l == 0:
+                            self.lifes.append(Obstacle(1185, 190, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')),'life', 'x'))
                     elif self.obstacles[len(self.obstacles) - 1].num != '2':
-                        self.obstacles.append(
-                            Obstacle(810, 408, 400, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_1.png')),
-                                     'triangle', '4'))
-                        self.obstacles.append(
-                            Obstacle(810, 370, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')),
-                                     'rectangle', '4'))
-                        self.obstacles.append(
-                            Obstacle(935, 325, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')),
-                                     'rectangle', '4'))
-                        self.obstacles.append(
-                            Obstacle(1060, 280, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')),
-                                     'rectangle', '4'))
-                        self.obstacles.append(
-                            Obstacle(1185, 235, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')),
-                                     'rectangle', '4'))
+                        self.obstacles.append(Obstacle(810, 408, 400, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_1.png')),'triangle', '4'))
+                        self.obstacles.append(Obstacle(810, 370, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')),'rectangle', '4'))
+                        self.obstacles.append(Obstacle(935, 325, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')),'rectangle', '4'))
+                        self.obstacles.append(Obstacle(1060, 280, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')),'rectangle', '4'))
+                        self.obstacles.append(Obstacle(1185, 235, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')),'rectangle', '4'))
+                        if l == 0:
+                            self.lifes.append(Obstacle(1185, 190, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')),'life', 'x'))
                 elif r == 5:
                     self.obstacles.append(Obstacle(810, 300, 306, 38, pygame.image.load(os.path.join('Imagens', 'Plataforma.png')), 'rectangle', '5'))
                     self.obstacles.append(Obstacle(810, 408, 306, 33, pygame.image.load(os.path.join('Imagens', 'Espinhos_Plat.png')), 'triangle', '5'))
+                    if l == 0:
+                        self.lifes.append(Obstacle(900, 260, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life', 'x'))
 
     def checkCollisions(self):
         for obstacle in self.obstacles:
@@ -166,9 +176,22 @@ class Game:
                     self.runner.vel.y = 0
                     self.runner.obstacleOnTop = obstacle
                 else:
-                    if self.playing:
-                        self.playing = False
-                    self.running = False
+                    if self.n_lifes == 0:
+                        if self.playing:
+                            self.playing = False
+                        self.running = False
+                    else:
+                        self.n_lifes -= 1
+                        self.lifebar.pop()
+                        self.obstacles.pop(self.obstacles.index(obstacle))
+                        self.lifes.clear()
+        for life in self.lifes:
+            life.update()
+            if self.runner.rect.colliderect(life):
+                self.n_lifes += 1
+                n = 46*(self.n_lifes - 1)
+                self.lifebar.append(Obstacle(25 + n, 25, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life', 'x'))
+                self.lifes.pop(self.lifes.index(life))
 
     def update(self):
         self.runner.update()
@@ -194,6 +217,12 @@ class Game:
             else:
                 obstacle.x -= 1.4
 
+        for life in self.lifes:
+            if life.x < -850:
+                self.lifes.pop(self.lifes.index(life))
+            else:
+                life.x -= 1.4
+
     def draw(self):
         # Game Loop - draw
 
@@ -204,6 +233,12 @@ class Game:
 
         for obstacle in self.obstacles:
             obstacle.draw(self.screen)
+
+        for life in self.lifes:
+            life.draw(self.screen)
+
+        for life in self.lifebar:
+            life.draw(self.screen)
 
 
         # *after* drawing everything, flip the display
