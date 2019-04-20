@@ -20,6 +20,8 @@ class Game:
         pygame.time.set_timer(USEREVENT + 2, 6000)
         self.running = True
         self.run_start_screen = False
+        self.run_reset_screen = False
+        self.retry = False
         self.collisions = False
         # initializing player and vector for obstacles
         self.runner = Player(self)
@@ -30,8 +32,12 @@ class Game:
         self.bgX2 = self.bg.get_width()
         self.speed = 150
         self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
+        self.reset = pygame.image.load(os.path.join('Imagens', 'Play.png'))
+        self.stop = pygame.image.load(os.path.join('Imagens', 'Play.png'))
         self.inst = pygame.image.load(os.path.join('Imagens', 'Instrucoes.png'))
+        self.try_again = pygame.image.load(os.path.join('Imagens', 'Instrucoes.png'))
         self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
+        self.game_over = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
 
 
     def show_start_screen(self):
@@ -43,6 +49,11 @@ class Game:
             self.update_start_screen()
             for event in pygame.event.get():
                 pos = pygame.mouse.get_pos()
+                # highlight hovering the button
+                if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
+                    self.play = pygame.image.load(os.path.join('Imagens', 'Play1.png'))
+                else:
+                    self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
                 if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_ESCAPE]:
                     self.run_start_screen = False
                     self.running = False
@@ -71,14 +82,50 @@ class Game:
         self.screen.blit(self.bg, (self.bgX2, 0))
         self.screen.blit(self.play, (340, 140))
         self.screen.blit(self.inst, (75, 290))
-        self.screen.blit(self.title, (230, 50))
+        self.screen.blit(self.title, (225, 50))
         self.runner.draw(self.screen)
         pygame.display.flip()
 
 
-    def show_go_screen(self):
+    def show_reset_screen(self):
         # game over/continue
-        pass
+        self.run_reset_screen = True
+        while self.run_reset_screen:
+            self.clock.tick(self.speed)
+            self.draw_reset_screen()
+            self.update_start_screen()
+            for event in pygame.event.get():
+                pos = pygame.mouse.get_pos()
+                # highlight hovering the button
+                if pos[0] > 205 and pos[0] < 333 and pos[1] > 140 and pos[1] < 259:
+                    self.reset = pygame.image.load(os.path.join('Imagens', 'Play1.png'))
+                else:
+                    self.reset = pygame.image.load(os.path.join('Imagens', 'Play.png'))
+                if pos[0] > 455 and pos[0] < 583 and pos[1] > 140 and pos[1] < 259:
+                    self.stop = pygame.image.load(os.path.join('Imagens', 'Play1.png'))
+                else:
+                    self.stop = pygame.image.load(os.path.join('Imagens', 'Play.png'))
+                if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.key.get_pressed()[
+                    pygame.K_ESCAPE]:
+                    self.run_reset_screen = False
+                    self.running = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if pos[0] > 205 and pos[0] < 333 and pos[1] > 140 and pos[1] < 259:
+                        self.retry = True
+                        self.run_reset_screen = False
+                    if pos[0] > 455 and pos[0] < 583 and pos[1] > 140 and pos[1] < 259:
+                        self.run_reset_screen = False
+
+    def draw_reset_screen(self):
+        self.screen.blit(self.bg, (self.bgX, 0))
+        self.screen.blit(self.bg, (self.bgX2, 0))
+        self.screen.blit(self.reset, (205, 140))
+        self.screen.blit(self.stop, (455, 140))
+        self.screen.blit(self.try_again, (75, 290))
+        self.screen.blit(self.game_over, (225, 50))
+        self.runner.draw(self.screen)
+        pygame.display.flip()
+
 
     def run(self):
         # Game Loop
@@ -166,9 +213,12 @@ class Game:
                     self.runner.vel.y = 0
                     self.runner.obstacleOnTop = obstacle
                 else:
+                    game.show_reset_screen()
                     if self.playing:
                         self.playing = False
                     self.running = False
+
+
 
     def update(self):
         self.runner.update()
@@ -213,8 +263,14 @@ class Game:
 game = Game()
 game.show_start_screen()
 
-while game.running and not game.run_start_screen:
+while game.running and not game.run_start_screen and not game.run_reset_screen:
     game.run()
+
+while game.retry:
+    del game
+    game = Game()
+    while game.running and not game.run_start_screen and not game.run_reset_screen:
+        game.run()
 
 pygame.quit()
 
