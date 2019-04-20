@@ -237,7 +237,7 @@ class Game:
                     else:
                         self.n_lifes -= 1
                         self.lifebar.pop()
-                        self.obstacles.pop(self.obstacles.index(obstacle))
+                        self.obstacles.clear()
                         self.lifes.clear()
         for life in self.lifes:
             life.update()
