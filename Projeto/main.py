@@ -287,7 +287,7 @@ class Game:
 
     def createObstacle(self):
         r = random.randrange(0, 6)
-        l = random.randrange(0, 7)
+        l = random.randrange(0, 12)
         if len(self.obstacles) == 0 or (self.obstacles[-1].num < 2 and self.obstacles[-1].x + self.obstacles[-1].width < 600) or (self.obstacles[-1].x + self.obstacles[-1].width < 480):
             if r == 0:
                 self.obstacles.append(
