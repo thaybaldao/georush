@@ -198,8 +198,8 @@ class Game:
         self.runner.update(self)
 
         # making background move
-        self.bgX -= 2
-        self.bgX2 -= 2
+        self.bgX -= 1.5
+        self.bgX2 -= 1.5
         if self.bgX < self.bg.get_width() * -1:
             self.bgX = self.bg.get_width()
         if self.bgX2 < self.bg.get_width() * -1:
@@ -242,7 +242,7 @@ class Game:
 
     def createObstacle(self):
         r = random.randrange(0, 6)
-        l = random.randrange(0, 5)
+        l = random.randrange(0, 7)
         if len(self.obstacles) == 0 or (self.obstacles[-1].num < 2 and self.obstacles[-1].x + self.obstacles[-1].width < 600) or (self.obstacles[-1].x + self.obstacles[-1].width < 480):
             if r == 0:
                 self.obstacles.append(
