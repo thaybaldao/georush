@@ -145,9 +145,9 @@ class Game:
                         self.run_reset_screen = False
                     if pos[0] > 455 and pos[0] < 583 and pos[1] > 140 and pos[1] < 259:
                         self.run_reset_screen = False
-                if event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_SPACE]:
-                    self.retry = True
-                    self.run_reset_screen = False
+                # if event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_SPACE]:
+                #     self.retry = True
+                #     self.run_reset_screen = False
 
 
     def draw_reset_screen(self):
