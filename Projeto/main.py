@@ -201,8 +201,8 @@ class Game:
         self.runner.update(self)
 
         # making background move
-        self.bgX -= 1.5
-        self.bgX2 -= 1.5
+        self.bgX -= 2
+        self.bgX2 -= 2
         if self.bgX < self.bg.get_width() * -1:
             self.bgX = self.bg.get_width()
         if self.bgX2 < self.bg.get_width() * -1:
