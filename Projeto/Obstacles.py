@@ -15,6 +15,8 @@ class Obstacle:
         self.num = num
 
     def update(self):
+        if self.x > -850:
+            self.x -= 1.4
         self.rect.x = self.x
         self.rect.y = self.y
 

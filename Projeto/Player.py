@@ -36,7 +36,6 @@ class Player():
 
     def checkCollisions(self, game):
         for obstacle in game.obstacles:
-            obstacle.update()
             if obstacle != 0 and self.rect.colliderect(obstacle):
                 if obstacle.type == 'rectangle' and self.vel.y > 0 and self.pos.y - TOLERANCE <= obstacle.rect.top:
                     self.pos.y = obstacle.rect.top
@@ -57,7 +56,6 @@ class Player():
                     game.obstacles.clear()
                     game.lifes.clear()
             for life in game.lifes:
-                life.update()
                 if game.runner.rect.colliderect(life):
                     game.n_lifes += 1
                     n = 46 * (game.n_lifes - 1)
