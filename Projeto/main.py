@@ -7,12 +7,19 @@ import os
 import random
 
 class Game:
-    def __init__(self, highScore):
+    def __init__(self, highScore, past_sound):
         # initializing pygame
         pygame.init()
         pygame.mixer.init()
         pygame.mixer.music.load('BackOnTrack.wav')
         self.menu_sound = pygame.mixer.Sound('menuLoop.wav')
+        self.past_sound = past_sound
+        if self.past_sound:
+            self.sound = True
+            self.img_sound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
+        else:
+            self.sound = False
+            self.img_sound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
         # creating game window
         self.screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
         pygame.display.set_caption(TITLE)
@@ -57,7 +64,8 @@ class Game:
     def showStartScreen(self):
         # game splash/start screen
         self.run_start_screen = True
-        pygame.mixer.Sound.play(self.menu_sound, -1)
+        if self.sound:
+            pygame.mixer.Sound.play(self.menu_sound, -1)
         while self.run_start_screen:
             self.clock.tick(self.speed)
             self.draw_start_screen()
@@ -75,9 +83,17 @@ class Game:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
                         self.run_start_screen = False
-                if event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_SPACE]:
-                    self.run_start_screen = False
-        pygame.mixer.Sound.fadeout(self.menu_sound, 300)
+                    if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
+                        if self.sound:
+                            self.sound = False
+                            self.img_sound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
+                            pygame.mixer.Sound.stop(self.menu_sound)
+                        else:
+                            self.sound = True
+                            self.img_sound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
+                            pygame.mixer.Sound.play(self.menu_sound, -1)
+        if self.sound:
+            pygame.mixer.Sound.fadeout(self.menu_sound, 300)
 
 
     def update_start_screen(self):
@@ -97,6 +113,7 @@ class Game:
         self.screen.blit(self.play, (340, 140))
         self.screen.blit(self.inst, (75, 290))
         self.screen.blit(self.title, (225, 50))
+        self.screen.blit(self.img_sound, (740, 450))
         self.runner.draw(self.screen)
         pygame.display.flip()
 
@@ -106,7 +123,7 @@ class Game:
 
         text = font.render("Score: "+str(int(self.score)), True, ORANGE)
 
-        self.screen.blit(text, (480, 10))
+        self.screen.blit(text, (265, 10))
 
 
 
@@ -123,7 +140,8 @@ class Game:
     def showResetScreen(self):
         # game over/continue
         self.run_reset_screen = True
-        pygame.mixer.Sound.play(self.menu_sound, -1)
+        if self.sound:
+            pygame.mixer.Sound.play(self.menu_sound, -1)
         while self.run_reset_screen:
             self.clock.tick(self.speed)
             self.draw_reset_screen()
@@ -150,7 +168,17 @@ class Game:
                         self.run_reset_screen = False
                     if pos[0] > 455 and pos[0] < 583 and pos[1] > 140 and pos[1] < 259:
                         self.run_reset_screen = False
-        pygame.mixer.Sound.fadeout(self.menu_sound, 300)
+                    if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
+                        if self.sound:
+                            self.sound = False
+                            self.img_sound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
+                            pygame.mixer.Sound.stop(self.menu_sound)
+                        else:
+                            self.sound = True
+                            self.img_sound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
+                            pygame.mixer.Sound.play(self.menu_sound, -1)
+        if self.sound:
+            pygame.mixer.Sound.fadeout(self.menu_sound, 300)
 
     def draw_reset_screen(self):
         self.screen.blit(self.bg, (self.bgX, 0))
@@ -158,6 +186,7 @@ class Game:
         self.screen.blit(self.reset, (205, 140))
         self.screen.blit(self.stop, (455, 140))
         self.screen.blit(self.game_over, (190, 50))
+        self.screen.blit(self.img_sound, (740, 450))
         self.runner.draw(self.screen)
 
         self.printFinalScore()
@@ -168,7 +197,8 @@ class Game:
     def run(self):
         # Game Loop
         self.playing = True
-        pygame.mixer.music.play(-1)
+        if self.sound:
+            pygame.mixer.music.play(-1)
         while self.playing:
             self.clock.tick(self.speed)
             self.events()
@@ -181,6 +211,7 @@ class Game:
     def events(self):
         # Game Loop - events
         for event in pygame.event.get():
+            pos = pygame.mouse.get_pos()
             # check for closing window
             if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_ESCAPE]:
                 if self.playing:
@@ -196,6 +227,19 @@ class Game:
 
             if event.type == USEREVENT + 1:
                 self.createObstacle()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
+                    self.run_start_screen = False
+                if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
+                    if self.sound:
+                        self.sound = False
+                        self.img_sound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
+                        pygame.mixer.music.stop()
+                    else:
+                        self.sound = True
+                        self.img_sound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
+                        pygame.mixer.music.play(-1)
 
     def update(self):
         self.runner.update(self)
@@ -225,7 +269,7 @@ class Game:
         # Game Loop - draw
         self.screen.blit(self.bg, (self.bgX, 0))
         self.screen.blit(self.bg, (self.bgX2, 0))
-
+        self.screen.blit(self.img_sound, (740, 450))
         self.runner.draw(self.screen)
 
         for obstacle in self.obstacles:
@@ -251,7 +295,7 @@ class Game:
                 self.obstacles.append(
                     Obstacle(810, 405, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
                              0))
-                if l == 0:
+                if l == 0 and self.n_lifes < 5:
                     self.lifes.append(
                         Obstacle(950, 400, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
                                  'x'))
@@ -261,7 +305,7 @@ class Game:
                     Obstacle(810, 245, 118, 48, pygame.image.load(os.path.join('Imagens', 'Triangulos_inverso.png')),
                              'triangle', 1))
 
-                if l == 0:
+                if l == 0 and self.n_lifes < 5:
                     self.lifes.append(
                         Obstacle(810, 400, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
                                  'x'))
@@ -284,7 +328,7 @@ class Game:
                     Obstacle(988, 409, 82, 33, pygame.image.load(os.path.join('Imagens', 'Obstaculo2_4.png')),
                              'triangle', 2))
 
-                if l == 0:
+                if l == 0 and self.n_lifes < 5:
                     self.lifes.append(
                         Obstacle(940, 275, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')),
                                  'life', 'x'))
@@ -305,7 +349,7 @@ class Game:
                 self.obstacles.append(
                     Obstacle(1480, 347, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
                              3))
-                if l == 0:
+                if l == 0 and self.n_lifes < 5:
                     self.lifes.append(
                         Obstacle(900, 340, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
                                  'x'))
@@ -323,7 +367,7 @@ class Game:
                 self.obstacles.append(
                     Obstacle(1060, 260, 51, 13, pygame.image.load(os.path.join('Imagens', 'Obstaculo4_2.png')),
                              'rectangle', 4))
-                if l == 0:
+                if l == 0 and self.n_lifes < 5:
                     self.lifes.append(
                         Obstacle(935, 280, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')),
                                  'life', 'x'))
@@ -335,7 +379,7 @@ class Game:
                 self.obstacles.append(
                     Obstacle(810, 408, 306, 33, pygame.image.load(os.path.join('Imagens', 'Espinhos_Plat.png')), 'triangle',
                              5))
-                if l == 0:
+                if l == 0 and self.n_lifes < 5:
                     self.lifes.append(
                         Obstacle(900, 310, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
                                  'x'))
@@ -344,7 +388,8 @@ class Game:
 
 
 highScore = 0
-game = Game(highScore)
+sound_past = True
+game = Game(highScore, sound_past)
 game.showStartScreen()
 
 while game.running and not game.run_start_screen and not game.run_reset_screen:
@@ -352,8 +397,10 @@ while game.running and not game.run_start_screen and not game.run_reset_screen:
 
 while game.retry:
     highScore = game.highScore
+    sound_past = game.sound
     del game
-    game = Game(highScore)
+    game = Game(highScore, sound_past)
+    game.sound = sound_past
     while game.running and not game.run_start_screen and not game.run_reset_screen:
         game.run()
 
