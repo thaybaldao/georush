@@ -11,6 +11,8 @@ class Game:
         # initializing pygame
         pygame.init()
         pygame.mixer.init()
+        pygame.mixer.music.load('BackOnTrack.wav')
+        self.menu_sound = pygame.mixer.Sound('menuLoop.wav')
         # creating game window
         self.screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
         pygame.display.set_caption(TITLE)
@@ -55,6 +57,7 @@ class Game:
     def showStartScreen(self):
         # game splash/start screen
         self.run_start_screen = True
+        pygame.mixer.Sound.play(self.menu_sound, -1)
         while self.run_start_screen:
             self.clock.tick(self.speed)
             self.draw_start_screen()
@@ -74,6 +77,7 @@ class Game:
                         self.run_start_screen = False
                 if event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_SPACE]:
                     self.run_start_screen = False
+        pygame.mixer.Sound.fadeout(self.menu_sound, 300)
 
 
     def update_start_screen(self):
@@ -119,6 +123,7 @@ class Game:
     def showResetScreen(self):
         # game over/continue
         self.run_reset_screen = True
+        pygame.mixer.Sound.play(self.menu_sound, -1)
         while self.run_reset_screen:
             self.clock.tick(self.speed)
             self.draw_reset_screen()
@@ -145,10 +150,7 @@ class Game:
                         self.run_reset_screen = False
                     if pos[0] > 455 and pos[0] < 583 and pos[1] > 140 and pos[1] < 259:
                         self.run_reset_screen = False
-                # if event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_SPACE]:
-                #     self.retry = True
-                #     self.run_reset_screen = False
-
+        pygame.mixer.Sound.fadeout(self.menu_sound, 300)
 
     def draw_reset_screen(self):
         self.screen.blit(self.bg, (self.bgX, 0))
@@ -166,6 +168,7 @@ class Game:
     def run(self):
         # Game Loop
         self.playing = True
+        pygame.mixer.music.play(-1)
         while self.playing:
             self.clock.tick(self.speed)
             self.events()
@@ -246,7 +249,7 @@ class Game:
         if len(self.obstacles) == 0 or (self.obstacles[-1].num < 2 and self.obstacles[-1].x + self.obstacles[-1].width < 600) or (self.obstacles[-1].x + self.obstacles[-1].width < 480):
             if r == 0:
                 self.obstacles.append(
-                    Obstacle(810, 395, 50, 48, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
+                    Obstacle(810, 405, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
                              0))
                 if l == 0:
                     self.lifes.append(
@@ -297,10 +300,10 @@ class Game:
                     Obstacle(1197, 409, 99, 29, pygame.image.load(os.path.join('Imagens', 'Obstaculo3_2.png')), 'triangle',
                              3))
                 self.obstacles.append(
-                    Obstacle(990, 334, 50, 48, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
+                    Obstacle(990, 347, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
                              3))
                 self.obstacles.append(
-                    Obstacle(1480, 334, 50, 48, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
+                    Obstacle(1480, 347, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
                              3))
                 if l == 0:
                     self.lifes.append(

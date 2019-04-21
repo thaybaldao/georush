@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="123eedbb-dcf8-4ed2-b962-110213f314b5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Imagens/Triangulo.png" beforeDir="false" afterPath="$PROJECT_DIR$/Imagens/Triangulo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -12,15 +14,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Projeto$main.coverage" NAME="main Coverage Results" MODIFIED="1555861891950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Projeto$main.coverage" NAME="main Coverage Results" MODIFIED="1555864822149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="149" column="51" lean-forward="true" selection-start-line="147" selection-start-column="18" selection-end-line="149" selection-end-column="51" />
+            <state relative-caret-position="330">
+              <caret line="305" column="38" selection-start-line="305" selection-start-column="38" selection-end-line="305" selection-end-column="38" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -43,8 +45,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Player.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-133">
-              <caret line="50" column="44" lean-forward="true" selection-start-line="50" selection-start-column="44" selection-end-line="50" selection-end-column="44" />
+            <state relative-caret-position="238">
+              <caret line="48" column="48" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -75,6 +77,14 @@
       <find>score</find>
       <find>coll</find>
       <find>retry</find>
+      <find>run_</find>
+      <find>showRese</find>
+      <find>showrese</find>
+      <find>run_re</find>
+      <find>check</find>
+      <find>run</find>
+      <find>upd</find>
+      <find>showRe</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -234,12 +244,12 @@
       <workItem from="1555622522888" duration="465000" />
       <workItem from="1555778692568" duration="4141000" />
       <workItem from="1555785553838" duration="629000" />
-      <workItem from="1555858354527" duration="3060000" />
+      <workItem from="1555858354527" duration="5943000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38680000" />
+    <option name="totallyTimeSpent" value="41563000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -270,6 +280,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Player.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
@@ -349,15 +369,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Player.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-133">
-          <caret line="50" column="44" lean-forward="true" selection-start-line="50" selection-start-column="44" selection-end-line="50" selection-end-column="44" />
+        <state relative-caret-position="238">
+          <caret line="48" column="48" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="149" column="51" lean-forward="true" selection-start-line="147" selection-start-column="18" selection-end-line="149" selection-end-column="51" />
+        <state relative-caret-position="330">
+          <caret line="305" column="38" selection-start-line="305" selection-start-column="38" selection-end-line="305" selection-end-column="38" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
