@@ -223,7 +223,7 @@ class Game:
                     self.runner.jump()
 
             if event.type == USEREVENT + 2:
-                self.speed += 1
+                self.speed += 0.5
 
             if event.type == USEREVENT + 1:
                 self.createObstacle()
@@ -254,16 +254,14 @@ class Game:
 
         # making obstacles disappear
         for obstacle in self.obstacles:
+            obstacle.update()
             if obstacle.x < -850:
                 self.obstacles.pop(self.obstacles.index(obstacle))
-            else:
-                obstacle.x -= 1.4
 
         for life in self.lifes:
+            life.update()
             if life.x < -850:
                 self.lifes.pop(self.lifes.index(life))
-            else:
-                life.x -= 1.4
 
     def draw(self):
         # Game Loop - draw
