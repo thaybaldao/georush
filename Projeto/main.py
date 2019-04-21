@@ -104,20 +104,16 @@ class Game:
 
         self.screen.blit(text, (450, 10))
 
-        pygame.display.flip()
+
 
     def print_final_score(self):
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
 
-
         text1 = font.render("Your Score: " + str(int(self.score)), True, PURPLE)
         text2 = font.render("Best Score: " + str(int(self.high_score)), True, PURPLE)
 
-
         self.screen.blit(text1, (200, 300))
         self.screen.blit(text2, (200, 350))
-
-        pygame.display.flip()
 
 
     def show_reset_screen(self):
@@ -126,8 +122,8 @@ class Game:
         while self.run_reset_screen:
             self.clock.tick(self.speed)
             self.draw_reset_screen()
-            self.update_start_screen()
-            self.print_final_score()
+            self.runner.update(self)
+
             for event in pygame.event.get():
                 pos = pygame.mouse.get_pos()
                 # highlight hovering the button
@@ -153,6 +149,7 @@ class Game:
                     self.retry = True
                     self.run_reset_screen = False
 
+
     def draw_reset_screen(self):
         self.screen.blit(self.bg, (self.bgX, 0))
         self.screen.blit(self.bg, (self.bgX2, 0))
@@ -160,6 +157,9 @@ class Game:
         self.screen.blit(self.stop, (455, 140))
         self.screen.blit(self.game_over, (190, 50))
         self.runner.draw(self.screen)
+
+        self.print_final_score()
+
         pygame.display.flip()
 
 
@@ -171,7 +171,6 @@ class Game:
             self.events()
             self.update()
             self.draw()
-            self.print_score()
             self.score = (self.score + 0.01)
             if self.score > self.high_score:
                 self.high_score = self.score
@@ -235,6 +234,7 @@ class Game:
         for life in self.lifebar:
             life.draw(self.screen)
 
+        self.print_score()
 
         # *after* drawing everything, flip the display
         pygame.display.flip()
