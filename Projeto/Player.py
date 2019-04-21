@@ -53,7 +53,7 @@ class Player():
                 else:
                     game.n_lifes -= 1
                     game.lifebar.pop()
-                    game.obstacles.pop(game.obstacles.index(obstacle))
+                    game.obstacles.clear()
                     game.lifes.clear()
             for life in game.lifes:
                 life.update()
