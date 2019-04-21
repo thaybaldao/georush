@@ -46,7 +46,7 @@ class Player():
                     game.lifes.clear()
                     game.obstacles.clear()
                     game.lifebar.clear()
-                    game.show_reset_screen()
+                    game.showResetScreen()
                     if game.playing:
                         game.playing = False
                     game.running = False

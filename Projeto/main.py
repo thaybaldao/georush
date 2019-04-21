@@ -7,7 +7,7 @@ import os
 import random
 
 class Game:
-    def __init__(self, High_Score):
+    def __init__(self, highScore):
         # initializing pygame
         pygame.init()
         pygame.mixer.init()
@@ -49,10 +49,10 @@ class Game:
 
         # setting score
         self.score = 0
-        self.high_score = High_Score
+        self.highScore = highScore
 
 
-    def show_start_screen(self):
+    def showStartScreen(self):
         # game splash/start screen
         self.run_start_screen = True
         while self.run_start_screen:
@@ -97,7 +97,7 @@ class Game:
         pygame.display.flip()
 
 
-    def print_score(self):
+    def printScore(self):
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
 
         text = font.render("Score: "+str(int(self.score)), True, ORANGE)
@@ -106,17 +106,17 @@ class Game:
 
 
 
-    def print_final_score(self):
+    def printFinalScore(self):
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
 
         text1 = font.render("Your Score: " + str(int(self.score)), True, PURPLE)
-        text2 = font.render("Best Score: " + str(int(self.high_score)), True, PURPLE)
+        text2 = font.render("Best Score: " + str(int(self.highScore)), True, PURPLE)
 
         self.screen.blit(text1, (200, 300))
         self.screen.blit(text2, (200, 350))
 
 
-    def show_reset_screen(self):
+    def showResetScreen(self):
         # game over/continue
         self.run_reset_screen = True
         while self.run_reset_screen:
@@ -158,7 +158,7 @@ class Game:
         self.screen.blit(self.game_over, (190, 50))
         self.runner.draw(self.screen)
 
-        self.print_final_score()
+        self.printFinalScore()
 
         pygame.display.flip()
 
@@ -172,8 +172,8 @@ class Game:
             self.update()
             self.draw()
             self.score = (self.score + 0.01)
-            if self.score > self.high_score:
-                self.high_score = self.score
+            if self.score > self.highScore:
+                self.highScore = self.score
 
     def events(self):
         # Game Loop - events
@@ -234,7 +234,7 @@ class Game:
         for life in self.lifebar:
             life.draw(self.screen)
 
-        self.print_score()
+        self.printScore()
 
         # *after* drawing everything, flip the display
         pygame.display.flip()
@@ -341,17 +341,19 @@ class Game:
                                  'x'))
 
 
-high_score = 0
-game = Game(high_score)
-game.show_start_screen()
+
+
+highScore = 0
+game = Game(highScore)
+game.showStartScreen()
 
 while game.running and not game.run_start_screen and not game.run_reset_screen:
     game.run()
 
 while game.retry:
-    high_score = game.high_score
+    highScore = game.highScore
     del game
-    game = Game(high_score)
+    game = Game(highScore)
     while game.running and not game.run_start_screen and not game.run_reset_screen:
         game.run()
 
