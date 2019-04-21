@@ -220,22 +220,23 @@ class Game:
         if self.sound:
             pygame.mixer.music.play(-1)
         while self.playing:
-            currentTime = pygame.time.get_ticks()/1000
-
-            if not self.inDangerZone and currentTime - self.timeRunningStarted < 10:
-                self.inDangerZone = False
-                self.runGame()
-            else:
-                if not self.inDangerZone:
-                    self.inDangerZone = True
-                    self.timeDangerZoneStarted = currentTime
-                    self.drawDangerZoneScreen()
-                elif self.inDangerZone and currentTime - self.timeDangerZoneStarted < 10:
-                    self.inDangerZone = True
-                    self.runGame()
-                else:
-                    self.inDangerZone = False
-                    self.timeRunningStarted = currentTime
+            # currentTime = pygame.time.get_ticks()/1000
+            #
+            # if not self.inDangerZone and currentTime - self.timeRunningStarted < 10:
+            #     self.inDangerZone = False
+            #     self.runGame()
+            # else:
+            #     if not self.inDangerZone:
+            #         self.inDangerZone = True
+            #         self.timeDangerZoneStarted = currentTime
+            #         self.drawDangerZoneScreen()
+            #     elif self.inDangerZone and currentTime - self.timeDangerZoneStarted < 10:
+            #         self.inDangerZone = True
+            #         self.runGame()
+            #     else:
+            #         self.inDangerZone = False
+            #         self.timeRunningStarted = currentTime
+            self.runGame()
 
 
     def runGame(self):
