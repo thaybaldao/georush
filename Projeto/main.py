@@ -192,7 +192,7 @@ class Game:
                     self.runner.jump()
 
             if event.type == USEREVENT + 2:
-                self.speed += 1
+                self.speed += 0.5
 
             if event.type == USEREVENT + 1:
                 self.createObstacle()

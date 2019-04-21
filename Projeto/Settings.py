@@ -5,8 +5,8 @@ SCREENHEIGHT = 500
 FPS = 50
 
 # Player properties
-PLAYER_GRAV = 0.2
-PLAYER_INITIAL_VEL = -7.7
+PLAYER_GRAV = 0.21
+PLAYER_INITIAL_VEL = -8.2
 TOLERANCE = 8
 
 # define colors
