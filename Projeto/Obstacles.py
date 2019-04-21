@@ -19,7 +19,7 @@ class Obstacle:
         self.rect.y = self.y
 
     def draw(self, win):
-        pygame.draw.rect(win, (255, 0, 0), self.rect, 2)
+        # pygame.draw.rect(win, (255, 0, 0), self.rect, 2)
         win.blit(self.img, (self.x, self.y))
 
     def identifyObstacleType(self):
