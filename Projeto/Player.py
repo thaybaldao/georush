@@ -41,7 +41,7 @@ class Player():
                     self.pos.y = obstacle.rect.top
                     self.vel.y = 0
                     self.obstacleOnTop = obstacle
-                elif game.n_lifes == 0:
+                elif game.numLives == 0:
                     game.lifes.clear()
                     game.obstacles.clear()
                     game.lifebar.clear()
@@ -52,14 +52,14 @@ class Player():
                         game.playing = False
                     game.running = False
                 else:
-                    game.n_lifes -= 1
+                    game.numLives -= 1
                     game.lifebar.pop()
                     game.obstacles.clear()
                     game.lifes.clear()
             for life in game.lifes:
                 if game.runner.rect.colliderect(life):
-                    game.n_lifes += 1
-                    n = 46 * (game.n_lifes - 1)
+                    game.numLives += 1
+                    n = 46 * (game.numLives - 1)
                     game.lifebar.append(
                         Obstacle(25 + n, 25, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
                                  'x'))

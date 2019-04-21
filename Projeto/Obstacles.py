@@ -25,6 +25,6 @@ class Obstacle:
         win.blit(self.img, (self.x, self.y))
 
     def identifyObstacleType(self):
-        return self.type;
+        return self.type
 
 
