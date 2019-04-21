@@ -18,6 +18,8 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
+ORANGE = (255,69,0)
+PURPLE = (32, 18, 60)
 
 
 BOTTOM_Y = 439

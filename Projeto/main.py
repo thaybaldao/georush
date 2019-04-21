@@ -7,7 +7,7 @@ import os
 import random
 
 class Game:
-    def __init__(self):
+    def __init__(self, High_Score):
         # initializing pygame
         pygame.init()
         pygame.mixer.init()
@@ -47,6 +47,10 @@ class Game:
         self.game_over = pygame.image.load(os.path.join('Imagens', 'Game_Over.png'))
         pygame.key.set_repeat(17, 17)
 
+        # setting score
+        self.score = 0
+        self.high_score = High_Score
+
 
     def show_start_screen(self):
         # game splash/start screen
@@ -68,6 +72,8 @@ class Game:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
                         self.run_start_screen = False
+                if event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_SPACE]:
+                    self.run_start_screen = False
 
 
     def update_start_screen(self):
@@ -91,6 +97,29 @@ class Game:
         pygame.display.flip()
 
 
+    def print_score(self):
+        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
+
+        text = font.render("Score: "+str(int(self.score)), True, ORANGE)
+
+        self.screen.blit(text, (450, 10))
+
+        pygame.display.flip()
+
+    def print_final_score(self):
+        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
+
+
+        text1 = font.render("Your Score: " + str(int(self.score)), True, PURPLE)
+        text2 = font.render("Best Score: " + str(int(self.high_score)), True, PURPLE)
+
+
+        self.screen.blit(text1, (200, 300))
+        self.screen.blit(text2, (200, 350))
+
+        pygame.display.flip()
+
+
     def show_reset_screen(self):
         # game over/continue
         self.run_reset_screen = True
@@ -98,6 +127,7 @@ class Game:
             self.clock.tick(self.speed)
             self.draw_reset_screen()
             self.update_start_screen()
+            self.print_final_score()
             for event in pygame.event.get():
                 pos = pygame.mouse.get_pos()
                 # highlight hovering the button
@@ -119,13 +149,15 @@ class Game:
                         self.run_reset_screen = False
                     if pos[0] > 455 and pos[0] < 583 and pos[1] > 140 and pos[1] < 259:
                         self.run_reset_screen = False
+                if event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_SPACE]:
+                    self.retry = True
+                    self.run_reset_screen = False
 
     def draw_reset_screen(self):
         self.screen.blit(self.bg, (self.bgX, 0))
         self.screen.blit(self.bg, (self.bgX2, 0))
         self.screen.blit(self.reset, (205, 140))
         self.screen.blit(self.stop, (455, 140))
-        self.screen.blit(self.try_again, (75, 290))
         self.screen.blit(self.game_over, (190, 50))
         self.runner.draw(self.screen)
         pygame.display.flip()
@@ -139,6 +171,10 @@ class Game:
             self.events()
             self.update()
             self.draw()
+            self.print_score()
+            self.score = (self.score + 0.01)
+            if self.score > self.high_score:
+                self.high_score = self.score
 
     def events(self):
         # Game Loop - events
@@ -271,15 +307,17 @@ class Game:
                     Obstacle(810, 408, 306, 33, pygame.image.load(os.path.join('Imagens', 'Espinhos_Plat.png')), 'triangle',
                              5))
 
-game = Game()
+high_score = 0
+game = Game(high_score)
 game.show_start_screen()
 
 while game.running and not game.run_start_screen and not game.run_reset_screen:
     game.run()
 
 while game.retry:
+    high_score = game.high_score
     del game
-    game = Game()
+    game = Game(high_score)
     while game.running and not game.run_start_screen and not game.run_reset_screen:
         game.run()
 
