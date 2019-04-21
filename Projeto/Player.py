@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+from Obstacles import *
 from Settings import *
 import os
 vec = pygame.math.Vector2
