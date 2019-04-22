@@ -84,7 +84,7 @@ class Game:
         while self.playing:
             currentTime = pygame.time.get_ticks()/1000
 
-            if not self.inDangerZone and currentTime - self.timeRunningStarted < 5:
+            if not self.inDangerZone and currentTime - self.timeRunningStarted < 40 + 10*random.randrange(0, 2):
                 self.inDangerZone = False
                 self.regularZone.run(self)
             else:
@@ -95,7 +95,7 @@ class Game:
                     pygame.time.wait(500)
                     self.dangerZone.drawDangerScreen(PURPLE, 'DANGER ZONE!', 115, game)
                     pygame.time.wait(400)
-                    self.dangerZone.drawDangerScreen(VIOLET, 'DANGER ZONE!', 115, game)
+                    self.dangerZone.drawDangerScreen(YELLOW, 'DANGER ZONE!', 115, game)
                     pygame.time.wait(500)
                     self.dangerZone.drawDangerScreen(PURPLE, 'DANGER ZONE!', 115, game)
                     pygame.time.wait(400)
@@ -109,7 +109,7 @@ class Game:
                     pygame.time.wait(500)
                     self.dangerZone.drawDangerScreen(PURPLE, 'WELL DONE!', 160, game)
                     pygame.time.wait(400)
-                    self.dangerZone.drawDangerScreen(VIOLET, 'WELL DONE!', 160, game)
+                    self.dangerZone.drawDangerScreen(YELLOW, 'WELL DONE!', 160, game)
                     pygame.time.wait(500)
                     self.dangerZone.drawDangerScreen(PURPLE, 'WELL DONE!', 160, game)
                     pygame.time.wait(400)
