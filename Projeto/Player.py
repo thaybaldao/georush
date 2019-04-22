@@ -43,7 +43,7 @@ class Player():
                     self.obstacleOnTop = obstacle
                 elif int(game.invincible) == 0:
                     if game.numLives == 0:
-                        game.lifes.clear()
+                        game.lives.clear()
                         game.obstacles.clear()
                         game.lifebar.clear()
                         if game.sound:
@@ -56,16 +56,16 @@ class Player():
                         game.numLives -= 1
                         game.lifebar.pop()
                         game.obstacles.clear()
-                        game.lifes.clear()
+                        game.lives.clear()
                         game.boost.clear()
-            for life in game.lifes:
+            for life in game.lives:
                 if game.runner.rect.colliderect(life):
                     game.numLives += 1
                     n = 46 * (game.numLives - 1)
                     game.lifebar.append(
                         Obstacle(25 + n, 25, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
                                  'x'))
-                    game.lifes.pop(game.lifes.index(life))
+                    game.lives.pop(game.lives.index(life))
 
             for boost in game.boost:
                 if game.runner.rect.colliderect(boost):
