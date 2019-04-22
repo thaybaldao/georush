@@ -41,21 +41,23 @@ class Player():
                     self.pos.y = obstacle.rect.top
                     self.vel.y = 0
                     self.obstacleOnTop = obstacle
-                elif game.numLives == 0:
-                    game.lifes.clear()
-                    game.obstacles.clear()
-                    game.lifebar.clear()
-                    if game.sound:
-                        pygame.mixer.music.fadeout(300)
-                    game.showResetScreen()
-                    if game.playing:
-                        game.playing = False
-                    game.running = False
-                else:
-                    game.numLives -= 1
-                    game.lifebar.pop()
-                    game.obstacles.clear()
-                    game.lifes.clear()
+                elif int(game.invincible) == 0:
+                    if game.numLives == 0:
+                        game.lifes.clear()
+                        game.obstacles.clear()
+                        game.lifebar.clear()
+                        if game.sound:
+                            pygame.mixer.music.fadeout(300)
+                        game.showResetScreen()
+                        if game.playing:
+                            game.playing = False
+                        game.running = False
+                    else:
+                        game.numLives -= 1
+                        game.lifebar.pop()
+                        game.obstacles.clear()
+                        game.lifes.clear()
+                        game.boost.clear()
             for life in game.lifes:
                 if game.runner.rect.colliderect(life):
                     game.numLives += 1
@@ -64,6 +66,11 @@ class Player():
                         Obstacle(25 + n, 25, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
                                  'x'))
                     game.lifes.pop(game.lifes.index(life))
+
+            for boost in game.boost:
+                if game.runner.rect.colliderect(boost):
+                    game.invincible = 15
+                    game.boost.pop(game.boost.index(boost))
 
 
     def update(self, game):
@@ -80,6 +87,12 @@ class Player():
             self.vel.y = 0
 
         self.checkCollisions(game)
+
+        if game.invincible > 0:
+            game.invincible = game.invincible - 0.01
+            self.image = pygame.image.load(os.path.join('Imagens', 'Personagem_Principal_Invencivel.png'))
+        else: self.image = pygame.image.load(os.path.join('Imagens', 'Personagem_Principal.png'))
+
 
     def draw(self, win):
         # pygame.draw.rect(win, (255, 0, 0), self.rect, 2)
