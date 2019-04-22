@@ -32,7 +32,7 @@ class Game:
 
         self.runResetScreen = False
         self.retry = False
-        self.timeRunningStarted = 0
+        self.timeRunningStarted = pygame.time.get_ticks()/1000
         self.timeDangerZoneStarted = 0
         self.numLives = 0
         self.lastState = 'running'
@@ -123,17 +123,18 @@ class Game:
         self.runner.draw(self.screen)
         pygame.display.flip()
 
-    def drawDangerZoneScreen(self):
+    def drawDangerZoneScreen(self, color):
         self.screen.blit(self.bg, (self.bgX, 0))
         self.screen.blit(self.bg, (self.bgX2, 0))
         self.screen.blit(self.imgSound, (740, 450))
         self.runner.draw(self.screen)
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 55)
 
-        text = font.render("DANGER ZONE!", True, PURPLE)
+        text = font.render("DANGER ZONE!", True, color)
 
         self.screen.blit(text, (115, 225))
         pygame.display.flip()
+
 
 
     def printScore(self):
@@ -180,6 +181,7 @@ class Game:
                     pygame.K_ESCAPE]:
                     self.runResetScreen = False
                     self.running = False
+                    break
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if pos[0] > 205 and pos[0] < 333 and pos[1] > 140 and pos[1] < 259:
                         self.retry = True
@@ -188,6 +190,8 @@ class Game:
                         self.inDangerZone = False
                     if pos[0] > 455 and pos[0] < 583 and pos[1] > 140 and pos[1] < 259:
                         self.runResetScreen = False
+                        self.running = False
+                        break
                     if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
                         if self.sound:
                             self.sound = False
@@ -222,20 +226,29 @@ class Game:
         while self.playing:
             # currentTime = pygame.time.get_ticks()/1000
             #
-            # if not self.inDangerZone and currentTime - self.timeRunningStarted < 10:
+            # if not self.inDangerZone and currentTime - self.timeRunningStarted < 5:
             #     self.inDangerZone = False
             #     self.runGame()
             # else:
             #     if not self.inDangerZone:
             #         self.inDangerZone = True
-            #         self.timeDangerZoneStarted = currentTime
-            #         self.drawDangerZoneScreen()
-            #     elif self.inDangerZone and currentTime - self.timeDangerZoneStarted < 10:
+            #         self.timeDangerZoneStarted = pygame.time.get_ticks()/1000
+            #         self.drawDangerZoneScreen(PURPLE)
+            #         pygame.time.wait(500)
+            #         game.obstacles.clear()
+            #         self.drawDangerZoneScreen(VIOLET)
+            #         pygame.time.wait(500)
+            #         self.drawDangerZoneScreen(PURPLE)
+            #         pygame.time.wait(500)
+            #
+            #     elif self.inDangerZone and currentTime - self.timeDangerZoneStarted < 5:
             #         self.inDangerZone = True
             #         self.runGame()
             #     else:
             #         self.inDangerZone = False
-            #         self.timeRunningStarted = currentTime
+            #         pygame.time.wait(500)
+            #         game.obstacles.clear()
+            #         self.timeRunningStarted = pygame.time.get_ticks()/1000
             self.runGame()
 
 
@@ -273,8 +286,6 @@ class Game:
                     self.createObstacleDangerZone()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
-                    self.runStartScreen = False
                 if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
                     if self.sound:
                         self.sound = False
@@ -318,11 +329,12 @@ class Game:
         for obstacle in self.obstacles:
             obstacle.draw(self.screen)
 
-        for life in self.lifes:
-            life.draw(self.screen)
+        if not self.inDangerZone:
+            for life in self.lifes:
+                life.draw(self.screen)
 
-        for life in self.lifebar:
-            life.draw(self.screen)
+            for life in self.lifebar:
+                life.draw(self.screen)
 
         self.printScore()
 
