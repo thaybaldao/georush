@@ -128,16 +128,16 @@ class Game:
         self.runner.draw(self.screen)
         pygame.display.flip()
 
-    def drawDangerZoneScreen(self, color):
+    def drawDangerZoneScreen(self, color, message, x):
         self.screen.blit(self.bg, (self.bgX, 0))
         self.screen.blit(self.bg, (self.bgX2, 0))
         self.screen.blit(self.imgSound, (740, 450))
         self.runner.draw(self.screen)
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 55)
 
-        text = font.render("DANGER ZONE!", True, color)
+        text = font.render(message, True, color)
 
-        self.screen.blit(text, (115, 225))
+        self.screen.blit(text, (x, 225))
         pygame.display.flip()
 
 
@@ -237,7 +237,7 @@ class Game:
         while self.playing:
             currentTime = pygame.time.get_ticks()/1000
 
-            if not self.inDangerZone and currentTime - self.timeRunningStarted < 40:
+            if not self.inDangerZone and currentTime - self.timeRunningStarted < 5:
                 self.inDangerZone = False
                 self.runGame()
             else:
@@ -246,20 +246,26 @@ class Game:
                     self.timeDangerZoneStarted = pygame.time.get_ticks()/1000
                     game.obstacles.clear()
                     pygame.time.wait(500)
-                    self.drawDangerZoneScreen(PURPLE)
+                    self.drawDangerZoneScreen(PURPLE, 'DANGER ZONE!', 115)
                     pygame.time.wait(400)
-                    self.drawDangerZoneScreen(VIOLET)
+                    self.drawDangerZoneScreen(VIOLET, 'DANGER ZONE!', 115)
                     pygame.time.wait(500)
-                    self.drawDangerZoneScreen(PURPLE)
+                    self.drawDangerZoneScreen(PURPLE, 'DANGER ZONE!', 115)
                     pygame.time.wait(400)
 
                 elif self.inDangerZone and currentTime - self.timeDangerZoneStarted < 10:
-                    self.inDangerZone = True
-                    self.runGame()
+                        self.inDangerZone = True
+                        self.runGame()
                 else:
                     self.inDangerZone = False
                     game.obstacles.clear()
                     pygame.time.wait(500)
+                    self.drawDangerZoneScreen(PURPLE, 'WELL DONE!', 160)
+                    pygame.time.wait(400)
+                    self.drawDangerZoneScreen(VIOLET, 'WELL DONE!', 160)
+                    pygame.time.wait(500)
+                    self.drawDangerZoneScreen(PURPLE, 'WELL DONE!', 160)
+                    pygame.time.wait(400)
                     self.timeRunningStarted = pygame.time.get_ticks()/1000
             # self.runGame()
 
@@ -310,6 +316,27 @@ class Game:
                         self.sound = True
                         self.imgSound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
                         pygame.mixer.music.play(-1)
+
+    def printInstructions(self):
+        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
+
+        text1 = font.render("- Press the spacebar to jump.\n- Avoid the triangles!\n- Jump and land on the platforms if necessary.\n- Collect hearts to own extra lives.\n- Collect stars to be unbeatable in the game for 15 seconds.\n - Click on the speaker icon at the right bottom to mute the game sounds.", True, PURPLE)
+
+        self.screen.blit(text1, (20, 20))
+
+
+    def drawInstructionsScreen(self):
+        self.screen.blit(self.bg, (self.bgX, 0))
+        self.screen.blit(self.bg, (self.bgX2, 0))
+        self.screen.blit(self.reset, (205, 140))
+        self.screen.blit(self.gameOver, (190, 50))
+        self.screen.blit(self.imgSound, (740, 450))
+        self.runner.draw(self.screen)
+
+        self.printInstructions()
+
+        pygame.display.flip()
+
 
     def update(self):
         self.runner.update(self)
@@ -492,19 +519,18 @@ class Game:
                     
     def createObstacleDangerZone(self):
         r = random.randrange(0, 12)
-        print('r: ', r, '\n')
-        if len(self.obstacles) == 0 or (self.obstacles[-1].x + self.obstacles[-1].width < 720):
+        if len(self.obstacles) == 0 or (self.obstacles[-1].x + self.obstacles[-1].width < 650):
             if r < 4:
                 self.obstacles.append(
-                    Obstacle(810, 405, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
+                    Obstacle(810, 405, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo_Danger_Zone.png')), 'triangle',
                              1))
             elif r < 7:
                 self.obstacles.append(
-                    Obstacle(810, 375, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
+                    Obstacle(810, 375, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo_Danger_Zone.png')), 'triangle',
                              0))
             elif r < 9 and (len(self.obstacles) == 0 or self.obstacles[-1].num != 2):
                 self.obstacles.append(
-                    Obstacle(810, 245, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo_inverso.png')),
+                    Obstacle(810, 245, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo_Invertido_Danger_Zone.png')),
                              'triangle', 2))
 
 

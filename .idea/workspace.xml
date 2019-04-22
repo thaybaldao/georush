@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5f87016-7380-4c2c-8908-9c5b9f608a5c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Projeto/Obstacles.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Obstacles.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto/Settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projeto/Imagens/Triangulo_inverso.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,8 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Projeto/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="370" column="34" lean-forward="true" selection-start-line="370" selection-start-column="34" selection-end-line="370" selection-end-column="34" />
+            <state relative-caret-position="222">
+              <caret line="250" column="52" selection-start-line="250" selection-start-column="52" selection-end-line="250" selection-end-column="52" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -103,7 +102,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>high_</find>
       <find>show_</find>
       <find>p</find>
       <find>print_</find>
@@ -128,11 +126,12 @@
       <find>resetS</find>
       <find>game</find>
       <find>runGame</find>
-      <find>run</find>
       <find>_</find>
       <find>drawDan</find>
       <find>score</find>
       <find>update</find>
+      <find>drawDang</find>
+      <find>run</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -435,8 +434,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="370" column="34" lean-forward="true" selection-start-line="370" selection-start-column="34" selection-end-line="370" selection-end-column="34" />
+        <state relative-caret-position="222">
+          <caret line="250" column="52" selection-start-line="250" selection-start-column="52" selection-end-line="250" selection-end-column="52" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
