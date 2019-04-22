@@ -32,8 +32,13 @@ class Game:
 
         self.runResetScreen = False
         self.retry = False
-
+        self.timeRunningStarted = 0
+        self.timeDangerZoneStarted = 0
         self.numLives = 0
+
+        self.invincible = 0
+        self.lastState = 'running'
+
 
         self.collisions = False
         # initializing player and vector for obstacles
@@ -41,6 +46,7 @@ class Game:
         self.obstacles = []
         self.lifes = []
         self.lifebar = []
+        self.boost = []
         # creating background
         self.bg = pygame.image.load(os.path.join('Imagens', 'Background.png')).convert()
         self.bgX = 0
@@ -54,7 +60,7 @@ class Game:
         self.tryAgain = pygame.image.load(os.path.join('Imagens', 'Best_Score.png'))
         self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
         self.gameOver = pygame.image.load(os.path.join('Imagens', 'Game_Over.png'))
-        self.isInDangerZone = False
+        self.inDangerZone = False
         pygame.key.set_repeat(17, 17)
 
         # setting score
@@ -85,6 +91,7 @@ class Game:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
                         self.runStartScreen = False
+                        self.timeRunningStarted = pygame.time.get_ticks()/1000
                     if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
                         if self.sound:
                             self.sound = False
@@ -120,6 +127,18 @@ class Game:
         self.runner.draw(self.screen)
         pygame.display.flip()
 
+    def drawDangerZoneScreen(self):
+        self.screen.blit(self.bg, (self.bgX, 0))
+        self.screen.blit(self.bg, (self.bgX2, 0))
+        self.screen.blit(self.imgSound, (740, 450))
+        self.runner.draw(self.screen)
+        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 55)
+
+        text = font.render("DANGER ZONE!", True, PURPLE)
+
+        self.screen.blit(text, (115, 225))
+        pygame.display.flip()
+
 
     def printScore(self):
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
@@ -139,6 +158,12 @@ class Game:
         self.screen.blit(text1, (180, 300))
         self.screen.blit(text2, (180, 350))
 
+    def printInvTime(self):
+        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
+
+        text = font.render(str(int(self.invincible)), True, PINK)
+
+        self.screen.blit(text, (700, 10))
 
     def showResetScreen(self):
         # game over/continue
@@ -169,6 +194,8 @@ class Game:
                     if pos[0] > 205 and pos[0] < 333 and pos[1] > 140 and pos[1] < 259:
                         self.retry = True
                         self.runResetScreen = False
+                        self.timeRunningStarted = pygame.time.get_ticks()/1000
+                        self.inDangerZone = False
                     if pos[0] > 455 and pos[0] < 583 and pos[1] > 140 and pos[1] < 259:
                         self.runResetScreen = False
                     if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
@@ -203,13 +230,34 @@ class Game:
         if self.sound:
             pygame.mixer.music.play(-1)
         while self.playing:
-            self.clock.tick(self.speed)
-            self.events()
-            self.update()
-            self.draw()
-            self.score = (self.score + 0.01)
-            if self.score > self.highScore:
-                self.highScore = self.score
+            # currentTime = pygame.time.get_ticks()/1000
+            #
+            # if not self.inDangerZone and currentTime - self.timeRunningStarted < 10:
+            #     self.inDangerZone = False
+            #     self.runGame()
+            # else:
+            #     if not self.inDangerZone:
+            #         self.inDangerZone = True
+            #         self.timeDangerZoneStarted = currentTime
+            #         self.drawDangerZoneScreen()
+            #     elif self.inDangerZone and currentTime - self.timeDangerZoneStarted < 10:
+            #         self.inDangerZone = True
+            #         self.runGame()
+            #     else:
+            #         self.inDangerZone = False
+            #         self.timeRunningStarted = currentTime
+            self.runGame()
+
+
+    def runGame(self):
+        self.clock.tick(self.speed)
+        self.events()
+        self.update()
+        self.draw()
+        self.score = (self.score + 0.01)
+        if self.score > self.highScore:
+            self.highScore = self.score
+
 
     def events(self):
         # Game Loop - events
@@ -229,7 +277,10 @@ class Game:
                 self.speed += 0.5
 
             if event.type == USEREVENT + 1:
-                self.createObstacle()
+                if not self.inDangerZone:
+                    self.createObstacle()
+                else:
+                    self.createObstacleDangerZone()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
@@ -257,24 +308,31 @@ class Game:
 
         # making obstacles disappear
         for obstacle in self.obstacles:
-            obstacle.update()
+            obstacle.update(self.inDangerZone)
             if obstacle.x < -850:
                 self.obstacles.pop(self.obstacles.index(obstacle))
 
-        for life in self.lifes:
-            life.update()
-            if life.x < -850:
-                self.lifes.pop(self.lifes.index(life))
+        if not self.inDangerZone:
+            for life in self.lifes:
+                life.update(False)
+                if life.x < -850:
+                    self.lifes.pop(self.lifes.index(life))
+
+        for boost in self.boost:
+            boost.update()
+            if boost.x < -850:
+                self.boost.pop(self.boost.index(boost))
 
     def draw(self):
         # Game Loop - draw
         self.screen.blit(self.bg, (self.bgX, 0))
         self.screen.blit(self.bg, (self.bgX2, 0))
         self.screen.blit(self.imgSound, (740, 450))
-        self.runner.draw(self.screen)
 
         for obstacle in self.obstacles:
             obstacle.draw(self.screen)
+
+        self.runner.draw(self.screen)
 
         for life in self.lifes:
             life.draw(self.screen)
@@ -282,15 +340,21 @@ class Game:
         for life in self.lifebar:
             life.draw(self.screen)
 
+        for boost in self.boost:
+            boost.draw(self.screen)
+
         self.printScore()
+
+        if self.invincible > 0:
+            self.printInvTime()
 
         # *after* drawing everything, flip the display
         pygame.display.flip()
 
-
     def createObstacle(self):
         r = random.randrange(0, 6)
         l = random.randrange(0, 12)
+        i = random.randrange(0, 20)
         if len(self.obstacles) == 0 or (self.obstacles[-1].num < 2 and self.obstacles[-1].x + self.obstacles[-1].width < 600) or (self.obstacles[-1].x + self.obstacles[-1].width < 480):
             if r == 0:
                 self.obstacles.append(
@@ -299,6 +363,10 @@ class Game:
                 if l == 0 and self.numLives < 5:
                     self.lifes.append(
                         Obstacle(950, 400, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
+                                 'x'))
+                elif i == 0:
+                    self.boost.append(
+                        Obstacle(950, 400, 46, 39, pygame.image.load(os.path.join('Imagens', 'Star.png')), 'boost',
                                  'x'))
 
             elif r == 1:
@@ -310,7 +378,10 @@ class Game:
                     self.lifes.append(
                         Obstacle(810, 400, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
                                  'x'))
-
+                elif i == 0:
+                    self.boost.append(
+                        Obstacle(810, 400, 46, 39, pygame.image.load(os.path.join('Imagens', 'Star.png')), 'boost',
+                                 'x'))
 
             elif r == 2 and (len(self.obstacles) == 0 or (self.obstacles[-1].num != 2 and self.obstacles[-1].num != 4)):
                 self.obstacles.append(
@@ -334,6 +405,11 @@ class Game:
                         Obstacle(940, 275, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')),
                                  'life', 'x'))
 
+                elif i == 0:
+                    self.boost.append(
+                        Obstacle(940, 275, 46, 39, pygame.image.load(os.path.join('Imagens', 'Star.png')), 'boost',
+                                 'x'))
+
             elif r == 3:
                 self.obstacles.append(
                     Obstacle(810, 380, 379, 60, pygame.image.load(os.path.join('Imagens', 'Obstaculo3_1.png')), 'rectangle',
@@ -354,6 +430,10 @@ class Game:
                     self.lifes.append(
                         Obstacle(900, 340, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
                                  'x'))
+                elif i == 0:
+                    self.boost.append(
+                        Obstacle(900, 340, 46, 39, pygame.image.load(os.path.join('Imagens', 'Star.png')), 'boost',
+                                 'x'))
 
             elif r == 4 and (len(self.obstacles) == 0 or (self.obstacles[-1].num != 2 and self.obstacles[-1].num != 4)):
                 self.obstacles.append(
@@ -373,6 +453,11 @@ class Game:
                         Obstacle(935, 280, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')),
                                  'life', 'x'))
 
+                elif i == 0:
+                    self.boost.append(
+                        Obstacle(935, 280, 46, 39, pygame.image.load(os.path.join('Imagens', 'Star.png')), 'boost',
+                                 'x'))
+
             elif r == 5:
                 self.obstacles.append(
                     Obstacle(810, 350, 306, 38, pygame.image.load(os.path.join('Imagens', 'Plataforma.png')), 'rectangle',
@@ -385,8 +470,23 @@ class Game:
                         Obstacle(900, 310, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
                                  'x'))
 
+                elif i == 0:
+                    self.boost.append(
+                        Obstacle(910, 310, 46, 39, pygame.image.load(os.path.join('Imagens', 'Star.png')), 'boost',
+                                 'x'))
 
-
+    def createObstacleDangerZone(self):
+        r = random.randrange(0, 6)
+        l = random.randrange(0, 12)
+        if len(self.obstacles) == 0 or (self.obstacles[-1].x + self.obstacles[-1].width < 700):
+            if r < 5:
+                self.obstacles.append(
+                    Obstacle(810, 405, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
+                             0))
+            else:
+                self.obstacles.append(
+                    Obstacle(810, 245, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo_inverso.png')),
+                             'triangle', 1))
 
 highScore = 0
 soundPast = True
