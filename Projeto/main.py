@@ -35,6 +35,7 @@ class Game:
         self.timeRunningStarted = 0
         self.timeDangerZoneStarted = 0
         self.numLives = 0
+        self.lastState = 'running'
 
         self.invincible = 0
         self.lastState = 'running'
@@ -469,11 +470,23 @@ class Game:
                     self.lifes.append(
                         Obstacle(900, 310, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
                                  'x'))
-
                 elif i == 0:
                     self.boost.append(
                         Obstacle(910, 310, 46, 39, pygame.image.load(os.path.join('Imagens', 'Star.png')), 'boost',
                                  'x'))
+                    
+    def createObstacleDangerZone(self):
+        r = random.randrange(0, 6)
+        l = random.randrange(0, 12)
+        if len(self.obstacles) == 0 or (self.obstacles[-1].x + self.obstacles[-1].width < 700):
+            if r < 5:
+                self.obstacles.append(
+                    Obstacle(810, 405, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
+                             0))
+            else:
+                self.obstacles.append(
+                    Obstacle(810, 245, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo_inverso.png')),
+                             'triangle', 1))
 
     def createObstacleDangerZone(self):
         r = random.randrange(0, 6)
