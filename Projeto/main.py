@@ -1,6 +1,8 @@
 from Player import *
 from Obstacles import *
 from Settings import *
+from StartScreen import*
+from ResetScreen import*
 from pygame.locals import *
 import pygame
 import os
@@ -10,6 +12,8 @@ class Game:
     def __init__(self, highScore, pastSound):
         # initializing pygame
         pygame.init()
+
+        # setting up sounds
         pygame.mixer.init()
         pygame.mixer.music.load('BackOnTrack.wav')
         self.menuSound = pygame.mixer.Sound('menuLoop.wav')
@@ -20,113 +24,52 @@ class Game:
         else:
             self.sound = False
             self.imgSound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
+
         # creating game window
         self.screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
         pygame.display.set_caption(TITLE)
+
         # setting up clock
         self.clock = pygame.time.Clock()
         pygame.time.set_timer(USEREVENT + 1, 500)
         pygame.time.set_timer(USEREVENT + 2, 6000)
+
+        # initializing game constants
         self.running = True
-        self.runStartScreen = False
-
-        self.runResetScreen = False
-        self.retry = False
-        self.timeRunningStarted = pygame.time.get_ticks()/1000
-        self.timeDangerZoneStarted = 0
         self.numLives = 0
-        self.lastState = 'running'
-
         self.invincible = 0
-        self.lastState = 'running'
-
-
         self.collisions = False
+
+        # initializing screens
+        self.startScreen = StartScreen()
+        self.resetScreen = ResetScreen()
+
         # initializing player and vector for obstacles
         self.runner = Player(self)
         self.obstacles = []
         self.lifes = []
         self.lifebar = []
         self.boost = []
+
         # creating background
         self.bg = pygame.image.load(os.path.join('Imagens', 'Background.png')).convert()
         self.bgX = 0
         self.bgX2 = self.bg.get_width()
         self.initialSpeed = 250
         self.speed = self.initialSpeed
-        self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
-        self.reset = pygame.image.load(os.path.join('Imagens', 'Replay.png'))
-        self.stop = pygame.image.load(os.path.join('Imagens', 'X_button.png'))
-        self.inst = pygame.image.load(os.path.join('Imagens', 'Instrucoes.png'))
-        self.tryAgain = pygame.image.load(os.path.join('Imagens', 'Best_Score.png'))
-        self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
-        self.gameOver = pygame.image.load(os.path.join('Imagens', 'Game_Over.png'))
+
+        # initializing danger zone
         self.inDangerZone = False
+        self.timeRunningStarted = pygame.time.get_ticks() / 1000
+        self.timeDangerZoneStarted = 0
+
+        # allowing spacebar to be pressed
         pygame.key.set_repeat(17, 17)
 
         # setting score
         self.score = 0
         self.highScore = highScore
 
-
-
-    def showStartScreen(self):
-        # game splash/start screen
-        self.runStartScreen = True
-        if self.sound:
-            pygame.mixer.Sound.play(self.menuSound, -1)
-        while self.runStartScreen:
-            self.clock.tick(self.speed)
-            self.drawStartScreen()
-            self.updateStartScreen()
-            for event in pygame.event.get():
-                pos = pygame.mouse.get_pos()
-                # highlight hovering the button
-                if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
-                    self.play = pygame.image.load(os.path.join('Imagens', 'Play1.png'))
-                else:
-                    self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
-                if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_ESCAPE]:
-                    self.runStartScreen = False
-                    self.running = False
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
-                        self.runStartScreen = False
-                        self.timeRunningStarted = pygame.time.get_ticks()/1000
-                    if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
-                        if self.sound:
-                            self.sound = False
-                            self.imgSound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
-                            pygame.mixer.Sound.stop(self.menuSound)
-                        else:
-                            self.sound = True
-                            self.imgSound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
-                            pygame.mixer.Sound.play(self.menuSound, -1)
-        if self.sound:
-            pygame.mixer.Sound.fadeout(self.menuSound, 300)
-
-
-    def updateStartScreen(self):
-        self.runner.update(self)
-
-        # making background move
-        self.bgX -= 2
-        self.bgX2 -= 2
-        if self.bgX < self.bg.get_width() * -1:
-            self.bgX = self.bg.get_width()
-        if self.bgX2 < self.bg.get_width() * -1:
-            self.bgX2 = self.bg.get_width()
-
-
-    def drawStartScreen(self):
-        self.screen.blit(self.bg, (self.bgX, 0))
-        self.screen.blit(self.bg, (self.bgX2, 0))
-        self.screen.blit(self.play, (340, 140))
-        self.screen.blit(self.inst, (75, 290))
-        self.screen.blit(self.title, (225, 50))
-        self.screen.blit(self.imgSound, (740, 450))
-        self.runner.draw(self.screen)
-        pygame.display.flip()
 
     def drawDangerZoneScreen(self, color, message, x):
         self.screen.blit(self.bg, (self.bgX, 0))
@@ -141,93 +84,15 @@ class Game:
         pygame.display.flip()
 
 
-
     def printScore(self):
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
-
-        text = font.render("Score: "+str(int(self.score)), True, ORANGE)
-
-        self.screen.blit(text, (265, 10))
-
-
-
-    def printFinalScore(self):
-        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
-
-        text1 = font.render("Your Score: " + str(int(self.score)), True, PURPLE)
-        text2 = font.render("Best Score: " + str(int(self.highScore)), True, PURPLE)
-
-        self.screen.blit(text1, (180, 300))
-        self.screen.blit(text2, (180, 350))
+        score = font.render("Score: "+str(int(self.score)), True, ORANGE)
+        self.screen.blit(score, (265, 10))
 
     def printInvTime(self):
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
-
         text = font.render(str(int(self.invincible)), True, PINK)
-
         self.screen.blit(text, (700, 10))
-
-    def showResetScreen(self):
-        # game over/continue
-        self.runResetScreen = True
-        if self.sound:
-            pygame.mixer.Sound.play(self.menuSound, -1)
-        while self.runResetScreen:
-            self.clock.tick(self.speed)
-            self.drawResetScreen()
-            self.runner.update(self)
-
-            for event in pygame.event.get():
-                pos = pygame.mouse.get_pos()
-                # highlight hovering the button
-                if pos[0] > 205 and pos[0] < 333 and pos[1] > 140 and pos[1] < 259:
-                    self.reset = pygame.image.load(os.path.join('Imagens', 'Replay1.png'))
-                else:
-                    self.reset = pygame.image.load(os.path.join('Imagens', 'Replay.png'))
-                if pos[0] > 455 and pos[0] < 583 and pos[1] > 140 and pos[1] < 259:
-                    self.stop = pygame.image.load(os.path.join('Imagens', 'X_button1.png'))
-                else:
-                    self.stop = pygame.image.load(os.path.join('Imagens', 'X_button.png'))
-                if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.key.get_pressed()[
-                    pygame.K_ESCAPE]:
-                    self.runResetScreen = False
-                    self.running = False
-                    break
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if pos[0] > 205 and pos[0] < 333 and pos[1] > 140 and pos[1] < 259:
-                        self.retry = True
-                        self.runResetScreen = False
-                        self.timeRunningStarted = pygame.time.get_ticks()/1000
-                        self.inDangerZone = False
-                    if pos[0] > 455 and pos[0] < 583 and pos[1] > 140 and pos[1] < 259:
-                        self.runResetScreen = False
-                        self.running = False
-                        break
-                    if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
-                        if self.sound:
-                            self.sound = False
-                            self.imgSound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
-                            pygame.mixer.Sound.stop(self.menuSound)
-                        else:
-                            self.sound = True
-                            self.imgSound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
-                            pygame.mixer.Sound.play(self.menuSound, -1)
-        if self.sound:
-            pygame.mixer.Sound.fadeout(self.menuSound, 300)
-
-    def drawResetScreen(self):
-        self.screen.blit(self.bg, (self.bgX, 0))
-        self.screen.blit(self.bg, (self.bgX2, 0))
-        self.screen.blit(self.reset, (205, 140))
-        self.screen.blit(self.stop, (455, 140))
-        self.screen.blit(self.gameOver, (190, 50))
-        self.screen.blit(self.imgSound, (740, 450))
-        self.runner.draw(self.screen)
-
-        self.printFinalScore()
-
-        pygame.display.flip()
-
 
     def run(self):
         # Game Loop
@@ -237,7 +102,7 @@ class Game:
         while self.playing:
             currentTime = pygame.time.get_ticks()/1000
 
-            if not self.inDangerZone and currentTime - self.timeRunningStarted < 5:
+            if not self.inDangerZone and currentTime - self.timeRunningStarted < 20:
                 self.inDangerZone = False
                 self.runGame()
             else:
@@ -317,26 +182,12 @@ class Game:
                         self.imgSound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
                         pygame.mixer.music.play(-1)
 
-    def printInstructions(self):
-        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
-
-        text1 = font.render("- Press the spacebar to jump.\n- Avoid the triangles!\n- Jump and land on the platforms if necessary.\n- Collect hearts to own extra lives.\n- Collect stars to be unbeatable in the game for 15 seconds.\n - Click on the speaker icon at the right bottom to mute the game sounds.", True, PURPLE)
-
-        self.screen.blit(text1, (20, 20))
-
-
-    def drawInstructionsScreen(self):
-        self.screen.blit(self.bg, (self.bgX, 0))
-        self.screen.blit(self.bg, (self.bgX2, 0))
-        self.screen.blit(self.reset, (205, 140))
-        self.screen.blit(self.gameOver, (190, 50))
-        self.screen.blit(self.imgSound, (740, 450))
-        self.runner.draw(self.screen)
-
-        self.printInstructions()
-
-        pygame.display.flip()
-
+    # def printInstructions(self):
+    #     font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
+    #
+    #     text1 = font.render("- Press the spacebar to jump.\n- Avoid the triangles!\n- Jump and land on the platforms if necessary.\n- Collect hearts to own extra lives.\n- Collect stars to be unbeatable in the game for 15 seconds.\n - Click on the speaker icon at the right bottom to mute the game sounds.", True, PURPLE)
+    #
+    #     self.screen.blit(text1, (20, 20))
 
     def update(self):
         self.runner.update(self)
@@ -391,7 +242,7 @@ class Game:
         if self.invincible > 0:
             self.printInvTime()
 
-        # *after* drawing everything, flip the display
+        # after drawing everything, flip the display
         pygame.display.flip()
 
     def createObstacle(self):
@@ -535,20 +386,19 @@ class Game:
 
 
 highScore = 0
-soundPast = True
-game = Game(highScore, soundPast)
-game.showStartScreen()
+game = Game(highScore, True)
+game.startScreen.showScreen(game)
 
-while game.running and not game.runStartScreen and not game.runResetScreen:
+while game.running and not game.startScreen.runScreen and not game.resetScreen.runScreen:
     game.run()
 
-while game.retry:
+while game.resetScreen.retry:
     highScore = game.highScore
     soundPast = game.sound
     del game
     game = Game(highScore, soundPast)
     game.sound = soundPast
-    while game.running and not game.runStartScreen and not game.runResetScreen:
+    while game.running and not game.startScreen.runScreen and not game.resetScreen.runScreen:
         game.run()
 
 pygame.quit()

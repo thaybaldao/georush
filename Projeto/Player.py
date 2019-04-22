@@ -48,7 +48,7 @@ class Player():
                         game.lifebar.clear()
                         if game.sound:
                             pygame.mixer.music.fadeout(300)
-                        game.showResetScreen()
+                        game.resetScreen.showScreen(game)
                         if game.playing:
                             game.playing = False
                         game.running = False
