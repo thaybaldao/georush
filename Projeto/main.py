@@ -235,32 +235,33 @@ class Game:
         if self.sound:
             pygame.mixer.music.play(-1)
         while self.playing:
-            # currentTime = pygame.time.get_ticks()/1000
-            #
-            # if not self.inDangerZone and currentTime - self.timeRunningStarted < 5:
-            #     self.inDangerZone = False
-            #     self.runGame()
-            # else:
-            #     if not self.inDangerZone:
-            #         self.inDangerZone = True
-            #         self.timeDangerZoneStarted = pygame.time.get_ticks()/1000
-            #         self.drawDangerZoneScreen(PURPLE)
-            #         pygame.time.wait(500)
-            #         game.obstacles.clear()
-            #         self.drawDangerZoneScreen(VIOLET)
-            #         pygame.time.wait(500)
-            #         self.drawDangerZoneScreen(PURPLE)
-            #         pygame.time.wait(500)
-            #
-            #     elif self.inDangerZone and currentTime - self.timeDangerZoneStarted < 5:
-            #         self.inDangerZone = True
-            #         self.runGame()
-            #     else:
-            #         self.inDangerZone = False
-            #         pygame.time.wait(500)
-            #         game.obstacles.clear()
-            #         self.timeRunningStarted = pygame.time.get_ticks()/1000
-            self.runGame()
+            currentTime = pygame.time.get_ticks()/1000
+
+            if not self.inDangerZone and currentTime - self.timeRunningStarted < 40:
+                self.inDangerZone = False
+                self.runGame()
+            else:
+                if not self.inDangerZone:
+                    self.inDangerZone = True
+                    self.timeDangerZoneStarted = pygame.time.get_ticks()/1000
+                    game.obstacles.clear()
+                    pygame.time.wait(500)
+                    self.drawDangerZoneScreen(PURPLE)
+                    pygame.time.wait(400)
+                    self.drawDangerZoneScreen(VIOLET)
+                    pygame.time.wait(500)
+                    self.drawDangerZoneScreen(PURPLE)
+                    pygame.time.wait(400)
+
+                elif self.inDangerZone and currentTime - self.timeDangerZoneStarted < 10:
+                    self.inDangerZone = True
+                    self.runGame()
+                else:
+                    self.inDangerZone = False
+                    game.obstacles.clear()
+                    pygame.time.wait(500)
+                    self.timeRunningStarted = pygame.time.get_ticks()/1000
+            # self.runGame()
 
 
     def runGame(self):
@@ -268,7 +269,10 @@ class Game:
         self.events()
         self.update()
         self.draw()
-        self.score = (self.score + 0.01)
+        if self.inDangerZone == False:
+            self.score = self.score + 0.01
+        else:
+            self.score = self.score + 0.02
         if self.score > self.highScore:
             self.highScore = self.score
 
@@ -365,7 +369,7 @@ class Game:
 
     def createObstacle(self):
         r = random.randrange(0, 6)
-        l = random.randrange(0, 12)
+        l = random.randrange(0, 18)
         i = random.randrange(0, 20)
         if len(self.obstacles) == 0 or (self.obstacles[-1].num < 2 and self.obstacles[-1].x + self.obstacles[-1].width < 600) or (self.obstacles[-1].x + self.obstacles[-1].width < 480):
             if r == 0:
@@ -483,34 +487,26 @@ class Game:
                                  'x'))
                 elif i == 0:
                     self.boost.append(
-                        Obstacle(910, 310, 46, 39, pygame.image.load(os.path.join('Imagens', 'Star.png')), 'boost',
+                        Obstacle(900, 310, 46, 39, pygame.image.load(os.path.join('Imagens', 'Star.png')), 'boost',
                                  'x'))
                     
     def createObstacleDangerZone(self):
-        r = random.randrange(0, 6)
-        l = random.randrange(0, 12)
-        if len(self.obstacles) == 0 or (self.obstacles[-1].x + self.obstacles[-1].width < 700):
-            if r < 5:
+        r = random.randrange(0, 12)
+        print('r: ', r, '\n')
+        if len(self.obstacles) == 0 or (self.obstacles[-1].x + self.obstacles[-1].width < 720):
+            if r < 4:
                 self.obstacles.append(
                     Obstacle(810, 405, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
+                             1))
+            elif r < 7:
+                self.obstacles.append(
+                    Obstacle(810, 375, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
                              0))
-            else:
+            elif r < 9 and (len(self.obstacles) == 0 or self.obstacles[-1].num != 2):
                 self.obstacles.append(
                     Obstacle(810, 245, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo_inverso.png')),
-                             'triangle', 1))
+                             'triangle', 2))
 
-    def createObstacleDangerZone(self):
-        r = random.randrange(0, 6)
-        l = random.randrange(0, 12)
-        if len(self.obstacles) == 0 or (self.obstacles[-1].x + self.obstacles[-1].width < 700):
-            if r < 5:
-                self.obstacles.append(
-                    Obstacle(810, 405, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo.png')), 'triangle',
-                             0))
-            else:
-                self.obstacles.append(
-                    Obstacle(810, 245, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo_inverso.png')),
-                             'triangle', 1))
 
 highScore = 0
 soundPast = True
