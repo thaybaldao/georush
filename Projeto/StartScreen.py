@@ -1,8 +1,6 @@
-import pygame
-import os
+from Screen import *
 
-
-class StartScreen:
+class StartScreen(Screen):
     def __init__(self):
         self.runScreen = False
         self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
@@ -10,42 +8,35 @@ class StartScreen:
         self.inst = pygame.image.load(os.path.join('Imagens', 'Instrucoes.png'))
 
     def showScreen(self, game):
-        # game splash/start screen
         self.runScreen = True
-        if game.sound:
-            pygame.mixer.Sound.play(game.menuSound, -1)
+        self.startScreenSound(game, game.menuSound)
+
         while self.runScreen:
             game.clock.tick(game.speed)
             self.drawScreen(game)
             self.updateScreen(game)
+
             for event in pygame.event.get():
                 pos = pygame.mouse.get_pos()
-                # highlight hovering the button
+
+                # highlight hovering the play button
                 if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
                     self.play = pygame.image.load(os.path.join('Imagens', 'Play1.png'))
                 else:
                     self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
 
-                if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.key.get_pressed()[
-                    pygame.K_ESCAPE]:
-                    self.runScreen = False
-                    game.running = False
+                #  check if user wants to quit
+                self.quitGameBehavior(game, event)
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
+                    # check if user wants to play
                     if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
                         self.runScreen = False
                         game.timeRunningStarted = pygame.time.get_ticks() / 1000
-                    if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
-                        if game.sound:
-                            game.sound = False
-                            game.imgSound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
-                            pygame.mixer.Sound.stop(game.menuSound)
-                        else:
-                            game.sound = True
-                            game.imgSound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
-                            pygame.mixer.Sound.play(game.menuSound, -1)
-        if game.sound:
-            pygame.mixer.Sound.fadeout(game.menuSound, 300)
+
+                    self.soundButtonBehavior(game, event, pos)
+
+        self.endScreenSound(game, game.menuSound)
 
     def updateScreen(self, game):
         game.runner.update(game)
@@ -59,13 +50,10 @@ class StartScreen:
             game.bgX2 = game.bg.get_width()
 
     def drawScreen(self, game):
-        game.screen.blit(game.bg, (game.bgX, 0))
-        game.screen.blit(game.bg, (game.bgX2, 0))
+        self.drawBasicScreen(game)
         game.screen.blit(self.play, (340, 140))
         game.screen.blit(self.inst, (75, 290))
         game.screen.blit(self.title, (225, 50))
-        game.screen.blit(game.imgSound, (740, 450))
-        game.runner.draw(game.screen)
         pygame.display.flip()
 
 

@@ -40,7 +40,6 @@ class Game:
         self.running = True
         self.numLives = 0
         self.invincible = 0
-        self.collisions = False
 
         # initializing screens
         self.startScreen = StartScreen()
@@ -66,7 +65,7 @@ class Game:
 
         # initializing danger zone
         self.inDangerZone = False
-        self.timeRunningStarted = pygame.time.get_ticks() / 1000
+        self.timeRegularZoneStarted = pygame.time.get_ticks() / 1000
         self.timeDangerZoneStarted = 0
 
         # allowing spacebar to be pressed
@@ -77,14 +76,16 @@ class Game:
         self.highScore = highScore
 
     def run(self):
-        # Game Loop
+        # game Loop
         self.playing = True
+
         if self.sound:
             pygame.mixer.music.play(-1)
+
         while self.playing:
             currentTime = pygame.time.get_ticks()/1000
 
-            if not self.inDangerZone and currentTime - self.timeRunningStarted < 40 + 10*random.randrange(0, 2):
+            if not self.inDangerZone and currentTime - self.timeRegularZoneStarted < 25 + 10*random.randrange(0, 2):
                 self.inDangerZone = False
                 self.regularZone.run(self)
             else:
@@ -99,8 +100,7 @@ class Game:
                     pygame.time.wait(500)
                     self.dangerZone.drawDangerScreen(PURPLE, 'DANGER ZONE!', 115, game)
                     pygame.time.wait(400)
-
-                elif self.inDangerZone and currentTime - self.timeDangerZoneStarted < 10:
+                elif self.inDangerZone and currentTime - self.timeDangerZoneStarted < 10 + 5*random.randrange(0, 2):
                         self.inDangerZone = True
                         self.dangerZone.run(self)
                 else:
@@ -113,8 +113,7 @@ class Game:
                     pygame.time.wait(500)
                     self.dangerZone.drawDangerScreen(PURPLE, 'WELL DONE!', 160, game)
                     pygame.time.wait(400)
-                    self.timeRunningStarted = pygame.time.get_ticks()/1000
-            # self.runGame()
+                    self.timeRegularZoneStarted = pygame.time.get_ticks()/1000
 
 highScore = 0
 game = Game(highScore, True)
@@ -129,6 +128,7 @@ while game.resetScreen.retry:
     del game
     game = Game(highScore, soundPast)
     game.sound = soundPast
+
     while game.running and not game.startScreen.runScreen and not game.resetScreen.runScreen:
         game.run()
 

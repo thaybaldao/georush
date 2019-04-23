@@ -1,7 +1,4 @@
 import pygame
-from math import *
-from pygame.locals import *
-import os
 import random
 
 class Obstacle:
@@ -14,9 +11,12 @@ class Obstacle:
         self.type = type
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
         self.num = num
-        if(self.num == 0):
-            self.speedDangerZone = 1.4 + 0.2*random.randrange(8, 9)
-        elif(self.num == 1):
+        self.speedDangerZone()
+
+    def speedDangerZone(self):
+        if (self.num == 0):
+            self.speedDangerZone = 1.4 + 0.2 * random.randrange(8, 9)
+        elif (self.num == 1):
             self.speedDangerZone = 1.4 + 0.2 * random.randrange(6, 7)
         else:
             self.speedDangerZone = 1.4 + 0.2 * random.randrange(5, 6)
