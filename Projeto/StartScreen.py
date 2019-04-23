@@ -9,7 +9,7 @@ class StartScreen(Screen):
 
     def showScreen(self, game):
         self.runScreen = True
-        self.startScreenSound(game, game.menuSound)
+        self.startScreenSound(game)
 
         while self.runScreen:
             game.clock.tick(game.speed)
@@ -36,7 +36,7 @@ class StartScreen(Screen):
 
                     self.soundButtonBehavior(game, event, pos)
 
-        self.endScreenSound(game, game.menuSound)
+        # self.endScreenSound(game, game.menuSound)
 
     def updateScreen(self, game):
         game.runner.update(game)

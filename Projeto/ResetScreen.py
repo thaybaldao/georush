@@ -11,7 +11,7 @@ class ResetScreen(Screen):
 
     def showScreen(self, game):
         self.runScreen = True
-        self.startScreenSound(game, game.menuSound)
+        self.startScreenSound(game)
 
         while self.runScreen:
             game.clock.tick(game.speed)
@@ -54,7 +54,7 @@ class ResetScreen(Screen):
                     # check if user wants to mute or enable sound
                     self.soundButtonBehavior(game, event, pos)
 
-        self.endScreenSound(game, game.menuSound)
+        # self.endScreenSound(game, game.menuSound)
 
     def drawScreen(self, game):
         self.drawBasicScreen(game)

@@ -42,11 +42,14 @@ class Player():
                     self.obstacleOnTop = obstacle
                 elif int(game.invincible) == 0:
                     if game.numLives == 0:
+                        if game.sound:
+                            pygame.mixer.Channel(0).set_volume(0.3)
+                            pygame.mixer.Channel(1).play(pygame.mixer.Sound('death.wav'), 0)
+                            pygame.time.wait(3100)
+                            pygame.mixer.Channel(0).set_volume(1)
                         game.lives.clear()
                         game.obstacles.clear()
                         game.lifebar.clear()
-                        if game.sound:
-                            pygame.mixer.music.fadeout(300)
                         game.resetScreen.showScreen(game)
                         if game.playing:
                             game.playing = False
@@ -60,6 +63,10 @@ class Player():
             for life in game.lives:
                 if game.runner.rect.colliderect(life):
                     game.numLives += 1
+                    if game.sound:
+                        pygame.mixer.Channel(0).set_volume(0.3)
+                        pygame.mixer.Channel(1).play(pygame.mixer.Sound('life.wav'), 0)
+                        pygame.mixer.Channel(0).set_volume(1)
                     n = 46 * (game.numLives - 1)
                     game.lifebar.append(
                         Obstacle(25 + n, 25, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
@@ -68,6 +75,10 @@ class Player():
 
             for boost in game.boost:
                 if game.runner.rect.colliderect(boost):
+                    if game.sound:
+                        pygame.mixer.Channel(0).set_volume(0.3)
+                        pygame.mixer.Channel(1).play(pygame.mixer.Sound('boost.wav'), 0)
+                        pygame.mixer.Channel(0).set_volume(1)
                     game.invincible = 19
                     game.boost.pop(game.boost.index(boost))
 

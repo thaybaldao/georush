@@ -59,11 +59,12 @@ class Zone:
                     if game.sound:
                         game.sound = False
                         game.imgSound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
-                        pygame.mixer.music.stop()
+                        pygame.mixer.Channel(0).stop()
+                        pygame.mixer.Channel(1).stop()
                     else:
                         game.sound = True
                         game.imgSound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
-                        pygame.mixer.music.play(-1)
+                        pygame.mixer.Channel(0).play(pygame.mixer.Sound('BackOnTrack.wav'), -1)
 
     def basicZoneUpdate(self, game):
         game.runner.update(game)

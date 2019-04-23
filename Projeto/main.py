@@ -17,8 +17,9 @@ class Game:
 
         # setting up sounds
         pygame.mixer.init()
-        pygame.mixer.music.load('BackOnTrack.wav')
-        self.menuSound = pygame.mixer.Sound('menuLoop.wav')
+        pygame.mixer.set_num_channels(2)
+        # pygame.mixer.music.load('BackOnTrack.wav')
+        # self.menuSound = pygame.mixer.Sound('menuLoop.wav')
         self.pastSound = pastSound
         if self.pastSound:
             self.sound = True
@@ -87,16 +88,17 @@ class Game:
         self.playing = True
 
         if self.sound:
-            pygame.mixer.music.play(-1)
+            pygame.mixer.Channel(0).play(pygame.mixer.Sound('BackOnTrack.wav'), -1, fade_ms = 100)
 
         while self.playing:
             currentTime = pygame.time.get_ticks()/1000
 
-            if not self.inDangerZone and currentTime - self.timeRegularZoneStarted < 40 + 10*random.randrange(0, 2):
+            if not self.inDangerZone and currentTime - self.timeRegularZoneStarted < 25 + 10*random.randrange(0, 2):
                 self.inDangerZone = False
                 self.regularZone.run(self)
             else:
                 if not self.inDangerZone:
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('DeadLocked.wav'), -1, fade_ms = 100)
                     self.inDangerZone = True
                     self.timeDangerZoneStarted = pygame.time.get_ticks()/1000
                     game.obstacles.clear()
@@ -120,6 +122,7 @@ class Game:
                     pygame.time.wait(500)
                     self.dangerZone.drawDangerScreen(PURPLE, 'WELL DONE!', 160, game)
                     pygame.time.wait(400)
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('BackOnTrack.wav'), -1, fade_ms=100)
                     self.timeRegularZoneStarted = pygame.time.get_ticks()/1000
 
 highScore = 0
