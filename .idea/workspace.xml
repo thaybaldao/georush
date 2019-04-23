@@ -2,18 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5f87016-7380-4c2c-8908-9c5b9f608a5c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Projeto/DeadLocked.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Projeto/boost.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Projeto/death.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Projeto/jump.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Projeto/life.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Projeto/InstructionsScreen.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Projeto/SoundManager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projeto/BackOnTrack.wav" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Music/BackOnTrack.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projeto/DeadLocked.wav" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Music/DeadLocked.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/ResetScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/ResetScreen.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/Screen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Screen.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/StartScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/StartScreen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto/Zone.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Zone.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projeto/boost.wav" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Music/boost.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projeto/death.wav" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Music/death.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projeto/life.wav" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Music/life.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projeto/menuLoop.wav" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Music/menuLoop.wav" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +31,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/Obstacles.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
+            <state relative-caret-position="300">
               <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -39,13 +41,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Projeto/main.py">
+        <entry file="file://$PROJECT_DIR$/Projeto/InstructionsScreen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="101" column="44" lean-forward="true" selection-start-line="101" selection-start-column="44" selection-end-line="101" selection-end-column="44" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="375">
+              <caret line="40" column="87" selection-start-line="40" selection-start-column="87" selection-end-line="40" selection-end-column="87" />
             </state>
           </provider>
         </entry>
@@ -53,8 +52,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/Screen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="50" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="50" />
+            <state relative-caret-position="195">
+              <caret line="13" column="115" lean-forward="true" selection-start-line="13" selection-start-column="73" selection-end-line="13" selection-end-column="115" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -63,10 +62,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Projeto/Player.py">
+        <entry file="file://$PROJECT_DIR$/Projeto/SoundManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
+            <state relative-caret-position="150">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -77,17 +76,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/StartScreen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="361">
+              <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="47" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Projeto/ResetScreen.py">
+        <entry file="file://$PROJECT_DIR$/Projeto/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
+            <state relative-caret-position="646">
+              <caret line="135" column="83" selection-start-line="135" selection-start-column="83" selection-end-line="135" selection-end-column="83" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -95,7 +97,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/Zone.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
+            <state relative-caret-position="210">
               <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
@@ -115,8 +117,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>resetS</find>
-      <find>game</find>
       <find>drawDan</find>
       <find>drawDang</find>
       <find>_</find>
@@ -145,6 +145,8 @@
       <find>MIXER</find>
       <find>mixer</find>
       <find>300</find>
+      <find>soundMan</find>
+      <find>start</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -174,12 +176,14 @@
         <option value="$PROJECT_DIR$/Projeto/Obstacles.py" />
         <option value="$PROJECT_DIR$/Projeto/RegularZone.py" />
         <option value="$PROJECT_DIR$/Projeto/DangerZone.py" />
-        <option value="$PROJECT_DIR$/Projeto/StartScreen.py" />
-        <option value="$PROJECT_DIR$/Projeto/ResetScreen.py" />
-        <option value="$PROJECT_DIR$/Projeto/Screen.py" />
         <option value="$PROJECT_DIR$/Projeto/Zone.py" />
+        <option value="$PROJECT_DIR$/Projeto/SoundManager.py" />
+        <option value="$PROJECT_DIR$/Projeto/Screen.py" />
         <option value="$PROJECT_DIR$/Projeto/Player.py" />
+        <option value="$PROJECT_DIR$/Projeto/ResetScreen.py" />
+        <option value="$PROJECT_DIR$/Projeto/StartScreen.py" />
         <option value="$PROJECT_DIR$/Projeto/main.py" />
+        <option value="$PROJECT_DIR$/Projeto/InstructionsScreen.py" />
       </list>
     </option>
   </component>
@@ -207,12 +211,6 @@
               <item name="georush" type="462c0819:PsiDirectoryNode" />
               <item name="Projeto" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="georush" type="b2602c69:ProjectViewProjectNode" />
-              <item name="georush" type="462c0819:PsiDirectoryNode" />
-              <item name="Projeto" type="462c0819:PsiDirectoryNode" />
-              <item name="Imagens" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -225,6 +223,10 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Projeto" />
+      <recent name="$PROJECT_DIR$/Music" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Projeto" />
     </key>
@@ -283,15 +285,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-2" width="1920" height="1082" extended-state="6" />
+    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14887941" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15052573" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32948583" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27911857" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2786177" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39874083" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -303,7 +305,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="R Graphics" order="3" />
+      <window_info anchor="right" id="R Graphics" order="3" weight="0.32977587" />
       <window_info anchor="right" id="R Packages" order="4" />
     </layout>
     <layout-to-restore>
@@ -329,16 +331,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../.PyCharmCE2018.3/system/python_stubs/-1247971763/pygame/rect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4215">
-          <caret line="281" selection-start-line="281" selection-end-line="281" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/Imagens/Triangulos_inverso.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/Imagens/Triangulo.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -422,16 +414,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/RegularZone.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1420">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/Obstacles.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
+        <state relative-caret-position="300">
           <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
@@ -441,21 +426,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/ResetScreen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
+        <state relative-caret-position="130">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/StartScreen.py">
+    <entry file="file://$PROJECT_DIR$/Projeto/Player.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="1110">
+          <caret line="74" column="93" selection-start-line="74" selection-start-column="93" selection-end-line="74" selection-end-column="93" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/RegularZone.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="93" column="104" selection-start-line="93" selection-start-column="69" selection-end-line="93" selection-end-column="104" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/Zone.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
+        <state relative-caret-position="210">
           <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
@@ -463,20 +458,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/Player.py">
+    <entry file="file://$PROJECT_DIR$/Projeto/SoundManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/StartScreen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/Screen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="50" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="50" />
+        <state relative-caret-position="195">
+          <caret line="13" column="115" lean-forward="true" selection-start-line="13" selection-start-column="73" selection-end-line="13" selection-end-column="115" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
@@ -485,11 +487,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="101" column="44" lean-forward="true" selection-start-line="101" selection-start-column="44" selection-end-line="101" selection-end-column="44" />
+        <state relative-caret-position="646">
+          <caret line="135" column="83" selection-start-line="135" selection-start-column="83" selection-end-line="135" selection-end-column="83" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/InstructionsScreen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="40" column="87" selection-start-line="40" selection-start-column="87" selection-end-line="40" selection-end-column="87" />
         </state>
       </provider>
     </entry>

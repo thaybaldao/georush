@@ -2,9 +2,11 @@ from Player import *
 from Obstacles import *
 from Settings import *
 from StartScreen import*
+from InstructionsScreen import*
 from ResetScreen import*
 from RegularZone import*
 from DangerZone import*
+from SoundManager import*
 from pygame.locals import *
 import pygame
 import os
@@ -16,10 +18,8 @@ class Game:
         pygame.init()
 
         # setting up sounds
-        pygame.mixer.init()
-        pygame.mixer.set_num_channels(2)
-        # pygame.mixer.music.load('BackOnTrack.wav')
-        # self.menuSound = pygame.mixer.Sound('menuLoop.wav')
+        self.soundManager = SoundManager()
+
         self.pastSound = pastSound
         if self.pastSound:
             self.sound = True
@@ -44,6 +44,7 @@ class Game:
 
         # initializing screens
         self.startScreen = StartScreen()
+        self.instructionsScreen = InstructionsScreen()
         self.resetScreen = ResetScreen()
 
         # initializing game zones
@@ -88,17 +89,17 @@ class Game:
         self.playing = True
 
         if self.sound:
-            pygame.mixer.Channel(0).play(pygame.mixer.Sound('BackOnTrack.wav'), -1, fade_ms = 100)
+            self.soundManager.playSong(os.path.join('Music', 'BackOnTrack.wav'))
 
         while self.playing:
             currentTime = pygame.time.get_ticks()/1000
 
-            if not self.inDangerZone and currentTime - self.timeRegularZoneStarted < 25 + 10*random.randrange(0, 2):
+            if not self.inDangerZone and currentTime - self.timeRegularZoneStarted < 10 + 10*random.randrange(0, 2):
                 self.inDangerZone = False
                 self.regularZone.run(self)
             else:
                 if not self.inDangerZone:
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('DeadLocked.wav'), -1, fade_ms = 100)
+                    self.soundManager.playSong(os.path.join('Music', 'DeadLocked.wav'))
                     self.inDangerZone = True
                     self.timeDangerZoneStarted = pygame.time.get_ticks()/1000
                     game.obstacles.clear()
@@ -122,14 +123,17 @@ class Game:
                     pygame.time.wait(500)
                     self.dangerZone.drawDangerScreen(PURPLE, 'WELL DONE!', 160, game)
                     pygame.time.wait(400)
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('BackOnTrack.wav'), -1, fade_ms=100)
+                    self.soundManager.playSong(os.path.join('Music', 'BackOnTrack.wav'))
                     self.timeRegularZoneStarted = pygame.time.get_ticks()/1000
 
 highScore = 0
 game = Game(highScore, True)
 game.startScreen.showScreen(game)
 
-while game.running and not game.startScreen.runScreen and not game.resetScreen.runScreen:
+while not game.startScreen.runScreen and game.instructionsScreen.runScreen:
+    game.instructionsScreen.showScreen(game)
+
+while not game.startScreen.runScreen and not game.instructionsScreen.runScreen and game.running and not game.resetScreen.runScreen:
     game.run()
 
 while game.resetScreen.retry:

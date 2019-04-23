@@ -5,7 +5,9 @@ class StartScreen(Screen):
         self.runScreen = False
         self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
         self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
-        self.inst = pygame.image.load(os.path.join('Imagens', 'Instrucoes.png'))
+        self.font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
+        self.inst = self.font.render('INSTRUCTIONS', True, PURPLE)
+
 
     def showScreen(self, game):
         self.runScreen = True
@@ -25,6 +27,12 @@ class StartScreen(Screen):
                 else:
                     self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
 
+                # highlight the instructions text
+                if pos[0] > 200 and pos[0] < 615 and pos[1] > 290 and pos[1] < 330:
+                    self.inst = self.font.render('INSTRUCTIONS', True, YELLOW)
+                else:
+                    self.inst = self.font.render('INSTRUCTIONS', True, PURPLE)
+
                 #  check if user wants to quit
                 self.quitGameBehavior(game, event)
 
@@ -34,9 +42,12 @@ class StartScreen(Screen):
                         self.runScreen = False
                         game.timeRunningStarted = pygame.time.get_ticks() / 1000
 
-                    self.soundButtonBehavior(game, event, pos)
+                    # check if user wants to see instructions
+                    if pos[0] > 200 and pos[0] < 615 and pos[1] > 290 and pos[1] < 330:
+                        self.runScreen = False
+                        game.instructionsScreen.runScreen = True
 
-        # self.endScreenSound(game, game.menuSound)
+                    self.soundButtonBehavior(game, event, pos)
 
     def updateScreen(self, game):
         game.runner.update(game)
@@ -52,9 +63,10 @@ class StartScreen(Screen):
     def drawScreen(self, game):
         self.drawBasicScreen(game)
         game.screen.blit(self.play, (340, 140))
-        game.screen.blit(self.inst, (75, 290))
+        game.screen.blit(self.inst, (200, 290))
         game.screen.blit(self.title, (225, 50))
         pygame.display.flip()
+
 
 
 

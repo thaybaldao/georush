@@ -8,12 +8,7 @@ class Screen:
 
     def startScreenSound(self, game):
         if game.sound:
-            pygame.mixer.Channel(0).play(pygame.mixer.Sound('menuLoop.wav'), -1)
-
-    # def endScreenSound(self, game, song):
-    #     if game.sound:
-    #         pygame.mixer.Sound.fadeout(song, 300)
-
+            game.soundManager.playSong(os.path.join('Music', 'menuLoop.wav'))
 
     def quitGameBehavior(self, game, event):
         if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_ESCAPE]:
