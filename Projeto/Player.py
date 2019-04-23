@@ -43,8 +43,8 @@ class Player():
                 elif int(game.invincible) == 0:
                     if game.numLives == 0:
                         if game.sound:
-                            game.soundManager.playSoundEffect(os.path.join('Music', 'death.wav'))
-                            pygame.time.wait(2000)
+                            game.soundManager.playDeath(os.path.join('Music', 'death.wav'))
+                            pygame.time.wait(3100)
                         game.lives.clear()
                         game.obstacles.clear()
                         game.lifebar.clear()

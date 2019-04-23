@@ -94,7 +94,7 @@ class Game:
         while self.playing:
             currentTime = pygame.time.get_ticks()/1000
 
-            if not self.inDangerZone and currentTime - self.timeRegularZoneStarted < 10 + 10*random.randrange(0, 2):
+            if not self.inDangerZone and currentTime - self.timeRegularZoneStarted < 25 + 10*random.randrange(0, 2):
                 self.inDangerZone = False
                 self.regularZone.run(self)
             else:
@@ -142,6 +142,7 @@ while game.resetScreen.retry:
     del game
     game = Game(highScore, soundPast)
     game.sound = soundPast
+    pygame.mixer.Channel(0).set_volume(1)
 
     while game.running and not game.startScreen.runScreen and not game.resetScreen.runScreen:
         game.run()

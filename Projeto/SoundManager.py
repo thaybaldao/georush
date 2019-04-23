@@ -14,3 +14,7 @@ class SoundManager():
         pygame.mixer.Channel(0).set_volume(0.3)
         pygame.mixer.Channel(1).play(pygame.mixer.Sound(effect), 0)
         pygame.mixer.Channel(0).set_volume(1)
+
+    def playDeath(self, effect):
+        pygame.mixer.Channel(0).set_volume(0)
+        pygame.mixer.Channel(1).play(pygame.mixer.Sound(effect), 0)

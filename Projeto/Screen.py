@@ -27,7 +27,7 @@ class Screen:
                 else:
                     game.sound = True
                     game.imgSound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('menuLoop.wav'), -1)
+                    game.soundManager.playSong(os.path.join('Music', 'menuLoop.wav'))
 
 
     def drawBasicScreen(self, game):

@@ -15,11 +15,11 @@ class Obstacle:
 
     def speedDangerZone(self):
         if (self.num == 0):
-            self.speedDangerZone = 1.4 + 0.2 * random.randrange(8, 9)
+            self.speedDangerZone = 1.4 + 0.2 * random.randrange(9, 10)
         elif (self.num == 1):
-            self.speedDangerZone = 1.4 + 0.2 * random.randrange(6, 7)
+            self.speedDangerZone = 1.4 + 0.2 * random.randrange(7, 8)
         else:
-            self.speedDangerZone = 1.4 + 0.2 * random.randrange(5, 6)
+            self.speedDangerZone = 1.4 + 0.2 * random.randrange(6, 7)
 
     def update(self, inDangerZone):
         if self.x > -850:
