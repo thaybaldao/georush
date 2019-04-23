@@ -64,6 +64,13 @@ class Game:
         self.speed = self.initialSpeed
 
         # initializing danger zone
+        self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
+        self.reset = pygame.image.load(os.path.join('Imagens', 'Replay.png'))
+        self.stop = pygame.image.load(os.path.join('Imagens', 'X_button.png'))
+        self.inst = pygame.image.load(os.path.join('Imagens', 'Instrucoes.png'))
+        #self.tryAgain = pygame.image.load(os.path.join('Imagens', 'Best_Score.png'))
+        self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
+        self.gameOver = pygame.image.load(os.path.join('Imagens', 'Game_Over.png'))
         self.inDangerZone = False
         self.timeRegularZoneStarted = pygame.time.get_ticks() / 1000
         self.timeDangerZoneStarted = 0
@@ -85,7 +92,7 @@ class Game:
         while self.playing:
             currentTime = pygame.time.get_ticks()/1000
 
-            if not self.inDangerZone and currentTime - self.timeRegularZoneStarted < 25 + 10*random.randrange(0, 2):
+            if not self.inDangerZone and currentTime - self.timeRegularZoneStarted < 40 + 10*random.randrange(0, 2):
                 self.inDangerZone = False
                 self.regularZone.run(self)
             else:
@@ -100,7 +107,7 @@ class Game:
                     pygame.time.wait(500)
                     self.dangerZone.drawDangerScreen(PURPLE, 'DANGER ZONE!', 115, game)
                     pygame.time.wait(400)
-                elif self.inDangerZone and currentTime - self.timeDangerZoneStarted < 10 + 5*random.randrange(0, 2):
+                elif self.inDangerZone and currentTime - self.timeDangerZoneStarted < 15 + 5*random.randrange(0, 2):
                         self.inDangerZone = True
                         self.dangerZone.run(self)
                 else:

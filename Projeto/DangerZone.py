@@ -25,6 +25,7 @@ class DangerZone(Zone):
     def draw(self, game):
         self.basicZoneDraw(game)
 
+
         # after drawing everything, flip the display
         pygame.display.flip()
 

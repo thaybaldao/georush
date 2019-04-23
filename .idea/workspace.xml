@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5f87016-7380-4c2c-8908-9c5b9f608a5c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Projeto/Screen.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Projeto/Zone.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/DangerZone.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/DangerZone.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto/Obstacles.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Obstacles.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/RegularZone.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/RegularZone.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto/ResetScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/ResetScreen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto/StartScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/StartScreen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projeto/Zone.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Zone.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Projeto/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="91" column="77" lean-forward="true" selection-start-line="91" selection-start-column="77" selection-end-line="91" selection-end-column="77" />
+            <state relative-caret-position="405">
+              <caret line="109" column="88" selection-start-line="109" selection-start-column="88" selection-end-line="109" selection-end-column="88" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -49,18 +44,39 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Projeto/Zone.py">
+        <entry file="file://$PROJECT_DIR$/Projeto/RegularZone.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-405">
-              <caret line="3" column="27" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
+            <state relative-caret-position="-1420">
+              <caret line="31" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Projeto/DangerZone.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Projeto/Zone.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/Player.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
+            <state relative-caret-position="-555">
               <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
             </state>
           </provider>
@@ -105,8 +121,8 @@
       <find>font</find>
       <find>update</find>
       <find>OBSTACLE</find>
-      <find>collisions</find>
       <find>timeRunn</find>
+      <find>collisions</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -133,15 +149,15 @@
         <option value="$PROJECT_DIR$/Projeto/Obstacle3_2.py" />
         <option value="$PROJECT_DIR$/Projeto/Booster.py" />
         <option value="$PROJECT_DIR$/Projeto/Settings.py" />
-        <option value="$PROJECT_DIR$/Projeto/RegularZone.py" />
-        <option value="$PROJECT_DIR$/Projeto/DangerZone.py" />
         <option value="$PROJECT_DIR$/Projeto/StartScreen.py" />
         <option value="$PROJECT_DIR$/Projeto/ResetScreen.py" />
         <option value="$PROJECT_DIR$/Projeto/Screen.py" />
         <option value="$PROJECT_DIR$/Projeto/Obstacles.py" />
+        <option value="$PROJECT_DIR$/Projeto/Player.py" />
+        <option value="$PROJECT_DIR$/Projeto/RegularZone.py" />
+        <option value="$PROJECT_DIR$/Projeto/DangerZone.py" />
         <option value="$PROJECT_DIR$/Projeto/Zone.py" />
         <option value="$PROJECT_DIR$/Projeto/main.py" />
-        <option value="$PROJECT_DIR$/Projeto/Player.py" />
       </list>
     </option>
   </component>
@@ -374,12 +390,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/RegularZone.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/DangerZone.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/ResetScreen.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1080">
@@ -414,27 +424,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/Zone.py">
+    <entry file="file://$PROJECT_DIR$/Projeto/RegularZone.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-405">
-          <caret line="3" column="27" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
+        <state relative-caret-position="-1420">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/main.py">
+    <entry file="file://$PROJECT_DIR$/Projeto/DangerZone.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="91" column="77" lean-forward="true" selection-start-line="91" selection-start-column="77" selection-end-line="91" selection-end-column="77" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="315">
+          <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/Player.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
+        <state relative-caret-position="-555">
           <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/Zone.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="109" column="88" selection-start-line="109" selection-start-column="88" selection-end-line="109" selection-end-column="88" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

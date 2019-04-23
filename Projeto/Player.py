@@ -68,7 +68,7 @@ class Player():
 
             for boost in game.boost:
                 if game.runner.rect.colliderect(boost):
-                    game.invincible = 15
+                    game.invincible = 19
                     game.boost.pop(game.boost.index(boost))
 
 
@@ -89,8 +89,11 @@ class Player():
 
         if game.invincible > 0:
             game.invincible = game.invincible - 0.01
-            self.image = pygame.image.load(os.path.join('Imagens', 'Personagem_Principal_Invencivel.png'))
-        else: self.image = pygame.image.load(os.path.join('Imagens', 'Personagem_Principal.png'))
+
+            if game.invincible > 4:
+                self.image = pygame.image.load(os.path.join('Imagens', 'Personagem_Principal_Invencivel.png'))
+
+            else: self.image = pygame.image.load(os.path.join('Imagens', 'Personagem_Principal.png'))
 
 
     def draw(self, win):

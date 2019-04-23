@@ -14,9 +14,9 @@ class Zone:
         game.screen.blit(score, (265, 10))
 
     def printInvTime(self, game):
-        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
-        text = font.render(str(int(game.invincible)), True, PINK)
-        game.screen.blit(text, (700, 10))
+        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 25)
+        text = font.render("Invincible Time: " + str(int(game.invincible) - 4), True, PURPLE)
+        game.screen.blit(text, (10, 455))
 
     def computeScore(self, game):
         game.score += 0.01
@@ -106,5 +106,5 @@ class Zone:
         self.printScore(game)
 
         # print invincible time if applies
-        if game.invincible > 0:
+        if game.invincible > 4:
             self.printInvTime(game)
