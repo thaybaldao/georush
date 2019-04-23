@@ -108,7 +108,7 @@ class DangerZone:
 
         self.printScore(game)
 
-        if game.invincible > 0:
+        if game.invincible > 4:
             self.printInvTime(game)
 
         # after drawing everything, flip the display

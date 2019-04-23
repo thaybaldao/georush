@@ -16,9 +16,9 @@ class RegularZone:
         game.screen.blit(score, (265, 10))
 
     def printInvTime(self, game):
-        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
-        text = font.render(str(int(game.invincible)), True, PINK)
-        game.screen.blit(text, (700, 10))
+        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 25)
+        text = font.render("Invincible Time: "+str(int(game.invincible) - 4), True, PURPLE)
+        game.screen.blit(text, (10, 455))
 
     def run(self, game):
         game.clock.tick(game.speed)
@@ -112,7 +112,7 @@ class RegularZone:
 
         self.printScore(game)
 
-        if game.invincible > 0:
+        if game.invincible > 4:
             self.printInvTime(game)
 
         # after drawing everything, flip the display
@@ -175,7 +175,7 @@ class RegularZone:
                                  'life', 'x'))
 
                 elif i == 0:
-                    self.boost.append(
+                    game.boost.append(
                         Obstacle(940, 275, 46, 39, pygame.image.load(os.path.join('Imagens', 'Star.png')), 'boost',
                                  'x'))
 

@@ -65,6 +65,13 @@ class Game:
         self.speed = self.initialSpeed
 
         # initializing danger zone
+        self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
+        self.reset = pygame.image.load(os.path.join('Imagens', 'Replay.png'))
+        self.stop = pygame.image.load(os.path.join('Imagens', 'X_button.png'))
+        self.inst = pygame.image.load(os.path.join('Imagens', 'Instrucoes.png'))
+        #self.tryAgain = pygame.image.load(os.path.join('Imagens', 'Best_Score.png'))
+        self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
+        self.gameOver = pygame.image.load(os.path.join('Imagens', 'Game_Over.png'))
         self.inDangerZone = False
         self.timeRunningStarted = pygame.time.get_ticks() / 1000
         self.timeDangerZoneStarted = 0
