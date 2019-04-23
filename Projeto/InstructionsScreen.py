@@ -60,7 +60,7 @@ class InstructionsScreen(Screen):
         self.printInstructions(game, 1, '- Avoid the triangles!', YELLOW)
         self.printInstructions(game, 2, '- Jump and land on the platforms if needed.', YELLOW)
         self.printInstructions(game, 3, '- Collect hearts to gain extra lives.', YELLOW)
-        self.printInstructions(game, 4, '- Collect start to be invincible for 15 seconds.', YELLOW)
+        self.printInstructions(game, 4, '- Collect stars to be invincible for 15 seconds.', YELLOW)
         self.printInstructions(game, 5, '- Click on the speaker icon to mute game sounds.', YELLOW)
         game.screen.blit(self.play, (280, 410))
 
