@@ -10,6 +10,7 @@ class ResetScreen(Screen):
         self.retry = False
 
     def showScreen(self, game):
+        pygame.mixer.Channel(0).set_volume(1)
         self.runScreen = True
         self.startScreenSound(game)
 
@@ -41,7 +42,6 @@ class ResetScreen(Screen):
                     if pos[0] > 205 and pos[0] < 333 and pos[1] > 140 and pos[1] < 259:
                         self.retry = True
                         self.runScreen = False
-                        game.timeRunningStarted = pygame.time.get_ticks() / 1000
                         game.inDangerZone = False
 
                     # check if user wants to quit

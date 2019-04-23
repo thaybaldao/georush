@@ -32,15 +32,13 @@ class InstructionsScreen(Screen):
                 #  check if user wants to quit
                 self.quitGameBehavior(game, event)
 
+                # check if user wants to play
                 if event.type==pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_RETURN]:
                     self.runScreen = False
-                    game.timeRunningStarted = pygame.time.get_ticks() / 1000
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    # check if user wants to play
                     if pos[0] > 280 and pos[0] < 780 and pos[1] > 410 and pos[1] < 430:
                         self.runScreen = False
-                        game.timeRunningStarted = pygame.time.get_ticks() / 1000
 
 
                     self.soundButtonBehavior(game, event, pos)

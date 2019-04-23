@@ -40,7 +40,6 @@ class StartScreen(Screen):
                     # check if user wants to play
                     if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
                         self.runScreen = False
-                        game.timeRunningStarted = pygame.time.get_ticks() / 1000
 
                     # check if user wants to see instructions
                     if pos[0] > 200 and pos[0] < 615 and pos[1] > 290 and pos[1] < 330:
