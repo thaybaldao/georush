@@ -57,16 +57,17 @@ class InstructionsScreen(Screen):
     def drawScreen(self, game):
         self.drawBasicScreen(game)
         game.screen.blit(self.title, (200, 20))
-        self.printInstructions(game, 1, '- Avoid the triangles!', YELLOW)
-        self.printInstructions(game, 2, '- Jump and land on the platforms if needed.', YELLOW)
-        self.printInstructions(game, 3, '- Collect hearts to gain extra lives.', YELLOW)
-        self.printInstructions(game, 4, '- Collect stars to be invincible for 15 seconds.', YELLOW)
-        self.printInstructions(game, 5, '- Click on the speaker icon to mute game sounds.', YELLOW)
+        self.printInstructions(game, 1, '- Click on the spacebar to jump.')
+        self.printInstructions(game, 2, '- Avoid the triangles!')
+        self.printInstructions(game, 3, '- Jump and land on the platforms if needed.')
+        self.printInstructions(game, 4, '- Collect hearts to gain extra lives.')
+        self.printInstructions(game, 5, '- Collect stars to be invincible for 15 seconds.')
+        self.printInstructions(game, 6, '- Click on the speaker icon to mute game sounds.')
         game.screen.blit(self.play, (280, 410))
 
         pygame.display.flip()
 
-    def printInstructions(self, game, num, text, color):
+    def printInstructions(self, game, num, text):
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 18)
-        ins = font.render(text, True, color)
-        game.screen.blit(ins, (70, 40 + 60*num))
+        ins = font.render(text, True, YELLOW)
+        game.screen.blit(ins, (70, 40 + 50*num))
