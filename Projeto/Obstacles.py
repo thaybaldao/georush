@@ -1,6 +1,7 @@
 import pygame
 import random
 from Settings import *
+from GameState import *
 import os
 
 class Obstacle:
@@ -41,8 +42,8 @@ class RectObs(Obstacle):
                 game.runner.pos.y = self.rect.top
                 game.runner.vel.y = 0
                 game.runner.obstacleOnTop = self
-            elif not game.gameState.invincible():
-                if game.gameState.haveExtraLifes():
+            elif not GameState().invincible(game):
+                if GameState().haveExtraLives(game):
                     game.numLives -= 1
                     game.lifebar.pop()
                     game.obstacles.clear()
@@ -84,8 +85,8 @@ class TriObs(Obstacle):
         self.rect.y = self.y
 
     def checkCollisions(self, game):
-        if game.runner.rect.colliderect(self) and not game.gameState.invincible():
-            if game.gameState.haveExtraLifes():
+        if game.runner.rect.colliderect(self) and not GameState().invincible(game):
+            if GameState().haveExtraLives(game):
                 game.numLives -= 1
                 game.lifebar.pop()
                 game.obstacles.clear()
@@ -128,4 +129,3 @@ class Boost(Obstacle):
                 game.soundManager.playSoundEffect(os.path.join('Music', 'boost.wav'))
             game.invincible = 19
             game.boost.pop(game.boost.index(self))
-

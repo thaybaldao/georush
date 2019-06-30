@@ -41,7 +41,6 @@ class Game:
         self.running = True
         self.numLives = 0
         self.invincible = 0
-        self.gameState = GameState(self)
 
         # initializing screens
         self.startScreen = StartScreen()
@@ -96,6 +95,7 @@ class Game:
 
         while self.playing:
             currentTime = pygame.time.get_ticks()/1000
+
 
             if not self.inDangerZone and currentTime - self.timeRegularZoneStarted < 5 + 10*random.randrange(0, 2):
                 self.inDangerZone = False
