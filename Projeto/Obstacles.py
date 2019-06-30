@@ -3,11 +3,6 @@ import random
 from Settings import *
 import os
 
-def notInvincible(game):
-    if int(game.invincible) == 0:
-        return True
-    return False
-
 class Obstacle:
     def __init__(self, x, y, width, height, img, type, num):
         self.width = width
