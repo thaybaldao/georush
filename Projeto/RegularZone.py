@@ -2,7 +2,7 @@ from Zone import *
 
 class RegularZone(Zone):
     def __init__(self):
-        pass
+        self.soundBehavior = SoundBehaviorRegZone()
 
     def update(self, game):
         self.basicZoneUpdate(game)

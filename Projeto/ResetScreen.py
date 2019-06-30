@@ -2,7 +2,7 @@ from Screen import *
 
 class ResetScreen(Screen):
     def __init__(self):
-        self.runScreen = False
+        super().__init__()
         self.reset = pygame.image.load(os.path.join('Imagens', 'Replay.png'))
         self.stop = pygame.image.load(os.path.join('Imagens', 'X_button.png'))
         self.tryAgain = pygame.image.load(os.path.join('Imagens', 'Best_Score.png'))
@@ -52,7 +52,7 @@ class ResetScreen(Screen):
                         break
 
                     # check if user wants to mute or enable sound
-                    self.soundButtonBehavior(game, pos)
+                    self.soundBehavior.soundButtonBehavior(game, pos)
 
     def drawScreen(self, game):
         self.drawBasicScreen(game)

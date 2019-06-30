@@ -2,7 +2,7 @@ from Screen import *
 
 class InstructionsScreen(Screen):
     def __init__(self):
-        self.runScreen = False
+        super().__init__()
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
         self.title = font.render('INSTRUCTIONS', True, PINK)
         font2 = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 17)
@@ -33,7 +33,7 @@ class InstructionsScreen(Screen):
                 self.quitGameBehavior(game, event)
 
                 # check if user wants to play
-                if event.type==pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_RETURN]:
+                if event.type==pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_SPACE]:
                     self.runScreen = False
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -41,7 +41,7 @@ class InstructionsScreen(Screen):
                         self.runScreen = False
 
 
-                    self.soundButtonBehavior(game, pos)
+                    self.soundBehavior.soundButtonBehavior(game, pos)
 
     def updateScreen(self, game):
         game.runner.update(game)

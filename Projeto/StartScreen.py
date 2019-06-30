@@ -2,7 +2,7 @@ from Screen import *
 
 class StartScreen(Screen):
     def __init__(self):
-        self.runScreen = False
+        super().__init__()
         self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
         self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
         self.font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
@@ -46,7 +46,7 @@ class StartScreen(Screen):
                         self.runScreen = False
                         game.instructionsScreen.runScreen = True
 
-                    self.soundButtonBehavior(game, pos)
+                    self.soundBehavior.soundButtonBehavior(game, pos)
 
     def updateScreen(self, game):
         game.runner.update(game)

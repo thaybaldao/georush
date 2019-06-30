@@ -19,7 +19,6 @@ class Game:
 
         # setting up sounds
         self.soundManager = SoundManager()
-
         self.pastSound = pastSound
         if self.pastSound:
             self.sound = True

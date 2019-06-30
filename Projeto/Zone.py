@@ -3,10 +3,11 @@ from Settings import *
 import pygame
 from pygame.locals import *
 import os
+from SoundBehavior import*
 
 class Zone:
     def __init__(self):
-        pass
+        self.soundBehavior = None
 
     def printScore(self, game):
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
@@ -55,16 +56,10 @@ class Zone:
                 self.createObstacle(game)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
-                    if game.sound:
-                        game.sound = False
-                        game.imgSound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
-                        pygame.mixer.Channel(0).stop()
-                        pygame.mixer.Channel(1).stop()
-                    else:
-                        game.sound = True
-                        game.imgSound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
-                        game.soundManager.playSong(os.path.join('Music', 'menuLoop.wav'))
+                self.soundBehavior.soundButtonBehavior(game, pos)
+
+    def createObstacle(self, game):
+        pass
 
     def basicZoneUpdate(self, game):
         game.runner.update(game)

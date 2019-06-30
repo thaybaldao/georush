@@ -3,7 +3,7 @@ from Zone import *
 
 class DangerZone(Zone):
     def __init__(self):
-        pass
+        self.soundBehavior = SoundBehaviorDangZone()
 
     def drawDangerScreen(self, color, message, x, game):
         game.screen.blit(game.bg, (game.bgX, 0))
@@ -24,7 +24,6 @@ class DangerZone(Zone):
 
     def draw(self, game):
         self.basicZoneDraw(game)
-
 
         # after drawing everything, flip the display
         pygame.display.flip()

@@ -1,10 +1,12 @@
 from Settings import *
+from SoundBehavior import*
 import pygame
 import os
 
 class Screen:
     def __init__(self):
         self.runScreen = False
+        self.soundBehavior = SoundBehaviorScreen()
 
     def startScreenSound(self, game):
         if game.sound:
@@ -15,19 +17,6 @@ class Screen:
             self.runScreen = False
             game.running = False
             game.retry = False
-
-
-    def soundButtonBehavior(self, game, pos):
-        if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
-            if game.sound:
-                game.sound = False
-                game.imgSound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
-                pygame.mixer.Channel(0).stop()
-                pygame.mixer.Channel(1).stop()
-            else:
-                game.sound = True
-                game.imgSound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
-                game.soundManager.playSong(os.path.join('Music', 'menuLoop.wav'))
 
 
     def drawBasicScreen(self, game):
