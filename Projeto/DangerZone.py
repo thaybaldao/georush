@@ -34,18 +34,9 @@ class DangerZone(Zone):
         r = random.randrange(0, 12)
         if len(game.obstacles) == 0 or (game.obstacles[-1].x + game.obstacles[-1].width < 650):
             if r < 4:
-                game.obstacles.append(
-                    Obstacle(810, 405, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo_Danger_Zone.png')),
-                             'triangle',
-                             1))
+                game.obstacles.append(TriObs(810,405,35,36,pygame.image.load(os.path.join('Imagens', 'Triangulo_Danger_Zone.png')), 1))
             elif r < 7:
-                game.obstacles.append(
-                    Obstacle(810, 375, 35, 36, pygame.image.load(os.path.join('Imagens', 'Triangulo_Danger_Zone.png')),
-                             'triangle',
-                             0))
+                game.obstacles.append(TriObs(810,375,35,36,pygame.image.load(os.path.join('Imagens', 'Triangulo_Danger_Zone.png')), 0))
             elif r < 9 and (len(game.obstacles) == 0 or game.obstacles[-1].num != 2):
-                game.obstacles.append(
-                    Obstacle(810, 245, 35, 36,
-                             pygame.image.load(os.path.join('Imagens', 'Triangulo_Invertido_Danger_Zone.png')),
-                             'triangle', 2))
+                game.obstacles.append(TriObs(810,245,35,36,pygame.image.load(os.path.join('Imagens', 'Triangulo_Invertido_Danger_Zone.png')), 2))
 

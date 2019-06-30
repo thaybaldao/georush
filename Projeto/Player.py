@@ -35,46 +35,13 @@ class Player():
 
     def checkCollisions(self, game):
         for obstacle in game.obstacles:
-            if obstacle != 0 and self.rect.colliderect(obstacle):
-                if obstacle.type == 'rectangle' and self.vel.y > 0 and self.pos.y - TOLERANCE <= obstacle.rect.top:
-                    self.pos.y = obstacle.rect.top
-                    self.vel.y = 0
-                    self.obstacleOnTop = obstacle
-                elif int(game.invincible) == 0:
-                    if game.numLives == 0:
-                        if game.sound:
-                            game.soundManager.playDeath(os.path.join('Music', 'death.wav'))
-                            pygame.time.wait(3100)
-                        game.lives.clear()
-                        game.obstacles.clear()
-                        game.lifebar.clear()
-                        game.resetScreen.showScreen(game)
-                        if game.playing:
-                            game.playing = False
-                        game.running = False
-                    else:
-                        game.numLives -= 1
-                        game.lifebar.pop()
-                        game.obstacles.clear()
-                        game.lives.clear()
-                        game.boost.clear()
-            for life in game.lives:
-                if game.runner.rect.colliderect(life):
-                    game.numLives += 1
-                    if game.sound:
-                        game.soundManager.playSoundEffect(os.path.join('Music', 'life.wav'))
-                    n = 46 * (game.numLives - 1)
-                    game.lifebar.append(
-                        Obstacle(25 + n, 25, 46, 39, pygame.image.load(os.path.join('Imagens', 'Vida.png')), 'life',
-                                 'x'))
-                    game.lives.pop(game.lives.index(life))
+            obstacle.checkCollisions(game)
 
-            for boost in game.boost:
-                if game.runner.rect.colliderect(boost):
-                    if game.sound:
-                        game.soundManager.playSoundEffect(os.path.join('Music', 'boost.wav'))
-                    game.invincible = 19
-                    game.boost.pop(game.boost.index(boost))
+        for life in game.lives:
+            life.checkCollisions(game)
+
+        for boost in game.boost:
+            boost.checkCollisions(game)
 
 
     def update(self, game):
@@ -102,5 +69,4 @@ class Player():
 
 
     def draw(self, win):
-        # pygame.draw.rect(win, (255, 0, 0), self.rect, 2)
         win.blit(self.image, (self.rect.left, self.rect.top))

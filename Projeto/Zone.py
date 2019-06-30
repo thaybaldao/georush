@@ -79,7 +79,10 @@ class Zone:
 
         # making obstacles disappear
         for obstacle in game.obstacles:
-            obstacle.update(game.inDangerZone)
+            if obstacle.type == 'triangle':
+                obstacle.update(game.inDangerZone)
+            else:
+                obstacle.update()
             if obstacle.x < -850:
                 game.obstacles.pop(game.obstacles.index(obstacle))
 

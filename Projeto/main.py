@@ -70,7 +70,7 @@ class Game:
         self.reset = pygame.image.load(os.path.join('Imagens', 'Replay.png'))
         self.stop = pygame.image.load(os.path.join('Imagens', 'X_button.png'))
         self.inst = pygame.image.load(os.path.join('Imagens', 'Instrucoes.png'))
-        #self.tryAgain = pygame.image.load(os.path.join('Imagens', 'Best_Score.png'))
+
         self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
         self.gameOver = pygame.image.load(os.path.join('Imagens', 'Game_Over.png'))
         self.inDangerZone = False
@@ -96,12 +96,14 @@ class Game:
         while self.playing:
             currentTime = pygame.time.get_ticks()/1000
 
+
             if not self.inDangerZone and currentTime - self.timeRegularZoneStarted < 5 + 10*random.randrange(0, 2):
                 self.inDangerZone = False
                 self.regularZone.run(self)
             else:
                 if not self.inDangerZone:
-                    self.soundManager.playSong(os.path.join('Music', 'DeadLocked.wav'))
+                    if self.sound:
+                        self.soundManager.playSong(os.path.join('Music', 'DeadLocked.wav'))
                     self.inDangerZone = True
                     self.timeDangerZoneStarted = pygame.time.get_ticks()/1000
                     game.obstacles.clear()
@@ -125,7 +127,8 @@ class Game:
                     pygame.time.wait(500)
                     self.dangerZone.drawDangerScreen(PURPLE, 'WELL DONE!', 160, game)
                     pygame.time.wait(400)
-                    self.soundManager.playSong(os.path.join('Music', 'BackOnTrack.wav'))
+                    if self.sound:
+                        self.soundManager.playSong(os.path.join('Music', 'BackOnTrack.wav'))
                     self.timeRegularZoneStarted = pygame.time.get_ticks()/1000
 
 highScore = 0

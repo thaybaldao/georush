@@ -52,7 +52,7 @@ class ResetScreen(Screen):
                         break
 
                     # check if user wants to mute or enable sound
-                    self.soundButtonBehavior(game, event, pos)
+                    self.soundButtonBehavior(game, pos)
 
     def drawScreen(self, game):
         self.drawBasicScreen(game)

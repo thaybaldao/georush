@@ -46,7 +46,7 @@ class StartScreen(Screen):
                         self.runScreen = False
                         game.instructionsScreen.runScreen = True
 
-                    self.soundButtonBehavior(game, event, pos)
+                    self.soundButtonBehavior(game, pos)
 
     def updateScreen(self, game):
         game.runner.update(game)

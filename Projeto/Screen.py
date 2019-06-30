@@ -17,17 +17,17 @@ class Screen:
             game.retry = False
 
 
-    def soundButtonBehavior(self, game, event, pos):
-            if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
-                if game.sound:
-                    game.sound = False
-                    game.imgSound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
-                    pygame.mixer.Channel(0).stop()
-                    pygame.mixer.Channel(1).stop()
-                else:
-                    game.sound = True
-                    game.imgSound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
-                    game.soundManager.playSong(os.path.join('Music', 'menuLoop.wav'))
+    def soundButtonBehavior(self, game, pos):
+        if pos[0] > 740 and pos[0] < 785 and pos[1] > 450 and pos[1] < 495:
+            if game.sound:
+                game.sound = False
+                game.imgSound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
+                pygame.mixer.Channel(0).stop()
+                pygame.mixer.Channel(1).stop()
+            else:
+                game.sound = True
+                game.imgSound = pygame.image.load(os.path.join('Imagens', 'Sound.png'))
+                game.soundManager.playSong(os.path.join('Music', 'menuLoop.wav'))
 
 
     def drawBasicScreen(self, game):
