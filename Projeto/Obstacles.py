@@ -46,8 +46,14 @@ class RectObs(Obstacle):
                 game.runner.pos.y = self.rect.top
                 game.runner.vel.y = 0
                 game.runner.obstacleOnTop = self
-            elif notInvincible(game):
-                if game.numLives == 0:
+            elif not game.gameState.invincible():
+                if game.gameState.haveExtraLifes():
+                    game.numLives -= 1
+                    game.lifebar.pop()
+                    game.obstacles.clear()
+                    game.lives.clear()
+                    game.boost.clear()
+                else:
                     if game.sound:
                         game.soundManager.playDeath(os.path.join('Music', 'death.wav'))
                         pygame.time.wait(3100)
@@ -58,12 +64,6 @@ class RectObs(Obstacle):
                     if game.playing:
                         game.playing = False
                     game.running = False
-                else:
-                    game.numLives -= 1
-                    game.lifebar.pop()
-                    game.obstacles.clear()
-                    game.lives.clear()
-                    game.boost.clear()
 
 
 class TriObs(Obstacle):
@@ -89,8 +89,14 @@ class TriObs(Obstacle):
         self.rect.y = self.y
 
     def checkCollisions(self, game):
-        if game.runner.rect.colliderect(self) and notInvincible(game):
-            if game.numLives == 0:
+        if game.runner.rect.colliderect(self) and not game.gameState.invincible():
+            if game.gameState.haveExtraLifes():
+                game.numLives -= 1
+                game.lifebar.pop()
+                game.obstacles.clear()
+                game.lives.clear()
+                game.boost.clear()
+            else:
                 if game.sound:
                     game.soundManager.playDeath(os.path.join('Music', 'death.wav'))
                     pygame.time.wait(3100)
@@ -101,12 +107,6 @@ class TriObs(Obstacle):
                 if game.playing:
                     game.playing = False
                 game.running = False
-            else:
-                game.numLives -= 1
-                game.lifebar.pop()
-                game.obstacles.clear()
-                game.lives.clear()
-                game.boost.clear()
 
 
 class Life(Obstacle):
