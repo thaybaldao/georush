@@ -7,46 +7,15 @@ class StartScreen(Screen):
         self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
         self.font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
         self.inst = self.font.render('INSTRUCTIONS', True, PURPLE)
-
-
-    def playButtonBehavior(self, event, pos):
-        # highlight hovering the play button
-        if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
-            self.play = pygame.image.load(os.path.join('Imagens', 'Play1.png'))
-        else:
-            self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
-
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            # check if user wants to play
-            if pos[0] > 340 and pos[0] < 468 and pos[1] > 140 and pos[1] < 259:
-                self.runScreen = False
-
-
-    def instructionsButtonBehavior(self, event, pos, game):
-        # highlight the instructions text
-        if pos[0] > 200 and pos[0] < 615 and pos[1] > 290 and pos[1] < 330:
-            self.inst = self.font.render('INSTRUCTIONS', True, YELLOW)
-        else:
-            self.inst = self.font.render('INSTRUCTIONS', True, PURPLE)
-
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            # check if user wants to see instructions
-            if pos[0] > 200 and pos[0] < 615 and pos[1] > 290 and pos[1] < 330:
-                self.runScreen = False
-                game.instructionsScreen.runScreen = True
-
-
-    def interpretEvents(self, game):
-        for event in pygame.event.get():
-            pos = pygame.mouse.get_pos()
-
-            self.playButtonBehavior(event, pos)
-
-            self.instructionsButtonBehavior(event, pos, game)
-
-            self.soundBehavior.soundButtonBehavior(game, pos, event)
-
-            self.quitGameBehavior(game, event)
+        self.comandsInterpreter = CommandsInterpreter()
+        self.comandsInterpreter.add(QuitGameCommand())
+        self.comandsInterpreter.add(HighlightPlayButtonCommand())
+        self.comandsInterpreter.add(NotHighlightPlayButtonCommand())
+        self.comandsInterpreter.add(PlayButtonCommand())
+        self.comandsInterpreter.add(HighlightInstructionsButtonCommand())
+        self.comandsInterpreter.add(NotHighlightInstructionsButtonCommand())
+        self.comandsInterpreter.add(InstructionsButtonCommand())
+        self.comandsInterpreter.add(SoundButtonCommand())
 
 
     def drawScreen(self, game):
@@ -63,7 +32,7 @@ class StartScreen(Screen):
 
         while self.runScreen:
             game.clock.tick(game.speed)
-            self.interpretEvents(game)
+            self.comandsInterpreter.run(game, self)
             self.basicScreenUpdate(game)
             self.drawScreen(game)
 

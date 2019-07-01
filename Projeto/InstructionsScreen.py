@@ -7,32 +7,12 @@ class InstructionsScreen(Screen):
         self.title = font.render('INSTRUCTIONS', True, PINK)
         font2 = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 17)
         self.play = font2.render('Press ENTER or CLICK HERE to play.', True, PURPLE)
-
-
-    def playButtonBehavior(self, game, pos, event):
-        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 17)
-
-        # highlight the play text
-        if pos[0] > 280 and pos[0] < 780 and pos[1] > 410 and pos[1] < 430:
-            self.play = font.render('Press ENTER or CLICK HERE to play.', True, YELLOW)
-        else:
-            self.play = font.render('Press ENTER or CLICK HERE to play.', True, PURPLE)
-
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if pos[0] > 280 and pos[0] < 780 and pos[1] > 410 and pos[1] < 430:
-                self.runScreen = False
-
-
-    def interpretEvents(self, game):
-        for event in pygame.event.get():
-            pos = pygame.mouse.get_pos()
-
-            self.playButtonBehavior(game, pos, event)
-
-            self.soundBehavior.soundButtonBehavior(game, pos, event)
-
-            self.quitGameBehavior(game, event)
-
+        self.comandsInterpreter = CommandsInterpreter()
+        self.comandsInterpreter.add(QuitGameCommand())
+        self.comandsInterpreter.add(SoundButtonCommand())
+        self.comandsInterpreter.add(HighlightAdvanceToGameTextCommand())
+        self.comandsInterpreter.add(NotHighlightAdvanceToGameTextCommand())
+        self.comandsInterpreter.add(AdvanceToGameTextCommand())
 
     def updateScreen(self, game):
         game.runner.update(game)
@@ -72,6 +52,6 @@ class InstructionsScreen(Screen):
 
         while self.runScreen:
             game.clock.tick(game.speed)
-            self.interpretEvents(game)
+            self.comandsInterpreter.run(game, self)
             self.updateScreen(game)
             self.drawScreen(game)

@@ -4,6 +4,10 @@ from Zone import *
 class DangerZone(Zone):
     def __init__(self):
         self.soundBehavior = SoundBehaviorDangZone()
+        self.comandsInterpreter = CommandsInterpreter()
+        self.comandsInterpreter.add(QuitGameCommand())
+        self.comandsInterpreter.add(JumpCommand())
+        self.comandsInterpreter.add(SoundButtonCommand())
 
 
     def computeScore(self, game):

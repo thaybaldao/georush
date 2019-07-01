@@ -8,34 +8,11 @@ from SoundBehavior import*
 
 class Zone(Screen):
     def __init__(self):
-        self.soundBehavior = None
+        pass
 
 
     def computeScore(self, game):
         game.score += 0.01
-
-
-    def jumpBehavior(self, game, event):
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                game.runner.jump()
-
-
-    def interpretEvents(self, game):
-        for event in pygame.event.get():
-            if event.type == USEREVENT + 2:
-                game.speed += 0.5
-
-            if event.type == USEREVENT + 1:
-                self.createObstacle(game)
-
-            pos = pygame.mouse.get_pos()
-
-            self.quitGameBehavior(game, event)
-
-            self.jumpBehavior(game, event)
-
-            self.soundBehavior.soundButtonBehavior(game, pos, event)
 
 
     def createObstacle(self, game):
@@ -88,8 +65,8 @@ class Zone(Screen):
 
     def run(self, game):
         game.clock.tick(game.speed)
-
-        self.interpretEvents(game)
+        self.createObstacle(game)
+        self.comandsInterpreter.run(game, self)
         self.update(game)
         self.computeScore(game)
         self.draw(game)

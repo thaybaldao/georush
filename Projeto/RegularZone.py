@@ -3,6 +3,10 @@ from Zone import *
 class RegularZone(Zone):
     def __init__(self):
         self.soundBehavior = SoundBehaviorRegZone()
+        self.comandsInterpreter = CommandsInterpreter()
+        self.comandsInterpreter.add(QuitGameCommand())
+        self.comandsInterpreter.add(JumpCommand())
+        self.comandsInterpreter.add(SoundButtonCommand())
 
 
     def update(self, game):
