@@ -4,6 +4,7 @@ class RegularZone(Zone):
     def __init__(self):
         self.soundBehavior = SoundBehaviorRegZone()
 
+
     def update(self, game):
         self.basicZoneUpdate(game)
 
@@ -19,19 +20,6 @@ class RegularZone(Zone):
             if boost.x < -850:
                 game.boost.pop(game.boost.index(boost))
 
-    def draw(self, game):
-        self.basicZoneDraw(game)
-
-        # draw lives
-        for life in game.lives:
-            life.draw(game.screen)
-
-        # draw boosters
-        for boost in game.boost:
-            boost.draw(game.screen)
-
-        # after drawing everything, flip the display
-        pygame.display.flip()
 
     def createObstacle(self, game):
         r = random.randrange(0, 6)
@@ -97,3 +85,18 @@ class RegularZone(Zone):
                     game.lives.append(Life(900,310))
                 elif i == 0:
                     game.boost.append(Boost(900,310))
+
+
+    def draw(self, game):
+        self.basicZoneDraw(game)
+
+        # draw lives
+        for life in game.lives:
+            life.draw(game.screen)
+
+        # draw boosters
+        for boost in game.boost:
+            boost.draw(game.screen)
+
+        # after drawing everything, flip the display
+        pygame.display.flip()

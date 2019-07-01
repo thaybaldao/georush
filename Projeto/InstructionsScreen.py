@@ -9,39 +9,30 @@ class InstructionsScreen(Screen):
         self.play = font2.render('Press ENTER or CLICK HERE to play.', True, PURPLE)
 
 
-    def showScreen(self, game):
-        self.runScreen = True
-        self.startScreenSound(game)
+    def playButtonBehavior(self, game, pos, event):
+        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 17)
 
-        while self.runScreen:
-            game.clock.tick(game.speed)
-            self.drawScreen(game)
-            self.updateScreen(game)
+        # highlight the play text
+        if pos[0] > 280 and pos[0] < 780 and pos[1] > 410 and pos[1] < 430:
+            self.play = font.render('Press ENTER or CLICK HERE to play.', True, YELLOW)
+        else:
+            self.play = font.render('Press ENTER or CLICK HERE to play.', True, PURPLE)
 
-            for event in pygame.event.get():
-                pos = pygame.mouse.get_pos()
-
-                font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 17)
-
-                # highlight the play text
-                if pos[0] > 280 and pos[0] < 780 and pos[1] > 410 and pos[1] < 430:
-                    self.play = font.render('Press ENTER or CLICK HERE to play.', True, YELLOW)
-                else:
-                    self.play = font.render('Press ENTER or CLICK HERE to play.', True, PURPLE)
-
-                #  check if user wants to quit
-                self.quitGameBehavior(game, event)
-
-                # check if user wants to play
-                if event.type==pygame.KEYDOWN and pygame.key.get_pressed()[pygame.K_SPACE]:
-                    self.runScreen = False
-
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if pos[0] > 280 and pos[0] < 780 and pos[1] > 410 and pos[1] < 430:
-                        self.runScreen = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if pos[0] > 280 and pos[0] < 780 and pos[1] > 410 and pos[1] < 430:
+                self.runScreen = False
 
 
-                    self.soundBehavior.soundButtonBehavior(game, pos)
+    def interpretEvents(self, game):
+        for event in pygame.event.get():
+            pos = pygame.mouse.get_pos()
+
+            self.playButtonBehavior(game, pos, event)
+
+            self.soundBehavior.soundButtonBehavior(game, pos, event)
+
+            self.quitGameBehavior(game, event)
+
 
     def updateScreen(self, game):
         game.runner.update(game)
@@ -53,6 +44,13 @@ class InstructionsScreen(Screen):
             game.bgX = game.bg.get_width()
         if game.bgX2 < game.bg.get_width() * -1:
             game.bgX2 = game.bg.get_width()
+
+
+    def printInstructions(self, game, num, text):
+        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 18)
+        ins = font.render(text, True, YELLOW)
+        game.screen.blit(ins, (70, 40 + 50*num))
+
 
     def drawScreen(self, game):
         self.drawBasicScreen(game)
@@ -67,7 +65,13 @@ class InstructionsScreen(Screen):
 
         pygame.display.flip()
 
-    def printInstructions(self, game, num, text):
-        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 18)
-        ins = font.render(text, True, YELLOW)
-        game.screen.blit(ins, (70, 40 + 50*num))
+
+    def showScreen(self, game):
+        self.runScreen = True
+        self.startScreenSound(game)
+
+        while self.runScreen:
+            game.clock.tick(game.speed)
+            self.interpretEvents(game)
+            self.updateScreen(game)
+            self.drawScreen(game)

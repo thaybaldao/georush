@@ -5,28 +5,13 @@ class DangerZone(Zone):
     def __init__(self):
         self.soundBehavior = SoundBehaviorDangZone()
 
-    def drawDangerScreen(self, color, message, x, game):
-        game.screen.blit(game.bg, (game.bgX, 0))
-        game.screen.blit(game.bg, (game.bgX2, 0))
-        game.screen.blit(game.imgSound, (740, 450))
-        game.runner.draw(game.screen)
-        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 55)
-        text = font.render(message, True, color)
-        game.screen.blit(text, (x, 225))
-        pygame.display.flip()
 
     def computeScore(self, game):
         game.score += 0.02
 
+
     def update(self, game):
         self.basicZoneUpdate(game)
-
-
-    def draw(self, game):
-        self.basicZoneDraw(game)
-
-        # after drawing everything, flip the display
-        pygame.display.flip()
 
 
     def createObstacle(self, game):
@@ -39,3 +24,20 @@ class DangerZone(Zone):
             elif r < 9 and (len(game.obstacles) == 0 or game.obstacles[-1].num != 2):
                 game.obstacles.append(TriObs(810,245,35,36,pygame.image.load(os.path.join('Imagens', 'Triangulo_Invertido_Danger_Zone.png')), 2))
 
+
+    def drawDangerScreen(self, color, message, x, game):
+        game.screen.blit(game.bg, (game.bgX, 0))
+        game.screen.blit(game.bg, (game.bgX2, 0))
+        game.screen.blit(game.imgSound, (740, 450))
+        game.runner.draw(game.screen)
+        font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 55)
+        text = font.render(message, True, color)
+        game.screen.blit(text, (x, 225))
+        pygame.display.flip()
+
+
+    def draw(self, game):
+        self.basicZoneDraw(game)
+
+        # after drawing everything, flip the display
+        pygame.display.flip()
