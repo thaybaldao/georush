@@ -26,7 +26,7 @@ class StartScreen(Screen):
     def run(self, game):
         self.startScreenSound(game)
 
-        while not game.userQuit and self.runScreen:
+        while not game.userQuit:
             game.clock.tick(game.speed)
             self.basicScreenUpdate(game)
             self.draw(game)

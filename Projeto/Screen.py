@@ -21,8 +21,6 @@ class Screen:
         self.bgX = 0
         self.bgX2 = self.bg.get_width()
 
-        self.runScreen = True
-
 
     def startScreenSound(self, game):
         if game.sound:

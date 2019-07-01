@@ -28,7 +28,7 @@ class ZoneState:
 class RegularZoneState(ZoneState):
 
     def check(self, game, currentTime):
-        if not game.inDangerZone and currentTime - game.timeRegularZoneStarted > 5 + 10*random.randrange(0, 2):
+        if not game.inDangerZone and currentTime - game.timeRegularZoneStarted > 20 + 10*random.randrange(0, 2):
             self.switch(game, DangerZoneState)
         elif not game.inDangerZone:
             self.execute(game)
@@ -49,7 +49,7 @@ class RegularZoneState(ZoneState):
 class DangerZoneState(ZoneState):
 
     def check(self, game, currentTime):
-        if game.inDangerZone and currentTime - game.timeDangerZoneStarted > 5 + 10 * random.randrange(0, 2):
+        if game.inDangerZone and currentTime - game.timeDangerZoneStarted > 10 + 10 * random.randrange(0, 2):
             self.switch(game, RegularZoneState)
         elif game.inDangerZone:
             self.execute(game)

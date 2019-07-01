@@ -36,6 +36,9 @@ class ResetScreen(Screen):
 
 
     def run(self, game):
+        if game.score > game.highScore:
+            game.highScore = game.score
+
         pygame.mixer.Channel(0).set_volume(1)
         self.startScreenSound(game)
 

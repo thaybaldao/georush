@@ -71,5 +71,3 @@ class Zone(Screen):
         self.draw(game)
         self.commandsInterpreter.run(game, self)
 
-        if game.score > game.highScore:
-            game.highScore = game.score
