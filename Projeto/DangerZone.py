@@ -5,7 +5,7 @@ class DangerZone(Zone):
     def __init__(self):
         self.soundBehavior = SoundBehaviorDangZone()
         self.basicInitialization()
-        self.commandsMediator.add(JumpCommand())
+        self.commandsInterpreter.add(JumpCommand())
 
 
     def computeScore(self, game):

@@ -7,12 +7,12 @@ class ResetScreen(Screen):
         self.stop = pygame.image.load(os.path.join('Imagens', 'X_button.png'))
         self.tryAgain = pygame.image.load(os.path.join('Imagens', 'Best_Score.png'))
         self.gameOver = pygame.image.load(os.path.join('Imagens', 'Game_Over.png'))
-        self.commandsMediator.add(HighlightReplayButtonCommand())
-        self.commandsMediator.add(NotHighlightReplayButtonCommand())
-        self.commandsMediator.add(ReplayButtonCommand())
-        self.commandsMediator.add(HighlightXButtonCommand())
-        self.commandsMediator.add(NotHighlightXButtonCommand())
-        self.commandsMediator.add(XButtonCommand())
+        self.commandsInterpreter.add(HighlightReplayButtonCommand())
+        self.commandsInterpreter.add(NotHighlightReplayButtonCommand())
+        self.commandsInterpreter.add(ReplayButtonCommand())
+        self.commandsInterpreter.add(HighlightXButtonCommand())
+        self.commandsInterpreter.add(NotHighlightXButtonCommand())
+        self.commandsInterpreter.add(XButtonCommand())
 
 
     def printFinalScore(self, game):
@@ -43,7 +43,7 @@ class ResetScreen(Screen):
             game.clock.tick(game.speed)
             game.runner.update(game)
             self.draw(game)
-            self.commandsMediator.run(game, self)
+            self.commandsInterpreter.run(game, self)
 
 
 

@@ -14,51 +14,58 @@ import os
 import random
 
 class ZoneState:
+
     def check(self, game, currentTime):
         pass
 
-    def switch(self, game):
+    def switch(self, game, state):
         pass
+
+    def execute(self, game):
+        pass
+
 
 class RegularZoneState(ZoneState):
+
     def check(self, game, currentTime):
         if not game.inDangerZone and currentTime - game.timeRegularZoneStarted > 5 + 10*random.randrange(0, 2):
-            self.switch(game)
+            self.switch(game, DangerZoneState)
         elif not game.inDangerZone:
             self.execute(game)
 
-    def switch(self, game):
+    def switch(self, game, state):
         if game.sound:
             game.soundManager.playSong(os.path.join('Music', 'DeadLocked.wav'))
         game.inDangerZone = True
         game.timeDangerZoneStarted = pygame.time.get_ticks() / 1000
         game.dangerZone.dangerZoneMessage(game)
-        game.dangerZone.run(game)
+        self.__class__ = state
 
     def execute(self, game):
         game.regularZone.run(game)
 
 
 class DangerZoneState(ZoneState):
+
     def check(self, game, currentTime):
         if game.inDangerZone and currentTime - game.timeDangerZoneStarted > 5 + 10 * random.randrange(0, 2):
-            self.switch(game)
+            self.switch(game, RegularZoneState)
         elif game.inDangerZone:
             self.execute(game)
 
-    def switch(self, game):
+    def switch(self, game, state):
         game.inDangerZone = False
         game.dangerZone.wellDoneMessage(game)
         if game.sound:
             game.soundManager.playSong(os.path.join('Music', 'BackOnTrack.wav'))
         game.timeRegularZoneStarted = pygame.time.get_ticks() / 1000
-        game.regularZone.run(game)
+        self.__class__ = state
 
     def execute(self, game):
         game.dangerZone.run(game)
 
 
-class ZonesMediator:
+class ZonesStateMachine:
     def __init__(self):
         self.switchZones = []
 
@@ -79,6 +86,7 @@ class ZonesMediator:
             currentTime = pygame.time.get_ticks() / 1000
             for c in self.switchZones:
                 c.check(game, currentTime)
+
 
 
 class GameManager:
@@ -113,9 +121,9 @@ class GameManager:
         self.inDangerZone = False
         self.timeRegularZoneStarted = 0
         self.timeDangerZoneStarted = 0
-        self.zonesMediator = ZonesMediator()
-        self.zonesMediator.add(RegularZoneState())
-        self.zonesMediator.add(DangerZoneState())
+        self.zonesStateMachine = ZonesStateMachine()
+        self.zonesStateMachine.add(RegularZoneState())
+        self.zonesStateMachine.add(DangerZoneState())
 
         # initializing player and vector for obstacles
         self.runner = Player(self)

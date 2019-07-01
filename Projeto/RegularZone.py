@@ -4,7 +4,7 @@ class RegularZone(Zone):
     def __init__(self):
         self.soundBehavior = SoundBehaviorRegZone()
         self.basicInitialization()
-        self.commandsMediator.add(JumpCommand())
+        self.commandsInterpreter.add(JumpCommand())
 
 
     def update(self, game):

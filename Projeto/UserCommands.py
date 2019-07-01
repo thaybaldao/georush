@@ -42,7 +42,7 @@ class PlayButtonCommand(Command):
                 self.execute(game, screen)
 
     def execute(self, game, screen):
-        game.zonesMediator.run(game)
+        game.zonesStateMachine.run(game)
 
 
 class HighlightInstructionsButtonCommand(Command):
@@ -94,7 +94,7 @@ class ReplayButtonCommand(Command):
                 self.execute(game, screen)
 
     def execute(self, game, screen):
-        game.zonesMediator.run(game)
+        game.zonesStateMachine.run(game)
 
 
 class HighlightXButtonCommand(Command):
@@ -171,10 +171,10 @@ class AdvanceToGameTextCommand(Command):
                 self.execute(game, screen)
 
     def execute(self, game, screen):
-        game.zonesMediator.run(game)
+        game.zonesStateMachine.run(game)
 
 
-class CommandsMediator:
+class CommandsInterpreter:
     def __init__(self):
         self.commands = []
 

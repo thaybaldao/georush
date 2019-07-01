@@ -7,9 +7,9 @@ class InstructionsScreen(Screen):
         self.title = font.render('INSTRUCTIONS', True, PINK)
         font2 = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 17)
         self.play = font2.render('Press ENTER or CLICK HERE to play.', True, PURPLE)
-        self.commandsMediator.add(HighlightAdvanceToGameTextCommand())
-        self.commandsMediator.add(NotHighlightAdvanceToGameTextCommand())
-        self.commandsMediator.add(AdvanceToGameTextCommand())
+        self.commandsInterpreter.add(HighlightAdvanceToGameTextCommand())
+        self.commandsInterpreter.add(NotHighlightAdvanceToGameTextCommand())
+        self.commandsInterpreter.add(AdvanceToGameTextCommand())
 
     def updateScreen(self, game):
         game.runner.update(game)
@@ -50,4 +50,4 @@ class InstructionsScreen(Screen):
             game.clock.tick(game.speed)
             self.updateScreen(game)
             self.draw(game)
-            self.commandsMediator.run(game, self)
+            self.commandsInterpreter.run(game, self)

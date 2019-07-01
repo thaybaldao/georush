@@ -7,12 +7,12 @@ class StartScreen(Screen):
         self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
         self.font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
         self.inst = self.font.render('INSTRUCTIONS', True, PURPLE)
-        self.commandsMediator.add(HighlightPlayButtonCommand())
-        self.commandsMediator.add(NotHighlightPlayButtonCommand())
-        self.commandsMediator.add(PlayButtonCommand())
-        self.commandsMediator.add(HighlightInstructionsButtonCommand())
-        self.commandsMediator.add(NotHighlightInstructionsButtonCommand())
-        self.commandsMediator.add(InstructionsButtonCommand())
+        self.commandsInterpreter.add(HighlightPlayButtonCommand())
+        self.commandsInterpreter.add(NotHighlightPlayButtonCommand())
+        self.commandsInterpreter.add(PlayButtonCommand())
+        self.commandsInterpreter.add(HighlightInstructionsButtonCommand())
+        self.commandsInterpreter.add(NotHighlightInstructionsButtonCommand())
+        self.commandsInterpreter.add(InstructionsButtonCommand())
 
 
     def draw(self, game):
@@ -30,7 +30,7 @@ class StartScreen(Screen):
             game.clock.tick(game.speed)
             self.basicScreenUpdate(game)
             self.draw(game)
-            self.commandsMediator.run(game, self)
+            self.commandsInterpreter.run(game, self)
 
 
 

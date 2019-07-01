@@ -69,7 +69,7 @@ class Zone(Screen):
         self.update(game)
         self.computeScore(game)
         self.draw(game)
-        self.commandsMediator.run(game, self)
+        self.commandsInterpreter.run(game, self)
 
         if game.score > game.highScore:
             game.highScore = game.score
