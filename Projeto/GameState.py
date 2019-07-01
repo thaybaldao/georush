@@ -9,3 +9,5 @@ class GameState():
         if game.numLives is not 0:
             return True
         return False
+
+

@@ -59,8 +59,6 @@ class RectObs(Obstacle):
                     game.resetScreen.run(game)
                     if game.playing:
                         game.playing = False
-                    game.running = False
-
 
 class TriObs(Obstacle):
     def __init__(self, x, y, width, height, img, num):
@@ -102,7 +100,6 @@ class TriObs(Obstacle):
                 game.resetScreen.run(game)
                 if game.playing:
                     game.playing = False
-                game.running = False
 
 
 class Life(Obstacle):

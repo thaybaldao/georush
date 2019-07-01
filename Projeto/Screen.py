@@ -8,10 +8,9 @@ class Screen:
         self.basicInitialization()
 
     def basicInitialization(self):
-        self.runScreen = False
-        self.comandsInterpreter = CommandsInterpreter()
-        self.comandsInterpreter.add(QuitGameCommand())
-        self.comandsInterpreter.add(SoundButtonCommand())
+        self.commandsMediator = CommandsMediator()
+        self.commandsMediator.add(QuitGameCommand())
+        self.commandsMediator.add(SoundButtonCommand())
 
         # creating game window
         self.screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
@@ -22,6 +21,7 @@ class Screen:
         self.bgX = 0
         self.bgX2 = self.bg.get_width()
 
+        self.runScreen = True
 
 
     def startScreenSound(self, game):

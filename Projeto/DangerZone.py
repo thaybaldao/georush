@@ -5,7 +5,7 @@ class DangerZone(Zone):
     def __init__(self):
         self.soundBehavior = SoundBehaviorDangZone()
         self.basicInitialization()
-        self.comandsInterpreter.add(JumpCommand())
+        self.commandsMediator.add(JumpCommand())
 
 
     def computeScore(self, game):
@@ -17,7 +17,7 @@ class DangerZone(Zone):
 
 
     def createObstacle(self, game):
-        r = random.randrange(0, 12)
+        r = random.randrange(0, 1000)
         if len(game.obstacles) == 0 or (game.obstacles[-1].x + game.obstacles[-1].width < 650):
             if r < 4:
                 game.obstacles.append(TriObs(810,405,35,36,pygame.image.load(os.path.join('Imagens', 'Triangulo_Danger_Zone.png')), 1))
@@ -36,6 +36,26 @@ class DangerZone(Zone):
         text = font.render(message, True, color)
         self.screen.blit(text, (x, 225))
         pygame.display.flip()
+
+    def dangerZoneMessage(self, game):
+        game.obstacles.clear()
+        pygame.time.wait(500)
+        self.drawDangerScreen(PURPLE, 'DANGER ZONE!', 115, game)
+        pygame.time.wait(400)
+        self.drawDangerScreen(YELLOW, 'DANGER ZONE!', 115, game)
+        pygame.time.wait(500)
+        self.drawDangerScreen(PURPLE, 'DANGER ZONE!', 115, game)
+        pygame.time.wait(400)
+
+    def wellDoneMessage(self, game):
+        game.obstacles.clear()
+        pygame.time.wait(500)
+        self.drawDangerScreen(PURPLE, 'WELL DONE!', 160, game)
+        pygame.time.wait(400)
+        self.drawDangerScreen(YELLOW, 'WELL DONE!', 160, game)
+        pygame.time.wait(500)
+        self.drawDangerScreen(PURPLE, 'WELL DONE!', 160, game)
+        pygame.time.wait(400)
 
 
     def draw(self, game):

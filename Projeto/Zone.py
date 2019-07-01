@@ -66,10 +66,10 @@ class Zone(Screen):
     def run(self, game):
         game.clock.tick(game.speed)
         self.createObstacle(game)
-        self.comandsInterpreter.run(game, self)
         self.update(game)
         self.computeScore(game)
         self.draw(game)
+        self.commandsMediator.run(game, self)
 
         if game.score > game.highScore:
             game.highScore = game.score

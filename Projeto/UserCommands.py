@@ -16,9 +16,7 @@ class QuitGameCommand(Command):
             self.execute(game, screen)
 
     def execute(self, game, screen):
-        screen.runScreen = False
-        game.running = False
-        game.retry = False
+        game.userQuit = True
 
 
 class HighlightPlayButtonCommand(Command):
@@ -44,7 +42,8 @@ class PlayButtonCommand(Command):
                 self.execute(game, screen)
 
     def execute(self, game, screen):
-        screen.runScreen = False
+        game.timeRegularZoneStarted = pygame.time.get_ticks() / 1000
+        game.runZones()
 
 
 class HighlightInstructionsButtonCommand(Command):
@@ -70,8 +69,7 @@ class InstructionsButtonCommand(Command):
                 self.execute(game, screen)
 
     def execute(self, game, screen):
-        screen.runScreen = False
-        game.instructionsScreen.runScreen = True
+        game.instructionsScreen.run(game)
 
 
 class HighlightReplayButtonCommand(Command):
@@ -97,9 +95,7 @@ class ReplayButtonCommand(Command):
                 self.execute(game, screen)
 
     def execute(self, game, screen):
-        screen.retry = True
-        screen.runScreen = False
-        game.inDangerZone = False
+        game.runZones()
 
 
 class HighlightXButtonCommand(Command):
@@ -125,9 +121,7 @@ class XButtonCommand(Command):
                 self.execute(game, screen)
 
     def execute(self, game, screen):
-        screen.retry = False
-        screen.runScreen = False
-        game.running = False
+        game.userQuit = True
 
 
 class SoundButtonCommand(Command):
@@ -178,10 +172,11 @@ class AdvanceToGameTextCommand(Command):
                 self.execute(game, screen)
 
     def execute(self, game, screen):
-        screen.runScreen = False
+        game.timeRegularZoneStarted = pygame.time.get_ticks() / 1000
+        game.runZones()
 
 
-class CommandsInterpreter:
+class CommandsMediator:
     def __init__(self):
         self.commands = []
 
