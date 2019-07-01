@@ -10,6 +10,7 @@ class SoundManager():
 
     def playSong(self, song):
         pygame.mixer.Channel(0).play(pygame.mixer.Sound(song), -1, fade_ms=200)
+        pygame.mixer.Channel(0).set_volume(1)
 
 
     def playSoundEffect(self, effect):

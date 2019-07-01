@@ -39,6 +39,7 @@ class RegularZoneState(ZoneState):
         game.inDangerZone = True
         game.timeDangerZoneStarted = pygame.time.get_ticks() / 1000
         game.dangerZone.dangerZoneMessage(game)
+        game.showDangerZoneMessage = True
         self.__class__ = state
 
     def execute(self, game):
@@ -55,7 +56,8 @@ class DangerZoneState(ZoneState):
 
     def switch(self, game, state):
         game.inDangerZone = False
-        game.dangerZone.wellDoneMessage(game)
+        if game.showDangerZoneMessage:
+            game.dangerZone.wellDoneMessage(game)
         if game.sound:
             game.soundManager.playSong(os.path.join('Music', 'BackOnTrack.wav'))
         game.timeRegularZoneStarted = pygame.time.get_ticks() / 1000
@@ -67,10 +69,10 @@ class DangerZoneState(ZoneState):
 
 class ZonesStateMachine:
     def __init__(self):
-        self.switchZones = []
+        self.zones = []
 
     def add(self, zone):
-        self.switchZones.append(zone)
+        self.zones.append(zone)
 
     def run(self, game):
         game.playing = True
@@ -80,11 +82,14 @@ class ZonesStateMachine:
             game.soundManager.playSong(os.path.join('Music', 'BackOnTrack.wav'))
 
         game.timeRegularZoneStarted = pygame.time.get_ticks() / 1000
-        game.inDangerZone = False
+
+        game.gameJustStarted = True
+
+        game.showDangerZoneMessage = False
 
         while game.playing and not game.userQuit:
             currentTime = pygame.time.get_ticks() / 1000
-            for c in self.switchZones:
+            for c in self.zones:
                 c.check(game, currentTime)
 
 
@@ -111,6 +116,7 @@ class GameManager:
         self.invincible = 0
         self.playing = True
         self.userQuit = False
+        self.showDangerZoneMessage = False
 
         # initializing screens
         self.startScreen = StartScreen()
@@ -138,6 +144,8 @@ class GameManager:
         # initializing scores
         self.score = 0
         self.highScore = 0
+
+
 
     def run(self):
         self.startScreen.run(self)
