@@ -42,8 +42,7 @@ class PlayButtonCommand(Command):
                 self.execute(game, screen)
 
     def execute(self, game, screen):
-        game.timeRegularZoneStarted = pygame.time.get_ticks() / 1000
-        game.runZones()
+        game.zonesMediator.run(game)
 
 
 class HighlightInstructionsButtonCommand(Command):
@@ -95,7 +94,7 @@ class ReplayButtonCommand(Command):
                 self.execute(game, screen)
 
     def execute(self, game, screen):
-        game.runZones()
+        game.zonesMediator.run(game)
 
 
 class HighlightXButtonCommand(Command):
@@ -172,8 +171,7 @@ class AdvanceToGameTextCommand(Command):
                 self.execute(game, screen)
 
     def execute(self, game, screen):
-        game.timeRegularZoneStarted = pygame.time.get_ticks() / 1000
-        game.runZones()
+        game.zonesMediator.run(game)
 
 
 class CommandsMediator:
