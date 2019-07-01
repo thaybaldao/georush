@@ -15,8 +15,7 @@ class StartScreen(Screen):
         self.comandsInterpreter.add(InstructionsButtonCommand())
 
 
-
-    def drawScreen(self, game):
+    def draw(self, game):
         self.drawBasicScreen(game)
         game.screen.blit(self.play, (340, 140))
         game.screen.blit(self.inst, (200, 290))
@@ -24,7 +23,7 @@ class StartScreen(Screen):
         pygame.display.flip()
 
 
-    def showScreen(self, game):
+    def run(self, game):
         self.runScreen = True
         self.startScreenSound(game)
 
@@ -32,7 +31,7 @@ class StartScreen(Screen):
             game.clock.tick(game.speed)
             self.comandsInterpreter.run(game, self)
             self.basicScreenUpdate(game)
-            self.drawScreen(game)
+            self.draw(game)
 
 
 

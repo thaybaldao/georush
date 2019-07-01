@@ -134,10 +134,10 @@ class Game:
 
 highScore = 0
 game = Game(highScore, True)
-game.startScreen.showScreen(game)
+game.startScreen.run(game)
 
 if not game.startScreen.runScreen and game.instructionsScreen.runScreen:
-    game.instructionsScreen.showScreen(game)
+    game.instructionsScreen.run(game)
 
 while game.running and not game.resetScreen.runScreen:
     game.run()

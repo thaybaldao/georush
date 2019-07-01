@@ -29,7 +29,7 @@ class InstructionsScreen(Screen):
         game.screen.blit(ins, (70, 40 + 50*num))
 
 
-    def drawScreen(self, game):
+    def draw(self, game):
         self.drawBasicScreen(game)
         game.screen.blit(self.title, (200, 20))
         self.printInstructions(game, 1, '- Click on the spacebar to jump.')
@@ -43,7 +43,7 @@ class InstructionsScreen(Screen):
         pygame.display.flip()
 
 
-    def showScreen(self, game):
+    def run(self, game):
         self.runScreen = True
         self.startScreenSound(game)
 
@@ -51,4 +51,4 @@ class InstructionsScreen(Screen):
             game.clock.tick(game.speed)
             self.comandsInterpreter.run(game, self)
             self.updateScreen(game)
-            self.drawScreen(game)
+            self.draw(game)

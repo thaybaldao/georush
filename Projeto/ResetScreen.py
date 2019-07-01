@@ -16,18 +16,6 @@ class ResetScreen(Screen):
         self.comandsInterpreter.add(XButtonCommand())
 
 
-    def showScreen(self, game):
-        pygame.mixer.Channel(0).set_volume(1)
-        self.runScreen = True
-        self.startScreenSound(game)
-
-        while self.runScreen:
-            game.clock.tick(game.speed)
-            self.comandsInterpreter.run(game, self)
-            game.runner.update(game)
-            self.drawScreen(game)
-
-
     def printFinalScore(self, game):
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
         currentScore = font.render("Your Score: " + str(int(game.score)), True, PURPLE)
@@ -36,7 +24,7 @@ class ResetScreen(Screen):
         game.screen.blit(bestScore, (180, 350))
 
 
-    def drawScreen(self, game):
+    def draw(self, game):
         self.drawBasicScreen(game)
 
         game.screen.blit(self.reset, (205, 140))
@@ -47,6 +35,17 @@ class ResetScreen(Screen):
 
         pygame.display.flip()
 
+
+    def run(self, game):
+        pygame.mixer.Channel(0).set_volume(1)
+        self.runScreen = True
+        self.startScreenSound(game)
+
+        while self.runScreen:
+            game.clock.tick(game.speed)
+            self.comandsInterpreter.run(game, self)
+            game.runner.update(game)
+            self.draw(game)
 
 
 
