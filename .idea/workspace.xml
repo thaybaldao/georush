@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5f87016-7380-4c2c-8908-9c5b9f608a5c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Projeto/UserCommands.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto/DangerZone.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/DangerZone.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/InstructionsScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/InstructionsScreen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto/RegularZone.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/RegularZone.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/ResetScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/ResetScreen.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/Screen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Screen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto/SoundBehavior.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/SoundBehavior.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/StartScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/StartScreen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto/Zone.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Zone.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,8 +25,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/Screen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="150">
+              <caret line="10" column="57" selection-start-line="10" selection-start-column="57" selection-end-line="10" selection-end-column="57" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -41,13 +35,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Projeto/Player.py">
+        <entry file="file://$PROJECT_DIR$/Projeto/InstructionsScreen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="120">
+              <caret line="8" column="84" selection-start-line="8" selection-start-column="84" selection-end-line="8" selection-end-column="84" />
             </state>
           </provider>
         </entry>
@@ -67,8 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/RegularZone.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="50" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
+            <state relative-caret-position="75">
+              <caret line="5" selection-start-line="5" selection-end-line="8" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -97,17 +88,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/ResetScreen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="45" lean-forward="true" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
+            <state relative-caret-position="225">
+              <caret line="15" column="53" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Projeto/Settings.py">
+        <entry file="file://$PROJECT_DIR$/Projeto/DangerZone.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="21" lean-forward="true" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+            <state relative-caret-position="90">
+              <caret line="6" selection-start-line="6" selection-end-line="9" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -115,8 +106,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Projeto/Zone.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="66" column="35" lean-forward="true" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
+            <state relative-caret-position="150">
+              <caret line="10" column="12" lean-forward="true" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="12" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -209,19 +200,19 @@
         <option value="$PROJECT_DIR$/Projeto/Command.py" />
         <option value="$PROJECT_DIR$/Projeto/main.py" />
         <option value="$PROJECT_DIR$/Projeto/UserCommands.py" />
-        <option value="$PROJECT_DIR$/Projeto/RegularZone.py" />
-        <option value="$PROJECT_DIR$/Projeto/DangerZone.py" />
         <option value="$PROJECT_DIR$/Projeto/SoundBehavior.py" />
         <option value="$PROJECT_DIR$/Projeto/StartScreen.py" />
+        <option value="$PROJECT_DIR$/Projeto/Screen.py" />
         <option value="$PROJECT_DIR$/Projeto/InstructionsScreen.py" />
         <option value="$PROJECT_DIR$/Projeto/ResetScreen.py" />
-        <option value="$PROJECT_DIR$/Projeto/Screen.py" />
+        <option value="$PROJECT_DIR$/Projeto/RegularZone.py" />
+        <option value="$PROJECT_DIR$/Projeto/DangerZone.py" />
         <option value="$PROJECT_DIR$/Projeto/Zone.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="984" />
+    <option name="x" value="3232" />
     <option name="y" value="27" />
     <option name="width" value="1247" />
     <option name="height" value="1053" />
@@ -332,15 +323,15 @@
     <option name="totallyTimeSpent" value="3006000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <frame x="1987" y="25" width="2493" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15329275" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11319984" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32948583" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2775378" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2775378" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39874083" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -451,22 +442,8 @@
     <entry file="file://$PROJECT_DIR$/Projeto/Imagens/Sound.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/DangerZone.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="50" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/GameState.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/InstructionsScreen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="84" selection-start-line="8" selection-start-column="84" selection-end-line="8" selection-end-column="84" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/main.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -498,30 +475,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/RegularZone.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="50" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/ResetScreen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="45" lean-forward="true" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/Screen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/Settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -549,13 +502,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/StartScreen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="66" selection-start-line="8" selection-start-column="66" selection-end-line="8" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/UserCommands.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2100">
@@ -566,10 +512,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/StartScreen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="66" selection-start-line="8" selection-start-column="66" selection-end-line="8" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/Screen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="57" selection-start-line="10" selection-start-column="57" selection-end-line="10" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/InstructionsScreen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="84" selection-start-line="8" selection-start-column="84" selection-end-line="8" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/ResetScreen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="53" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/RegularZone.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="8" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/DangerZone.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="9" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/Zone.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="66" column="35" lean-forward="true" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
+        <state relative-caret-position="150">
+          <caret line="10" column="12" lean-forward="true" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="12" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>

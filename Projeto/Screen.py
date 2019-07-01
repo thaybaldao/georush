@@ -6,6 +6,9 @@ class Screen:
     def __init__(self):
         self.runScreen = False
         self.soundBehavior = SoundBehaviorScreen()
+        self.comandsInterpreter = CommandsInterpreter()
+        self.comandsInterpreter.add(QuitGameCommand())
+        self.comandsInterpreter.add(SoundButtonCommand())
 
     def startScreenSound(self, game):
         if game.sound:

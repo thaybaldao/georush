@@ -7,15 +7,13 @@ class StartScreen(Screen):
         self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
         self.font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
         self.inst = self.font.render('INSTRUCTIONS', True, PURPLE)
-        self.comandsInterpreter = CommandsInterpreter()
-        self.comandsInterpreter.add(QuitGameCommand())
         self.comandsInterpreter.add(HighlightPlayButtonCommand())
         self.comandsInterpreter.add(NotHighlightPlayButtonCommand())
         self.comandsInterpreter.add(PlayButtonCommand())
         self.comandsInterpreter.add(HighlightInstructionsButtonCommand())
         self.comandsInterpreter.add(NotHighlightInstructionsButtonCommand())
         self.comandsInterpreter.add(InstructionsButtonCommand())
-        self.comandsInterpreter.add(SoundButtonCommand())
+
 
 
     def drawScreen(self, game):

@@ -8,15 +8,12 @@ class ResetScreen(Screen):
         self.tryAgain = pygame.image.load(os.path.join('Imagens', 'Best_Score.png'))
         self.gameOver = pygame.image.load(os.path.join('Imagens', 'Game_Over.png'))
         self.retry = False
-        self.comandsInterpreter = CommandsInterpreter()
-        self.comandsInterpreter.add(QuitGameCommand())
         self.comandsInterpreter.add(HighlightReplayButtonCommand())
         self.comandsInterpreter.add(NotHighlightReplayButtonCommand())
         self.comandsInterpreter.add(ReplayButtonCommand())
         self.comandsInterpreter.add(HighlightXButtonCommand())
         self.comandsInterpreter.add(NotHighlightXButtonCommand())
         self.comandsInterpreter.add(XButtonCommand())
-        self.comandsInterpreter.add(SoundButtonCommand())
 
 
     def showScreen(self, game):
