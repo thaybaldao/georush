@@ -17,9 +17,9 @@ class StartScreen(Screen):
 
     def draw(self, game):
         self.drawBasicScreen(game)
-        game.screen.blit(self.play, (340, 140))
-        game.screen.blit(self.inst, (200, 290))
-        game.screen.blit(self.title, (225, 50))
+        self.screen.blit(self.play, (340, 140))
+        self.screen.blit(self.inst, (200, 290))
+        self.screen.blit(self.title, (225, 50))
         pygame.display.flip()
 
 

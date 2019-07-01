@@ -56,7 +56,7 @@ class RectObs(Obstacle):
                     game.lives.clear()
                     game.obstacles.clear()
                     game.lifebar.clear()
-                    game.resetScreen.showScreen(game)
+                    game.resetScreen.run(game)
                     if game.playing:
                         game.playing = False
                     game.running = False

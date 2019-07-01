@@ -29,9 +29,6 @@ class Game:
             self.sound = False
             self.imgSound = pygame.image.load(os.path.join('Imagens', 'No_Sound.png'))
 
-        # creating game window
-        self.screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
-        pygame.display.set_caption(TITLE)
 
         # setting up clock
         self.clock = pygame.time.Clock()
@@ -59,29 +56,15 @@ class Game:
         self.lifebar = []
         self.boost = []
 
-        # creating background
-        self.bg = pygame.image.load(os.path.join('Imagens', 'Background.png')).convert()
-        self.bgX = 0
-        self.bgX2 = self.bg.get_width()
         self.initialSpeed = 250
         self.speed = self.initialSpeed
 
-        # initializing danger zone
-        self.play = pygame.image.load(os.path.join('Imagens', 'Play.png'))
-        self.reset = pygame.image.load(os.path.join('Imagens', 'Replay.png'))
-        self.stop = pygame.image.load(os.path.join('Imagens', 'X_button.png'))
-        self.inst = pygame.image.load(os.path.join('Imagens', 'Instrucoes.png'))
-
-        self.title = pygame.image.load(os.path.join('Imagens', 'Titulo.png'))
-        self.gameOver = pygame.image.load(os.path.join('Imagens', 'Game_Over.png'))
         self.inDangerZone = False
         self.timeRegularZoneStarted = pygame.time.get_ticks() / 1000
         self.timeDangerZoneStarted = 0
 
         # allowing spacebar to be pressed
         pygame.key.set_repeat(17, 17)
-
-        # setting score
         self.score = 0
         self.highScore = highScore
 

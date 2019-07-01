@@ -20,16 +20,16 @@ class ResetScreen(Screen):
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
         currentScore = font.render("Your Score: " + str(int(game.score)), True, PURPLE)
         bestScore = font.render("Best Score: " + str(int(game.highScore)), True, PURPLE)
-        game.screen.blit(currentScore, (180, 300))
-        game.screen.blit(bestScore, (180, 350))
+        self.screen.blit(currentScore, (180, 300))
+        self.screen.blit(bestScore, (180, 350))
 
 
     def draw(self, game):
         self.drawBasicScreen(game)
 
-        game.screen.blit(self.reset, (205, 140))
-        game.screen.blit(self.stop, (455, 140))
-        game.screen.blit(self.gameOver, (190, 50))
+        self.screen.blit(self.reset, (205, 140))
+        self.screen.blit(self.stop, (455, 140))
+        self.screen.blit(self.gameOver, (190, 50))
 
         self.printFinalScore(game)
 

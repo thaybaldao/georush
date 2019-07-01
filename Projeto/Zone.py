@@ -35,13 +35,13 @@ class Zone(Screen):
     def printScore(self, game):
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 40)
         score = font.render("Score: " + str(int(game.score)), True, ORANGE)
-        game.screen.blit(score, (265, 10))
+        self.screen.blit(score, (265, 10))
 
 
     def printInvTime(self, game):
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 25)
         text = font.render("Invincible Time: " + str(int(game.invincible) - 4), True, PURPLE)
-        game.screen.blit(text, (10, 455))
+        self.screen.blit(text, (10, 455))
 
 
     def basicZoneDraw(self, game):
@@ -49,11 +49,11 @@ class Zone(Screen):
 
         # draw obstacles
         for obstacle in game.obstacles:
-            obstacle.draw(game.screen)
+            obstacle.draw(self.screen)
 
         # draw lifebar
         for life in game.lifebar:
-            life.draw(game.screen)
+            life.draw(self.screen)
 
         # print current score
         self.printScore(game)

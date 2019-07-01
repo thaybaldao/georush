@@ -4,10 +4,8 @@ from Zone import *
 class DangerZone(Zone):
     def __init__(self):
         self.soundBehavior = SoundBehaviorDangZone()
-        self.comandsInterpreter = CommandsInterpreter()
-        self.comandsInterpreter.add(QuitGameCommand())
+        self.basicInitialization()
         self.comandsInterpreter.add(JumpCommand())
-        self.comandsInterpreter.add(SoundButtonCommand())
 
 
     def computeScore(self, game):
@@ -30,13 +28,13 @@ class DangerZone(Zone):
 
 
     def drawDangerScreen(self, color, message, x, game):
-        game.screen.blit(game.bg, (game.bgX, 0))
-        game.screen.blit(game.bg, (game.bgX2, 0))
-        game.screen.blit(game.imgSound, (740, 450))
-        game.runner.draw(game.screen)
+        self.screen.blit(self.bg, (self.bgX, 0))
+        self.screen.blit(self.bg, (self.bgX2, 0))
+        self.screen.blit(game.imgSound, (740, 450))
+        game.runner.draw(self.screen)
         font = pygame.font.Font(os.path.join('Imagens', '04B_30__.TTF'), 55)
         text = font.render(message, True, color)
-        game.screen.blit(text, (x, 225))
+        self.screen.blit(text, (x, 225))
         pygame.display.flip()
 
 

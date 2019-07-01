@@ -4,11 +4,25 @@ from UserCommands import *
 
 class Screen:
     def __init__(self):
-        self.runScreen = False
         self.soundBehavior = SoundBehaviorScreen()
+        self.basicInitialization()
+
+    def basicInitialization(self):
+        self.runScreen = False
         self.comandsInterpreter = CommandsInterpreter()
         self.comandsInterpreter.add(QuitGameCommand())
         self.comandsInterpreter.add(SoundButtonCommand())
+
+        # creating game window
+        self.screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
+        pygame.display.set_caption(TITLE)
+
+        # creating background
+        self.bg = pygame.image.load(os.path.join('Imagens', 'Background.png')).convert()
+        self.bgX = 0
+        self.bgX2 = self.bg.get_width()
+
+
 
     def startScreenSound(self, game):
         if game.sound:
@@ -18,19 +32,19 @@ class Screen:
         game.runner.update(game)
 
         # making background move
-        game.bgX -= 2
-        game.bgX2 -= 2
-        if game.bgX < game.bg.get_width() * -1:
-            game.bgX = game.bg.get_width()
-        if game.bgX2 < game.bg.get_width() * -1:
-            game.bgX2 = game.bg.get_width()
+        self.bgX -= 2
+        self.bgX2 -= 2
+        if self.bgX < self.bg.get_width() * -1:
+            self.bgX = self.bg.get_width()
+        if self.bgX2 < self.bg.get_width() * -1:
+            self.bgX2 = self.bg.get_width()
 
 
     def drawBasicScreen(self, game):
-        game.screen.blit(game.bg, (game.bgX, 0))
-        game.screen.blit(game.bg, (game.bgX2, 0))
-        game.screen.blit(game.imgSound, (740, 450))
-        game.runner.draw(game.screen)
+        self.screen.blit(self.bg, (self.bgX, 0))
+        self.screen.blit(self.bg, (self.bgX2, 0))
+        self.screen.blit(game.imgSound, (740, 450))
+        game.runner.draw(self.screen)
 
 
 

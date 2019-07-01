@@ -3,10 +3,8 @@ from Zone import *
 class RegularZone(Zone):
     def __init__(self):
         self.soundBehavior = SoundBehaviorRegZone()
-        self.comandsInterpreter = CommandsInterpreter()
-        self.comandsInterpreter.add(QuitGameCommand())
+        self.basicInitialization()
         self.comandsInterpreter.add(JumpCommand())
-        self.comandsInterpreter.add(SoundButtonCommand())
 
 
     def update(self, game):
@@ -91,16 +89,17 @@ class RegularZone(Zone):
                     game.boost.append(Boost(900,310))
 
 
+
     def draw(self, game):
         self.basicZoneDraw(game)
 
         # draw lives
         for life in game.lives:
-            life.draw(game.screen)
+            life.draw(self.screen)
 
         # draw boosters
         for boost in game.boost:
-            boost.draw(game.screen)
+            boost.draw(self.screen)
 
         # after drawing everything, flip the display
         pygame.display.flip()
